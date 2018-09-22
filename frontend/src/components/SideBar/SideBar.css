@@ -1,0 +1,33 @@
+@media (max-width: 600px) {
+  .sidebar-container {
+    display: none;
+  }
+}
+
+.sidebar-container {
+  /* border-right: 1px solid black; */
+  background-color: #171c28;
+  color: #c1c1d0;
+  width: 200px;
+  height: 100%;
+}
+
+.sidebar-company {
+  padding: 10px 10px 10px 20px;
+  /* border-bottom: 1px solid black; */
+}
+
+.sidebar-company.selected{
+  font-weight: bold;
+}
+
+.sidebar-title {
+  padding: 10px;
+  font-weight: bold;
+}
+
+.group-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}

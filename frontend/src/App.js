@@ -11,13 +11,51 @@ import Home from './components/Home';
 import SignIn from './components/SignIn'
 import './App.css';
 
+const sample_user = {
+  firstname: 'Riley',
+  lastname: 'Worthington',
+  email: 'riley@gmail.com',
+  posts: [1],
+  comments: [2],
+  groups: ['Whitman', 'SuggestionBox'],
+  userid: 123,
+}
+
+const sample_group = {
+  name: 'SuggestionBox',
+  groupid: 33,
+  members: [123],
+  posts: [1],
+}
+
+const sample_post = {
+  originalPoster: 123,
+  upvotes: 10,
+  downvotes: 1,
+  comments: [2],
+  postid: 1,
+  title: 'First ever post',
+  content: "This app is so cool!"
+}
+
+const sample_comment = {
+  commenter: 123,
+  post: 1,
+  commentid: 2,
+  upvotes: 5,
+  downvotes: 2,
+  content: "Yeah it is. I'm talking to myself."
+}
+
 const initialState = {
   route: 'signin',
   isSignedIn: false,
   user: {
     id: '',
-    name: '',
+    firstname: '',
+    lastname: '',
     email: '',
+    groups: [],
     joined: ''
   }
 }
@@ -32,8 +70,10 @@ class App extends Component {
     this.setState({
       user: {
         id: data.id,
-        name: data.name,
+        firstname: data.firstname,
+        lastname: data.lastname,
         email: data.email,
+        groups: data.groups,
         joined: data.joined,
       }
     })
@@ -67,6 +107,7 @@ class App extends Component {
 			case 'home':
 				return (
 					<Home
+            user={sample_user}
             isSignedIn={this.state.isSignedIn}
             onRouteChange={this.onRouteChange}
           />
