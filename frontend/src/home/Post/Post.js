@@ -12,19 +12,19 @@ const sample_post = {
   content: "This app is so cool!"
 }
 
-const Post = () => {
+const Post = ({ post }) => {
   return (
     <div className='post-malone'>
-      <Vote post={sample_post}/>
+      <Vote post={post}/>
       <div className='post-body'>
         <div className='author'>
-          Riley Worthington
+          {post.originalPoster}
         </div>
         <div className='title'>
-          {sample_post.title}
+          {post.title}
         </div>
         <div className='content'>
-          {sample_post.content}
+          {post.content}
         </div>
       </div>
     </div>
