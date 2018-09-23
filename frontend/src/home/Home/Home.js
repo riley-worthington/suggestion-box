@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import TopNav from './TopNav/TopNav';
-import SideBar from './SideBar/SideBar';
-import Post from './Post/Post';
+import TopNav from '../TopNav/TopNav';
+import SideBar from '../SideBar/SideBar';
+import Post from '../Post/Post';
 import './Home.css';
 
 

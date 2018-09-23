@@ -1,5 +1,5 @@
 import React from 'react';
-import Vote from './Vote';
+import Vote from '../Vote/Vote';
 import './Post.css';
 
 const sample_post = {

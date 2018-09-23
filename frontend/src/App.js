@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './components/Home';
+import Home from './home/Home/Home';
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -8,7 +8,7 @@ import Home from './components/Home';
 //   withRouter
 // } from "react-router-dom";
 
-import SignIn from './components/SignIn'
+import SignIn from './auth/SignIn/SignIn';
 import './App.css';
 
 const sample_user = {
