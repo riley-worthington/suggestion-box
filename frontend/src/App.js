@@ -10,42 +10,43 @@ import Home from './home/Home/Home';
 
 import SignIn from './auth/SignIn/SignIn';
 import './App.css';
+import { users, teams, posts, comments } from './fakeDatabase';
 
-const sample_user = {
-  firstname: 'Riley',
-  lastname: 'Worthington',
-  email: 'riley@gmail.com',
-  posts: [1],
-  comments: [2],
-  groups: ['Whitman', 'SuggestionBox'],
-  userid: 123,
-}
-
-const sample_group = {
-  name: 'SuggestionBox',
-  groupid: 33,
-  members: [123],
-  posts: [1],
-}
-
-const sample_post = {
-  originalPoster: 123,
-  upvotes: 10,
-  downvotes: 1,
-  comments: [2],
-  postid: 1,
-  title: 'First ever post',
-  content: "This app is so cool!"
-}
-
-const sample_comment = {
-  commenter: 123,
-  post: 1,
-  commentid: 2,
-  upvotes: 5,
-  downvotes: 2,
-  content: "Yeah it is. I'm talking to myself."
-}
+// const sample_user = {
+//   firstname: 'Riley',
+//   lastname: 'Worthington',
+//   email: 'riley@gmail.com',
+//   posts: [1],
+//   comments: [2],
+//   groups: ['Whitman', 'SuggestionBox'],
+//   userid: 123,
+// }
+//
+// const sample_group = {
+//   name: 'SuggestionBox',
+//   groupid: 33,
+//   members: [123],
+//   posts: [1],
+// }
+//
+// const sample_post = {
+//   originalPoster: 123,
+//   upvotes: 10,
+//   downvotes: 1,
+//   comments: [2],
+//   postid: 1,
+//   title: 'First ever post',
+//   content: "This app is so cool!"
+// }
+//
+// const sample_comment = {
+//   commenter: 123,
+//   post: 1,
+//   commentid: 2,
+//   upvotes: 5,
+//   downvotes: 2,
+//   content: "Yeah it is. I'm talking to myself."
+// }
 
 const initialState = {
   route: 'signin',
@@ -105,9 +106,10 @@ class App extends Component {
           />
 				);
 			case 'home':
+        console.log(users[1])
 				return (
 					<Home
-            user={sample_user}
+            user={users[1]}
             isSignedIn={this.state.isSignedIn}
             onRouteChange={this.onRouteChange}
           />

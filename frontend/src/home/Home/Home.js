@@ -5,6 +5,8 @@ import PostFeed from './PostFeed';
 import Post from '../Post/Post';
 import './Home.css';
 
+import { teams } from '../../fakeDatabase';
+
 
 class Home extends Component {
 
@@ -23,36 +25,12 @@ class Home extends Component {
     const { user, onRouteChange, isSignedIn } = this.props
     console.log(this.state.user);
 
-    const sample_team = {
-      name: 'SuggestionBox',
-      groupid: 33,
-      members: [123],
-      posts: [{
-        originalPoster: 123,
-        upvotes: 10,
-        downvotes: 1,
-        comments: [2],
-        postid: 1,
-        title: 'First ever post',
-        content: "This app is so cool!"
-      },
-      {
-        originalPoster: 122,
-        upvotes: 5,
-        downvotes: 2,
-        comments: [],
-        postid: 2,
-        title: 'Sup',
-        content: 'Test'
-      }]
-    }
-
     return (
       <div className='home-container'>
         <TopNav onRouteChange={onRouteChange} user={user}/>
         <main>
-          <SideBar groups={this.state.user.groups}/>
-          <PostFeed team={sample_team} />
+          <SideBar teamIds={user.teams}/>
+          <PostFeed teamId={user.teams[0]} />
         </main>
       </div>
     );

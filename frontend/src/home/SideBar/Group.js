@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import './Group.css';
 
 const Group = ({ name }) => {
+  console.log(name)
   return (
     <li className='Group'>
       <NavLink

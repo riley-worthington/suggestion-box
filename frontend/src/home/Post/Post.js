@@ -2,26 +2,21 @@ import React from 'react';
 import Vote from '../Vote/Vote';
 import './Post.css';
 
-const sample_post = {
-  originalPoster: 123,
-  upvotes: 10,
-  downvotes: 1,
-  comments: [2],
-  postid: 1,
-  title: "First ever post",
-  content: "This app is so cool!"
-}
+import { users } from '../../fakeDatabase';
 
 const Post = ({ post }) => {
+  console.log('post', post)
+  const originalPoster = users[post.originalPoster];
+  const opName = originalPoster.firstname + ' ' + originalPoster.lastname;
   return (
     <div className='post-malone'>
       <Vote post={post}/>
       <div className='post-body'>
-        <div className='author'>
-          {post.originalPoster}
-        </div>
         <div className='title'>
           {post.title}
+        </div>
+        <div className='author'>
+          {opName}
         </div>
         <div className='content'>
           {post.content}

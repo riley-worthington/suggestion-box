@@ -2,16 +2,19 @@ import React from 'react';
 import Group from './Group';
 import './SideBar.css';
 
-const SideBar = ({ groups }) => {
+import { teams } from '../../fakeDatabase';
 
+const SideBar = ({ teamIds }) => {
+  const currTeams = teamIds.map(id => teams[id]);
+  console.log('teams', currTeams);
   return (
     <div className='sidebar-container'>
       <div className='sidebar-title'>
-        Your groups:
+        Your teams:
       </div>
 
       <ul className='group-list'>
-        {groups.map((group, i) => <Group key={i} name={group}/> )}
+        {currTeams.map((team, i) => <Group key={team.teamid} name={team.name}/> )}
       </ul>
     </div>
   )

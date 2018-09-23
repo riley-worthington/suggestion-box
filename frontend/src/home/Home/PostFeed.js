@@ -1,11 +1,15 @@
 import React from 'react';
 import Post from '../Post/Post';
 
-const PostFeed = ({ team }) => {
-  const posts = team.posts;
+import { teams, posts } from '../../fakeDatabase';
+
+const PostFeed = ({ teamId }) => {
+  const team = teams[teamId]
+  const postIds = team.posts;
+  const currPosts = postIds.map((id, i) => posts[id]);
   return (
     <div>
-      {posts.map((post, i) => <Post key={post.postid} post={post}/> )}
+      {currPosts.map((post, i) => <Post key={post.postid} post={post}/> )}
     </div>
   );
 }
