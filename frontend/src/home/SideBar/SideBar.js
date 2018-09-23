@@ -11,7 +11,7 @@ const SideBar = ({ groups }) => {
       </div>
 
       <ul className='group-list'>
-        {groups.map((group, i) => <Group key={i} name={group}/>)}
+        {groups.map((group, i) => <Group key={i} name={group}/> )}
       </ul>
     </div>
   )
