@@ -1,12 +1,11 @@
 import React, {Component} from 'react';
-import TopNav from '../TopNav/TopNav';
-import SideBar from '../SideBar/SideBar';
-import PostFeed from './PostFeed';
-import Post from '../Post/Post';
+import TopNav from './TopNav/TopNav';
+import SideBar from './SideBar/SideBar';
+import PostFeed from './Feed/PostFeed';
+// import Post from './Feed/Post';
 import './Home.css';
 
-import { teams } from '../../fakeDatabase';
-
+// import { teams } from '../fakeDatabase';
 
 class Home extends Component {
 
@@ -23,7 +22,7 @@ class Home extends Component {
 
   render() {
     const { user, onRouteChange, isSignedIn } = this.props
-    console.log(this.state.user);
+    console.log(this.state.user, isSignedIn);
 
     return (
       <div className='home-container'>

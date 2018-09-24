@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Home from './home/Home/Home';
+import Home from './Home/Home';
 // import {
 //   BrowserRouter as Router,
 //   Route,
@@ -8,9 +8,9 @@ import Home from './home/Home/Home';
 //   withRouter
 // } from "react-router-dom";
 
-import SignIn from './auth/SignIn/SignIn';
+import SignIn from './SignIn/SignIn';
 import './App.css';
-import { users, teams, posts, comments } from './fakeDatabase';
+import { users } from './fakeDatabase';
 
 // const sample_user = {
 //   firstname: 'Riley',
