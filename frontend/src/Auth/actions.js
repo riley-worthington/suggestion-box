@@ -1,5 +1,6 @@
 import history from '../helpers/history';
 import { users } from '../fakeDatabase';
+import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authconstants';
 
 const sample_user = users[1];
 
@@ -16,19 +17,19 @@ export const signin = (username, password) => dispatch => {
 
   const request = (user) => {
       return {
-        type: 'SIGNIN_REQUEST',
+        type: SIGNIN_REQUEST,
         payload: user
       }
     }
   function success(user) {
     return {
-      type: 'SIGNIN_SUCCESS',
+      type: SIGNIN_SUCCESS,
       payload: user
     }
   }
   const failure = (error) => {
     return {
-      type: 'SIGNIN_FAILURE',
+      type: SIGNIN_FAILURE,
       payload: error
     }
   }
@@ -38,6 +39,6 @@ export const signout = () => {
   console.log('signing out');
   history.push('/signin')
   return {
-    type: 'SIGNOUT'
+    type: SIGNOUT
   };
 }
