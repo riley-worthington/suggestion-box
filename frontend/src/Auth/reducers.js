@@ -8,21 +8,21 @@ const initialState = {
 export const loadUser = (state=initialState, action={}) => {
   const { type, payload } = action;
   switch (type) {
-    case SIGNIN_SUCCESS:
+    case 'SIGNIN_SUCCESS':
       return {
         ...state,
         isAuthenticated: true,
         invalid: false,
         currentUser: payload.user
       };
-    case SIGNIN_FAIL:
+    case 'SIGNIN_FAILURE':
       return {
         ...state,
         isAuthenticated: false,
         invalid: true,
         currentUser: null
       };
-    case SIGNOUT_SUCCESS:
+    case 'SIGNOUT':
       return {
         ...state,
         isAuthenticated: false,

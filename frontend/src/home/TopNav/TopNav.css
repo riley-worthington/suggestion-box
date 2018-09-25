@@ -24,7 +24,7 @@
   font-size: 18px;
 }
 
-.logout-button {
+.signout-button {
   width: 100px;
   color: #ffffff;
   cursor: pointer;
@@ -34,7 +34,7 @@
   background: transparent;
 }
 
-.logout-button:hover {
+.signout-button:hover {
   color: lightgrey;
   border-color: lightgrey;
 }

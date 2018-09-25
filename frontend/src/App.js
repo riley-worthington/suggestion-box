@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
 import Home from './Home/Home';
-// import {
-//   BrowserRouter as Router,
-//   Route,
-//   Link,
-//   Redirect,
-//   withRouter
-// } from "react-router-dom";
-
-import SignIn from './SignIn/SignIn';
+import {
+  Router,
+  Route,
+  Link,
+  Redirect,
+  withRouter
+} from "react-router-dom";
+import PrivateRoute from './Auth/PrivateRoute';
+import SignIn from './Auth/SignIn';
 import './App.css';
 import { users } from './fakeDatabase';
+import history from './helpers/history';
 
 // const sample_user = {
 //   firstname: 'Riley',
@@ -80,29 +81,18 @@ class App extends Component {
     })
   }
 
-  onRouteChange = (route) => {
-		if (route === 'signout') {
-			this.setState(initialState);
-		} else if (route === 'home') {
-			this.setState({isSignedIn: true});
-		}
-		this.setState({ route: route });
-	}
-
   renderSwitch(route) {
 		switch(route) {
 			case 'signin':
 				return (
 					<SignIn
             loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
           />
 				);
 			case 'signout':
 				return (
 					<SignIn
             loadUser={this.loadUser}
-            onRouteChange={this.onRouteChange}
           />
 				);
 			case 'home':
@@ -111,7 +101,6 @@ class App extends Component {
 					<Home
             user={users[1]}
             isSignedIn={this.state.isSignedIn}
-            onRouteChange={this.onRouteChange}
           />
 				);
 			case 'register':
@@ -125,11 +114,21 @@ class App extends Component {
 		}
 	}
 
+  // render() {
+  //   return (
+  //     <div className="App">
+  //       {this.renderSwitch(this.state.route)}
+  //     </div>
+  //   );
+  // }
   render() {
     return (
-      <div className="App">
-        {this.renderSwitch(this.state.route)}
-      </div>
+      <Router history={history}>
+        <div>
+          <PrivateRoute exact path='/' component={Home} />
+          <Route path='/signin' component={SignIn} />
+        </div>
+      </Router>
     );
   }
 }

@@ -5,7 +5,7 @@ import PostFeed from './Feed/PostFeed';
 // import Post from './Feed/Post';
 import './Home.css';
 
-// import { teams } from '../fakeDatabase';
+import { users } from '../fakeDatabase';
 
 class Home extends Component {
 
@@ -21,12 +21,13 @@ class Home extends Component {
   }
 
   render() {
-    const { user, onRouteChange, isSignedIn } = this.props
+    const { isSignedIn } = this.props;
+    const user = users[1];
     console.log(this.state.user, isSignedIn);
 
     return (
       <div className='home-container'>
-        <TopNav onRouteChange={onRouteChange} user={user}/>
+        <TopNav user={user}/>
         <main>
           <SideBar teamIds={user.teams}/>
           <PostFeed teamId={user.teams[0]} />

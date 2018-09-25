@@ -1,5 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './SignIn.css';
+import history from '../helpers/history';
+import { signin, signout } from './actions';
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitSignIn: (username, password) => dispatch(signin(username, password))
+  }
+}
+
+// const mapStateToProps = state => {
+//   return {
+//     searchfield: state.searchRobots.searchfield,
+//     robots: state.requestRobots.robots,
+//     isPending: state.requestRobots.isPending,
+//     error: state.requestRobots.error
+//   }
+// }
 
 class SignIn extends Component {
   constructor(props) {
@@ -18,17 +37,16 @@ class SignIn extends Component {
     this.setState({signInPassword: event.target.value});
   }
 
-  onSubmitSignIn = () => {
-    let email = this.state.signInEmail;
-    let password = this.state.signInPassword;
-    console.log(email, password);
-    this.props.onRouteChange('home');
+  handleKeyUp = (event) => {
+    event.preventDefault();
+    if(event.key !== "Enter") return;
+    this.handleSubmit(); // Things you want to do.
   }
 
-  handleKeyUp = (event) => {
-    if(event.key !== "Enter") return;
-    this.onSubmitSignIn(); // Things you want to do.
-    event.preventDefault();
+  handleSubmit = () => {
+    const { signInEmail, signInPassword } = this.state;
+    const { onSubmitSignIn } = this.props;
+    onSubmitSignIn(signInEmail, signInPassword);
   }
 
   render() {
@@ -58,7 +76,7 @@ class SignIn extends Component {
             className="signin-button"
             type="button"
             name="signin"
-            onClick={this.onSubmitSignIn}>
+            onClick={this.handleSubmit}>
               Sign In
           </button>
         </div>
@@ -70,4 +88,4 @@ class SignIn extends Component {
   }
 }
 
-export default SignIn;
+export default connect(null, mapDispatchToProps)(SignIn);

@@ -1,7 +1,8 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './TopNav.css';
 
-const TopNav = ({ onRouteChange, user }) => {
+const TopNav = ({ user }) => {
   return (
     <header className='nav-header'>
       <div className='site-title'>
@@ -11,7 +12,7 @@ const TopNav = ({ onRouteChange, user }) => {
         <div className='dropdown'>
           {user.firstname}
         </div>
-        <button className='logout-button' onClick={() => onRouteChange('signin')}>Log Out</button>
+        <Link to='/signin'>Sign Out</Link>
       </nav>
     </header>
   )
