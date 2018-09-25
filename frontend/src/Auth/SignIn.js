@@ -11,15 +11,6 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     searchfield: state.searchRobots.searchfield,
-//     robots: state.requestRobots.robots,
-//     isPending: state.requestRobots.isPending,
-//     error: state.requestRobots.error
-//   }
-// }
-
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -43,7 +34,8 @@ class SignIn extends Component {
     this.handleSubmit(); // Things you want to do.
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { signInEmail, signInPassword } = this.state;
     const { onSubmitSignIn } = this.props;
     onSubmitSignIn(signInEmail, signInPassword);

@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
 import PostFeed from './Feed/PostFeed';
@@ -7,34 +8,28 @@ import './Home.css';
 
 import { users } from '../fakeDatabase';
 
+const mapStateToProps = state => {
+  return {
+    currentUser: state.loadUser.currentUser
+  }
+}
+
 class Home extends Component {
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: props.user
-    }
-  }
-
-  handleAddGroup() {
-    console.log('Adding group')
-  }
-
   render() {
+    const currentUser = this.props.currentUser;
     const { isSignedIn } = this.props;
-    const user = users[1];
-    console.log(this.state.user, isSignedIn);
 
     return (
       <div className='home-container'>
-        <TopNav user={user}/>
+        <TopNav user={currentUser}/>
         <main>
-          <SideBar teamIds={user.teams}/>
-          <PostFeed teamId={user.teams[0]} />
+          <SideBar teamIds={currentUser.teams}/>
+          <PostFeed teamId={currentUser.teams[0]} />
         </main>
       </div>
     );
   }
 }
 
-export default Home;
+export default connect(mapStateToProps, null)(Home);

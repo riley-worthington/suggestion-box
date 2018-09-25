@@ -10,7 +10,9 @@ export const signin = (username, password) => dispatch => {
   // Make API call here
 
   history.push('/');
+  localStorage.setItem('user', JSON.stringify(sample_user));
   dispatch(success(sample_user));
+  console.log(success(sample_user))
 
   const request = (user) => {
       return {

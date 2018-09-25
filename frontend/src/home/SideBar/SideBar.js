@@ -6,7 +6,6 @@ import { teams } from '../../fakeDatabase';
 
 const SideBar = ({ teamIds }) => {
   const currTeams = teamIds.map(id => teams[id]);
-  console.log('teams', currTeams);
   return (
     <div className='sidebar-container'>
       <div className='sidebar-title'>

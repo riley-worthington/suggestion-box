@@ -5,7 +5,6 @@ import './Post.css';
 import { users } from '../../fakeDatabase';
 
 const Post = ({ post }) => {
-  console.log('post', post)
   const originalPoster = users[post.originalPoster];
   const opName = originalPoster.firstname + ' ' + originalPoster.lastname;
   return (

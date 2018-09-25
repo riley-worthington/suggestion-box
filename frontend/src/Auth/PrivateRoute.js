@@ -1,15 +1,14 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-// When implementing actual sign in, use localStorage.getItem('user')
-// instead of true
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props =>
-      true ? (
+      localStorage.getItem('user') ? (
         <Component {...props} />
       ) : (
         <Redirect to={{
-            pathname: "/login",
+            pathname: "/signin",
             state: { from: props.location }
           }}
         />

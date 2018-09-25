@@ -1,9 +1,21 @@
 
-const initialState = {
-  isAuthenticated: false,
-  invalid: false,
-  currentUser: null,
-}
+let user = JSON.parse(localStorage.getItem('user'));
+console.log('found in local storage:', user)
+const initialState = user ?
+  { isAuthenticated: true,
+    invalid: false,
+    currentUser: user,
+  } : {
+    isAuthenticated: false,
+    invalid: false,
+    currentUser: null,
+  };
+
+// const initialState = {
+//   isAuthenticated: false,
+//   invalid: false,
+//   currentUser: null,
+// }
 
 export const loadUser = (state=initialState, action={}) => {
   const { type, payload } = action;
@@ -13,7 +25,7 @@ export const loadUser = (state=initialState, action={}) => {
         ...state,
         isAuthenticated: true,
         invalid: false,
-        currentUser: payload.user
+        currentUser: payload
       };
     case 'SIGNIN_FAILURE':
       return {
