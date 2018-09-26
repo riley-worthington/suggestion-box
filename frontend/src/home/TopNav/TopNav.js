@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './TopNav.css';
 
-const TopNav = ({ user }) => {
+const TopNav = ({ user, onSignOut }) => {
   return (
     <header className='nav-header'>
       <div className='site-title'>
@@ -12,7 +12,7 @@ const TopNav = ({ user }) => {
         <div className='dropdown'>
           {user.firstname}
         </div>
-        <Link to='/signin'>Sign Out</Link>
+        <button onClick={onSignOut}>Sign Out</button>
       </nav>
     </header>
   )

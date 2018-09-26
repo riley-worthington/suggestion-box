@@ -7,6 +7,7 @@ import PostFeed from './Feed/PostFeed';
 import './Home.css';
 
 import { users } from '../fakeDatabase';
+import { signout } from '../Auth/actions';
 
 const mapStateToProps = state => {
   return {
@@ -14,15 +15,21 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onSignOut: () => dispatch(signout())
+  }
+}
+
 class Home extends Component {
 
   render() {
     const currentUser = this.props.currentUser;
-    const { isSignedIn } = this.props;
+    const { isSignedIn, onSignOut } = this.props;
 
     return (
       <div className='home-container'>
-        <TopNav user={currentUser}/>
+        <TopNav user={currentUser} onSignOut={onSignOut}/>
         <main>
           <SideBar teamIds={currentUser.teams}/>
           <PostFeed teamId={currentUser.teams[0]} />
@@ -32,4 +39,4 @@ class Home extends Component {
   }
 }
 
-export default connect(mapStateToProps, null)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

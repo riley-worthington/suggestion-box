@@ -34,8 +34,7 @@ class SignIn extends Component {
     this.handleSubmit(); // Things you want to do.
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
     const { signInEmail, signInPassword } = this.state;
     const { onSubmitSignIn } = this.props;
     onSubmitSignIn(signInEmail, signInPassword);

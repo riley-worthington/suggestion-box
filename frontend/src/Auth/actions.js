@@ -5,7 +5,7 @@ import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authc
 const sample_user = users[1];
 
 export const signin = (username, password) => dispatch => {
-  console.log('logging in');
+  console.log('signing in');
   console.log('username: ', username, 'password: ', password);
 
   // Make API call here
@@ -13,7 +13,6 @@ export const signin = (username, password) => dispatch => {
   history.push('/');
   localStorage.setItem('user', JSON.stringify(sample_user));
   dispatch(success(sample_user));
-  console.log(success(sample_user))
 
   const request = (user) => {
       return {
@@ -37,7 +36,9 @@ export const signin = (username, password) => dispatch => {
 
 export const signout = () => {
   console.log('signing out');
-  history.push('/signin')
+  // remove the user from local storage on signout
+  localStorage.removeItem('user');
+  history.push('/signin');
   return {
     type: SIGNOUT
   };

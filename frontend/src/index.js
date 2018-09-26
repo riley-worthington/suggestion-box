@@ -15,7 +15,7 @@ const logger = createLogger();
 const rootReducer = combineReducers({ loadUser })
 
 // apply logger middleware
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware));
+const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
 ReactDOM.render(
   <Provider store={store} >
