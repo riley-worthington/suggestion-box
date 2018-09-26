@@ -1,12 +1,12 @@
 import React from 'react';
-import Vote from './Vote';
+import Vote from '../Vote/Vote';
 import './Post.css';
 
-import { users } from '../../fakeDatabase';
+import { users } from '../../../fakeDatabase';
 
 const Post = ({ post }) => {
   const originalPoster = users[post.originalPoster];
-  const opName = originalPoster.firstname + ' ' + originalPoster.lastname;
+  const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
   return (
     <div className='post-malone'>
       <Vote post={post}/>

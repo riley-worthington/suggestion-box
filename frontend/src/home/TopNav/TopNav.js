@@ -2,6 +2,7 @@ import React from 'react';
 import './TopNav.css';
 
 const TopNav = ({ user, onSignOut }) => {
+  console.log(user);
   return (
     <header className='nav-header'>
       <div className='site-title'>
@@ -9,7 +10,7 @@ const TopNav = ({ user, onSignOut }) => {
       </div>
       <nav className='top-nav'>
         <div className='dropdown'>
-          {user.firstname}
+          {user.firstName}
         </div>
         <button onClick={onSignOut} className='signout-button'>Sign Out</button>
       </nav>

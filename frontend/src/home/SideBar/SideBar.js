@@ -15,8 +15,8 @@ const SideBar = ({ teamIds }) => {
       <ul className='group-list'>
         {currTeams.map((team, i) =>
           <NavLink
-            to={`/teams/${team.teamid}`}
-            key={team.teamid}
+            to={`/teams/${team.teamId}`}
+            key={team.teamId}
             activeStyle={{
               fontWeight: 'bold',
               color: 'red'

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Post from './Post';
+import Post from '../Post/Post';
+import AddPost from '../AddPost/AddPost';
 import { loadPostListByTeam } from './actions';
 
 const mapDispatchToProps = dispatch => {
@@ -29,7 +30,7 @@ class PostFeed extends Component {
   }
 
   render() {
-    const { loadPostListPending, postList } = this.props;
+    const { currentUser, loadPostListPending, postList } = this.props;
     const postListArray = Object.entries(postList).map(entry => entry[1]);
 
     return loadPostListPending ? (
@@ -38,7 +39,8 @@ class PostFeed extends Component {
       </div>
     ) : (
       <div>
-        {postListArray.map((post, i) => <Post key={post.postid} post={post}/> )}
+        <AddPost currentUser={currentUser}/>
+        {postListArray.map((post, i) => <Post key={post.postId} post={post}/> )}
       </div>
     )
   }

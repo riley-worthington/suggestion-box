@@ -4,8 +4,7 @@ import { Route } from 'react-router-dom';
 
 import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
-import PostFeed from './Feed/PostFeed';
-import AddPost from './AddPost/AddPost';
+import PostFeed from './Feed/PostFeed/PostFeed';
 import './Home.css';
 
 import { signOut } from '../Auth/authActions';
@@ -31,7 +30,6 @@ class Home extends Component {
       <h1>Home Page</h1>
       :
       <div>
-        <AddPost />
         <PostFeed teamId={teamId} />
       </div>
   }
