@@ -9,17 +9,21 @@ export const signIn = (username, password) => dispatch => {
   console.log('username: ', username, 'password: ', password);
 
   // Make API call here
+  dispatch(signInRequest(username, password))
 
   history.push('/');
   localStorage.setItem('user', JSON.stringify(sample_user));
   dispatch(signInSuccess(sample_user));
 
-  function signInRequest(user) {
-      return {
-        type: SIGNIN_REQUEST,
-        payload: user
+  function signInRequest(username, password) {
+    return {
+      type: SIGNIN_REQUEST,
+      payload: {
+        username,
+        password
       }
     }
+  }
   function signInSuccess(user) {
     return {
       type: SIGNIN_SUCCESS,

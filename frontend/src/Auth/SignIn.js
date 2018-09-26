@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SignIn.css';
-import history from '../helpers/history';
-import { signIn, signOut } from './authActions';
+import { signIn } from './authActions';
 
 
 const mapDispatchToProps = dispatch => {

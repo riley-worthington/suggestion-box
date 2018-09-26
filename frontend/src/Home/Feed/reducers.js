@@ -2,7 +2,7 @@ import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE 
 
 const initialState = {
   loadPostListPending: false,
-  postList: []
+  postList: {}
 }
 
 export const loadPostList = (state=initialState, action={}) => {

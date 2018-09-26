@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Route } from 'react-router-dom';
+
 import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
 import PostFeed from './Feed/PostFeed';
 import AddPost from './AddPost/AddPost';
-// import Post from './Feed/Post';
 import './Home.css';
 
-import { users } from '../fakeDatabase';
 import { signOut } from '../Auth/authActions';
 
 const mapStateToProps = state => {
@@ -26,7 +26,11 @@ class Home extends Component {
 
   render() {
     const currentUser = this.props.currentUser;
-    const { isSignedIn, onSignOut } = this.props;
+    const { onSignOut, match } = this.props;
+    console.log(match)
+    console.log('path', match.path);
+    console.log('url', match.url);
+    const teamId = +match.params.teamId;
 
     return (
       <div className='home-container'>
@@ -35,7 +39,7 @@ class Home extends Component {
           <SideBar teamIds={currentUser.teams}/>
           <div>
             <AddPost />
-            <PostFeed teamId={currentUser.teams[0]} />
+            <PostFeed teamId={teamId} />
           </div>
         </main>
       </div>

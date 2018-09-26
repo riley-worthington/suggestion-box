@@ -1,5 +1,5 @@
 import React from 'react';
-import Group from './Group';
+import { NavLink } from 'react-router-dom';
 import './SideBar.css';
 
 import { teams } from '../../fakeDatabase';
@@ -13,7 +13,17 @@ const SideBar = ({ teamIds }) => {
       </div>
 
       <ul className='group-list'>
-        {currTeams.map((team, i) => <Group key={team.teamid} name={team.name}/> )}
+        {currTeams.map((team, i) =>
+          <NavLink
+            to={`/teams/${team.teamid}`}
+            key={team.teamid}
+            activeStyle={{
+              fontWeight: 'bold',
+              color: 'red'
+            }}>
+            {team.name}
+          </NavLink>
+          )}
       </ul>
     </div>
   )

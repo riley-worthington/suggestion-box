@@ -1,7 +1,10 @@
 import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE } from './constants';
 
 import { posts } from '../../fakeDatabase';
-const samplePostList = [posts[1], posts[2]];
+const samplePostList = {
+  [posts[1].postid]: posts[1],
+  [posts[2].postid]: posts[2]
+}
 
 export const loadPostListByTeam = teamId => dispatch => {
   // Request team post list from backend

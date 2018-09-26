@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import Post from './Post';
 import { loadPostListByTeam } from './actions';
 
-import { teams, posts } from '../../fakeDatabase';
-
 const mapDispatchToProps = dispatch => {
   return {
     loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId))
@@ -22,24 +20,27 @@ const mapStateToProps = state => {
 class PostFeed extends Component {
   componentDidMount() {
     // get posts
-    const { currentUser, loadPostListByTeam } = this.props;
+    const { currentUser, loadPostListByTeam, teamId } = this.props;
     // Just pick the first team for now
-    const teamId = currentUser.teams[0];
-    if (teamId != undefined) {
+    // const teamId = currentUser.teams[0];
+    if (teamId !== undefined) {
       loadPostListByTeam(teamId);
     }
   }
 
   render() {
-    const { currentUser, loadPostListPending, postList } = this.props;
-    // const team = teams[teamId];
-    // const postIds = team.posts;
-    // const currPosts = postIds.map((id, i) => posts[id]);
-    return (
+    const { loadPostListPending, postList } = this.props;
+    const postListArray = Object.entries(postList).map(entry => entry[1]);
+
+    return loadPostListPending ? (
       <div>
-        {postList.map((post, i) => <Post key={post.postid} post={post}/> )}
+        Loading...
       </div>
-    );
+    ) : (
+      <div>
+        {postListArray.map((post, i) => <Post key={post.postid} post={post}/> )}
+      </div>
+    )
   }
 }
 
