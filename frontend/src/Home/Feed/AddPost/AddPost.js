@@ -47,10 +47,21 @@ class AddPost extends Component {
   }
 
   render() {
+    const { currentUser } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className='new-post-form'>
-        <input onChange={this.onPostTitleChange} type='text' placeholder='Title' />
-        <textarea onChange={this.onPostBodyChange} placeholder='Add a post' className='new-post-field'></textarea>
+        <p>{`Add new post as ${currentUser.firstName} ${currentUser.lastName}`}</p>
+        <input
+          onChange={this.onPostTitleChange}
+          type='text'
+          placeholder='Title'
+          value={this.state.postTitle}
+          className='new-post-field'/>
+        <textarea
+          onChange={this.onPostBodyChange}
+          placeholder='Add a post'
+          value={this.state.postBody}
+          className='new-post-field' />
         <button onClick={this.handleSubmit} className='new-post-button'>Post</button>
       </form>
     );
