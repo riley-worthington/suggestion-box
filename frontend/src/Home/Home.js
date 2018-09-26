@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
 import PostFeed from './Feed/PostFeed';
+import AddPost from './AddPost/AddPost';
 // import Post from './Feed/Post';
 import './Home.css';
 
@@ -32,7 +33,10 @@ class Home extends Component {
         <TopNav user={currentUser} onSignOut={onSignOut}/>
         <main>
           <SideBar teamIds={currentUser.teams}/>
-          <PostFeed teamId={currentUser.teams[0]} />
+          <div>
+            <AddPost />
+            <PostFeed teamId={currentUser.teams[0]} />
+          </div>
         </main>
       </div>
     );

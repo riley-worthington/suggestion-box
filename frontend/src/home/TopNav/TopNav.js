@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './TopNav.css';
 
 const TopNav = ({ user, onSignOut }) => {
@@ -12,7 +11,7 @@ const TopNav = ({ user, onSignOut }) => {
         <div className='dropdown'>
           {user.firstname}
         </div>
-        <button onClick={onSignOut}>Sign Out</button>
+        <button onClick={onSignOut} className='signout-button'>Sign Out</button>
       </nav>
     </header>
   )
