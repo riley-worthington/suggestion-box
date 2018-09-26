@@ -37,9 +37,6 @@ class Home extends Component {
   render() {
     const currentUser = this.props.currentUser;
     const { onSignOut, match } = this.props;
-    console.log(match)
-    console.log('path', match.path);
-    console.log('url', match.url);
     const teamId = +match.params.teamId;
 
     return (

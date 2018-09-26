@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
-import { loadPostListByTeam } from './actions';
+import { loadPostListByTeam } from './postActions';
 
 const mapDispatchToProps = dispatch => {
   return {

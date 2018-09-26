@@ -28,20 +28,20 @@ export const users = [
   }
 ]
 
-export const teams = [
-  {
+export const teams = {
+  '0': {
     name: "Dumbledore's Army",
     teamId: 0,
     members: [1, 2],
     posts: [1, 2]
   },
-  {
+  '1': {
     name: 'Melbourne Track Club',
     teamId: 1,
     members: [0],
     posts: [0]
   }
-]
+}
 
 export const posts = [
   {

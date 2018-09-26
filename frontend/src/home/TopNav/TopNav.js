@@ -2,7 +2,6 @@ import React from 'react';
 import './TopNav.css';
 
 const TopNav = ({ user, onSignOut }) => {
-  console.log(user);
   return (
     <header className='nav-header'>
       <div className='site-title'>

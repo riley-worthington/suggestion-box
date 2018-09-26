@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { submitPost } from '../PostFeed/actions';
+import { submitPost } from '../PostFeed/postActions';
 import './AddPost.css';
 
 const mapDispatchToProps = dispatch => {

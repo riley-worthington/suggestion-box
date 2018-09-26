@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import { SIGNOUT } from './Auth/authConstants';
 
 import { loadUser } from './Auth/authReducers';
-import { loadPostList } from './Home/Feed/PostFeed/reducers';
+import { loadPostList } from './Home/Feed/PostFeed/postReducers';
 
 const appReducer = combineReducers({
   user: loadUser,

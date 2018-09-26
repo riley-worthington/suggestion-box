@@ -9,6 +9,7 @@
 }
 
 .post-body {
+  white-space: pre-wrap;
   display: flex;
   flex-direction: column;
   margin-left: 20px;
