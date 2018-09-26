@@ -1,0 +1,16 @@
+.add-post-button {
+  background-color: red;
+  border-radius: 4px;
+  border: none;
+  color: white;
+  outline: none;
+}
+
+.add-post-field {
+  border: 1px solid #000000;
+  border-radius: 4px;
+  outline: none;
+  padding: 10px;
+  margin: 10px;
+  resize: none;
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './AddPost.css';
 
 class AddPost extends Component {
   constructor(props) {
@@ -15,8 +16,8 @@ class AddPost extends Component {
   render() {
     return (
       <div>
-        <textarea onChange={this.onTextAreaChange}></textarea>
-        <button>Post</button>
+        <textarea onChange={this.onTextAreaChange} placeholder={'Add a post'} className='add-post-field'></textarea>
+        <button className='add-post-button'>Post</button>
       </div>
     );
   }
