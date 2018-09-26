@@ -1,10 +1,10 @@
 import history from '../helpers/history';
 import { users } from '../fakeDatabase';
-import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authconstants';
+import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authConstants';
 
 const sample_user = users[1];
 
-export const signin = (username, password) => dispatch => {
+export const signIn = (username, password) => dispatch => {
   console.log('signing in');
   console.log('username: ', username, 'password: ', password);
 
@@ -12,21 +12,21 @@ export const signin = (username, password) => dispatch => {
 
   history.push('/');
   localStorage.setItem('user', JSON.stringify(sample_user));
-  dispatch(success(sample_user));
+  dispatch(signInSuccess(sample_user));
 
-  const request = (user) => {
+  function signInRequest(user) {
       return {
         type: SIGNIN_REQUEST,
         payload: user
       }
     }
-  function success(user) {
+  function signInSuccess(user) {
     return {
       type: SIGNIN_SUCCESS,
       payload: user
     }
   }
-  const failure = (error) => {
+  function signInFailure(error) {
     return {
       type: SIGNIN_FAILURE,
       payload: error
@@ -34,7 +34,7 @@ export const signin = (username, password) => dispatch => {
   }
 }
 
-export const signout = () => {
+export const signOut = () => {
   console.log('signing out');
   // remove the user from local storage on signout
   localStorage.removeItem('user');

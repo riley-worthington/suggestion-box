@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './SignIn.css';
 import history from '../helpers/history';
-import { signin, signout } from './actions';
+import { signIn, signOut } from './authActions';
 
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitSignIn: (username, password) => dispatch(signin(username, password))
+    onSubmitSignIn: (username, password) => dispatch(signIn(username, password))
   }
 }
 

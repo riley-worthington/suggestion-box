@@ -12,11 +12,10 @@ const mapDispatchToProps = dispatch => {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
-    currentUser: state.loadUser.currentUser,
-    loadPostListPending: state.loadPostList.loadPostListPending,
-    postList: state.loadPostList.postList
+    currentUser: state.user.currentUser,
+    loadPostListPending: state.posts.loadPostListPending,
+    postList: state.posts.postList
   }
 }
 
@@ -26,10 +25,8 @@ class PostFeed extends Component {
     const { currentUser, loadPostListByTeam } = this.props;
     // Just pick the first team for now
     const teamId = currentUser.teams[0];
-    console.log(teamId)
     if (teamId != undefined) {
       loadPostListByTeam(teamId);
-      console.log('here')
     }
   }
 

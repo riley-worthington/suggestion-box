@@ -8,17 +8,17 @@ import AddPost from './AddPost/AddPost';
 import './Home.css';
 
 import { users } from '../fakeDatabase';
-import { signout } from '../Auth/actions';
+import { signOut } from '../Auth/authActions';
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.loadUser.currentUser
+    currentUser: state.user.currentUser
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignOut: () => dispatch(signout())
+    onSignOut: () => dispatch(signOut())
   }
 }
 
