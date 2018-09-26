@@ -23,6 +23,18 @@ const mapDispatchToProps = dispatch => {
 }
 
 class Home extends Component {
+  bodyLoader() {
+    const { match } = this.props;
+    const url = match.url;
+    const teamId = +match.params.teamId;
+    return (url === '/') ?
+      <h1>Home Page</h1>
+      :
+      <div>
+        <AddPost />
+        <PostFeed teamId={teamId} />
+      </div>
+  }
 
   render() {
     const currentUser = this.props.currentUser;
@@ -37,10 +49,7 @@ class Home extends Component {
         <TopNav user={currentUser} onSignOut={onSignOut}/>
         <main>
           <SideBar teamIds={currentUser.teams}/>
-          <div>
-            <AddPost />
-            <PostFeed teamId={teamId} />
-          </div>
+          {this.bodyLoader()}
         </main>
       </div>
     );
