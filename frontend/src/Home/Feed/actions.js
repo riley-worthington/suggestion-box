@@ -1,33 +1,36 @@
-import { GET_POST_LIST_REQUEST, GET_POST_LIST_SUCCESS, GET_POST_LIST_FAILURE } from './constants';
-import { posts } from '../../fakeDatabase';
+import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE } from './constants';
 
+import { posts } from '../../fakeDatabase';
 const samplePostList = [posts[1], posts[2]];
 
-export const getPostListByTeam = teamId => dispatch => {
+export const loadPostListByTeam = teamId => dispatch => {
   // Request team post list from backend
-  dispatch(success(samplePostList));
+  dispatch(loadPostListRequest(teamId));
+  dispatch(loadPostListSuccess(samplePostList));
 }
 
-export const getPostListByUser = userId => {
+export const loadPostListByUser = userId => dispatch => {
   // Request user post list from backend
-  dispatch(success(samplePostList));
+  dispatch(loadPostListSuccess(samplePostList));
 }
 
-const requestPostList = teamId => {
+const loadPostListRequest = teamId => {
   return {
-    type: GET_POST_LIST_REQUEST,
+    type: LOAD_POST_LIST_REQUEST,
     payload: teamId
   }
 }
 
-const success = postList => {
+const loadPostListSuccess = postList => {
   return {
-    type: GET_POST_LIST_SUCCESS,
+    type: LOAD_POST_LIST_SUCCESS,
     payload: postList
   }
 }
 
-const failure = error => {
-  type: GET_POST_LIST_FAILURE,
-  payload: error
+const loadPostListFailure = error => {
+  return {
+    type: LOAD_POST_LIST_FAILURE,
+    payload: error
+  }
 }

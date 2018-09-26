@@ -10,9 +10,10 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { loadUser } from './Auth/reducers';
+import { loadPostList } from './Home/Feed/reducers';
 
 const logger = createLogger();
-const rootReducer = combineReducers({ loadUser })
+const rootReducer = combineReducers({ loadUser, loadPostList })
 
 // apply logger middleware
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));

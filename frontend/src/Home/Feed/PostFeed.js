@@ -1,24 +1,49 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Post from './Post';
+import { loadPostListByTeam } from './actions';
 
 import { teams, posts } from '../../fakeDatabase';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId))
+  }
+}
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    currentUser: state.loadUser.currentUser,
+    loadPostListPending: state.loadPostList.loadPostListPending,
+    postList: state.loadPostList.postList
+  }
+}
 
 class PostFeed extends Component {
   componentDidMount() {
     // get posts
+    const { currentUser, loadPostListByTeam } = this.props;
+    // Just pick the first team for now
+    const teamId = currentUser.teams[0];
+    console.log(teamId)
+    if (teamId != undefined) {
+      loadPostListByTeam(teamId);
+      console.log('here')
+    }
   }
 
   render() {
-    const { teamId } = this.props
-    const team = teams[teamId]
-    const postIds = team.posts;
-    const currPosts = postIds.map((id, i) => posts[id]);
+    const { currentUser, loadPostListPending, postList } = this.props;
+    // const team = teams[teamId];
+    // const postIds = team.posts;
+    // const currPosts = postIds.map((id, i) => posts[id]);
     return (
       <div>
-        {currPosts.map((post, i) => <Post key={post.postid} post={post}/> )}
+        {postList.map((post, i) => <Post key={post.postid} post={post}/> )}
       </div>
     );
   }
 }
 
-export default PostFeed;
+export default connect(mapStateToProps, mapDispatchToProps)(PostFeed);
