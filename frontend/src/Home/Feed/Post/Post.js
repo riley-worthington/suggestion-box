@@ -4,12 +4,16 @@ import './Post.css';
 
 import { users } from '../../../fakeDatabase';
 
-const Post = ({ post }) => {
+const Post = ({ post, onUpvote, onDownvote }) => {
   const originalPoster = users[post.originalPoster];
   const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
   return (
     <div className='post-malone'>
-      <Vote post={post}/>
+      <Vote
+        post={post}
+        onUpvote={onUpvote}
+        onDownvote={onDownvote}
+      />
       <div className='post-body'>
         <div className='title'>
           {post.title}

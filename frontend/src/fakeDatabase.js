@@ -43,8 +43,8 @@ export const teams = {
   }
 }
 
-export const posts = [
-  {
+export const posts = {
+  '0': {
     originalPoster: 0,
     upvotes: 10,
     downvotes: 1,
@@ -53,7 +53,7 @@ export const posts = [
     title: 'Hey guys',
     content: "Where is everybody?"
   },
-  {
+  '1': {
     originalPoster: 1,
     upvotes: 7,
     downvotes: 3,
@@ -62,7 +62,7 @@ export const posts = [
     title: 'Come play quiddich',
     content: 'We got the pitch reserved, come out'
   },
-  {
+  '2': {
     originalPoster: 2,
     upvotes: 10,
     downvotes: 0,
@@ -71,7 +71,7 @@ export const posts = [
     title: "Join Dumbledore's Army",
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
   }
-]
+}
 
 export const comments = [
   {

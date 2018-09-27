@@ -1,5 +1,6 @@
 import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE } from './postConstants';
 import { SUBMIT_POST_REQUEST, SUBMIT_POST_SUCCESS, SUBMIT_POST_FAILURE } from './postConstants';
+import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE } from './postConstants';
 
 import { posts } from '../../../fakeDatabase';
 const samplePostList = {
@@ -62,6 +63,50 @@ export const submitPost = post => dispatch => {
     return {
       type: SUBMIT_POST_FAILURE,
       payload: error
+    }
+  }
+}
+
+export const upvotePost = postId => dispatch => {
+  // make API call, have database return updated post object
+  console.log('upvoting', postId);
+  const post = posts[postId];
+  post.upvotes++;
+  dispatch(upvotePostSuccess(post));
+
+  function upvotePostSuccess(post) {
+    return {
+      type: UPVOTE_POST_SUCCESS,
+      payload: post
+    }
+  }
+
+  function upvotePostFailure(post) {
+    return {
+      type: UPVOTE_POST_FAILURE,
+      payload: post
+    }
+  }
+}
+
+export const downvotePost = postId => dispatch => {
+  // make API call, have database return updated post object
+  console.log('downvoting', postId);
+  const post = posts[postId];
+  post.upvotes--;
+  dispatch(downvotePostSuccess(post));
+
+  function downvotePostSuccess(post) {
+    return {
+      type: DOWNVOTE_POST_SUCCESS,
+      payload: post
+    }
+  }
+
+  function downvotePostFailure(post) {
+    return {
+      type: DOWNVOTE_POST_FAILURE,
+      payload: post
     }
   }
 }

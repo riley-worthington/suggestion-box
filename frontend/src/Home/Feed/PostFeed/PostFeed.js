@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
-import { loadPostListByTeam } from './postActions';
+import { loadPostListByTeam, upvotePost, downvotePost } from './postActions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId))
+    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
+    upvotePost: postId => dispatch(upvotePost(postId)),
+    downvotePost: postId => dispatch(downvotePost(postId))
   }
 }
 
@@ -30,7 +32,13 @@ class PostFeed extends Component {
   }
 
   render() {
-    const { currentUser, loadPostListPending, postList } = this.props;
+    const {
+      currentUser,
+      loadPostListPending,
+      postList,
+      upvotePost,
+      downvotePost
+    } = this.props;
     const postListArray = Object.entries(postList).map(entry => entry[1]);
 
     return loadPostListPending ? (
@@ -40,7 +48,13 @@ class PostFeed extends Component {
     ) : (
       <div>
         <AddPost currentUser={currentUser}/>
-        {postListArray.map((post, i) => <Post key={post.postId} post={post}/> )}
+        {postListArray.map((post, i) =>
+          <Post
+            key={post.postId}
+            post={post}
+            onUpvote={() => upvotePost(post.postId)}
+            onDownvote={() => downvotePost(post.postId)}
+          /> )}
       </div>
     )
   }

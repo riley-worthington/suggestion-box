@@ -1,16 +1,13 @@
 import React from 'react';
 import './Vote.css';
 
-const Vote = ({ post }) => {
-  const upvote = () => {
-    post.upvotes += 1;
-  }
+const Vote = ({ post, onUpvote, onDownvote }) => {
 
   return (
     <div className='vote-container'>
-      <button onClick={upvote}>Up</button>
+      <button onClick={onUpvote}>Up</button>
       {post.upvotes - post.downvotes}
-      <button>Down</button>
+      <button onClick={onDownvote}>Down</button>
     </div>
   );
 }

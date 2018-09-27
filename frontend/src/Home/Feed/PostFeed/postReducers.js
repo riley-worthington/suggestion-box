@@ -1,5 +1,6 @@
 import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE } from './postConstants';
 import { SUBMIT_POST_REQUEST, SUBMIT_POST_SUCCESS, SUBMIT_POST_FAILURE } from './postConstants';
+import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE } from './postConstants';
 
 const initialState = {
   loadPostListPending: false,
@@ -48,6 +49,17 @@ export const loadPostList = (state=initialState, action={}) => {
         ...state,
         pendingPost: false
       };
+    case UPVOTE_POST_SUCCESS:
+    case DOWNVOTE_POST_SUCCESS:
+      return {
+        ...state,
+        postList: {
+          ...state.postList,
+          [payload.postId]: payload
+        }
+      };
+    case UPVOTE_POST_FAILURE:
+    case DOWNVOTE_POST_FAILURE:
     default:
       return state;
   }
