@@ -73,8 +73,8 @@ export const posts = {
   }
 }
 
-export const comments = [
-  {
+export const comments = {
+  '0': {
     commenter: 2,
     post: 1,
     commentId: 0,
@@ -82,4 +82,14 @@ export const comments = [
     downvotes: 2,
     content: "This is serious business Harry. You're being distracting."
   }
-]
+}
+
+// Sample user votes for Harry Potter
+export const userVotes = {
+  posts: {
+
+  },
+  comments: {
+
+  }
+}

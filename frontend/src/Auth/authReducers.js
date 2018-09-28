@@ -18,7 +18,7 @@ const initialState = user ?
 //   currentUser: null,
 // }
 
-export const loadUser = (state=initialState, action={}) => {
+export const auth = (state=initialState, action={}) => {
   const { type, payload } = action;
   switch (type) {
     case SIGNIN_SUCCESS:

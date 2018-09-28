@@ -2,21 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
-import { loadPostListByTeam, upvotePost, downvotePost } from './postActions';
+import { loadPostListByTeam } from './postFeedActions';
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
-    upvotePost: postId => dispatch(upvotePost(postId)),
-    downvotePost: postId => dispatch(downvotePost(postId))
+    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId))
   }
 }
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.user.currentUser,
-    loadPostListPending: state.posts.loadPostListPending,
-    postList: state.posts.postList
+    currentUser: state.auth.currentUser,
+    loadPostListPending: state.postList.loadPostListPending,
+    postList: state.postList.postList
   }
 }
 
@@ -24,8 +22,7 @@ class PostFeed extends Component {
   componentDidMount() {
     // get posts
     const { currentUser, loadPostListByTeam, teamId } = this.props;
-    // Just pick the first team for now
-    // const teamId = currentUser.teams[0];
+
     if (teamId !== undefined) {
       loadPostListByTeam(teamId);
     }
@@ -36,10 +33,9 @@ class PostFeed extends Component {
       currentUser,
       loadPostListPending,
       postList,
-      upvotePost,
-      downvotePost
+      loadPostListByTeam,
+      teamId
     } = this.props;
-    const postListArray = Object.entries(postList).map(entry => entry[1]);
 
     return loadPostListPending ? (
       <div>
@@ -48,13 +44,11 @@ class PostFeed extends Component {
     ) : (
       <div>
         <AddPost currentUser={currentUser}/>
-        {postListArray.map((post, i) =>
+        { postList.map((postId, i) =>
           <Post
-            key={post.postId}
-            post={post}
-            onUpvote={() => upvotePost(post.postId)}
-            onDownvote={() => downvotePost(post.postId)}
-          /> )}
+            key={postId}
+            postId={postId}
+          /> ) }
       </div>
     )
   }

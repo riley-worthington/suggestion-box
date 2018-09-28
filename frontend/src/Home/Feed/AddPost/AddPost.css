@@ -9,16 +9,19 @@
   font-size: 18px;
   border: 2px solid #4b8bf9;
   border-radius: 30px;
-  color: #4b8bf9;
+  background-color: #4b8bf9;
+  color: #ffffff;
   outline: none;
   cursor: pointer;
   padding: 5px 10px;
   margin: 5px 0;
+  transition: 0.2s;
 }
 
 .new-post-button:hover {
   border-color: #1c62da;
-  color: #1c62da;
+  background-color: #1c62da;
+  transition: 0.2s;
 }
 
 .new-post-field {

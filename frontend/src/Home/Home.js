@@ -11,7 +11,7 @@ import { signOut } from '../Auth/authActions';
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.user.currentUser
+    currentUser: state.auth.currentUser
   }
 }
 

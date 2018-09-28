@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { submitPost } from '../PostFeed/postActions';
+import { submitPost } from '../PostFeed/postFeedActions';
 import './AddPost.css';
 
 const mapDispatchToProps = dispatch => {
@@ -50,7 +50,11 @@ class AddPost extends Component {
     const { currentUser } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className='new-post-form'>
-        <p className='prompt'>{`Add new post as ${currentUser.firstName} ${currentUser.lastName}`}</p>
+        <p className='prompt'>Add new post as
+          <b>
+            {` ${currentUser.firstName} ${currentUser.lastName}`}
+          </b>
+        </p>
         <input
           onChange={this.onPostTitleChange}
           type='text'

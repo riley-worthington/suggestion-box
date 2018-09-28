@@ -22,3 +22,8 @@
 .vote-display {
   padding: 5px;
 }
+
+.vote-button.voted {
+  opacity: 1;
+  color: red;
+}

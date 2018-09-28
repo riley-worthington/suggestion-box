@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux';
 import { SIGNOUT } from './Auth/authConstants';
 
-import { loadUser } from './Auth/authReducers';
-import { loadPostList } from './Home/Feed/PostFeed/postReducers';
+import { auth } from './Auth/authReducers';
+import { postList } from './Home/Feed/PostFeed/postFeedReducers';
+import { postsById } from './Home/Feed/Post/postReducers';
 
 const appReducer = combineReducers({
-  user: loadUser,
-  posts: loadPostList
+  auth,
+  postList,
+  postsById
 })
 
 export const rootReducer = (state, action) => {
