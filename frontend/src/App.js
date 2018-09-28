@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div>
+        <div style={{'height': '100%'}}>
           <Route path='/signin' component={SignIn} />
           <PrivateRoute exact path='/' component={Home} />
           <PrivateRoute path={`/teams/:teamId`} component={Home} />

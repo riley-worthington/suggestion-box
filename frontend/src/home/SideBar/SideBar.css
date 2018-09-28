@@ -12,17 +12,15 @@
   height: 100%;
 }
 
-.sidebar-company {
+.sidebar-team {
+  color: lightgrey;
   padding: 10px 10px 10px 20px;
+  text-decoration: none;
   /* border-bottom: 1px solid black; */
 }
 
-.sidebar-company.selected{
-  font-weight: bold;
-}
-
 .sidebar-title {
-  padding: 10px;
+  padding: 15px 10px;
   font-weight: bold;
 }
 

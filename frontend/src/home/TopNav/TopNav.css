@@ -5,8 +5,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 30px 40px;
-  background-color: #302337;
-  color: #ffffff;
+  background-color: #b889d1;
+  color: #25072f;
+  /* opacity: 0.6; */
 }
 
 .site-title {
@@ -26,15 +27,15 @@
 
 .signout-button {
   width: 110px;
-  color: #ffffff;
+  color: #4e0e62;
   cursor: pointer;
   outline: none;
-  border: 1px solid #ffffff;
+  border: 2px solid #4e0e62;
   border-radius: 5px;
   background: transparent;
 }
 
 .signout-button:hover {
-  color: lightgrey;
-  border-color: lightgrey;
+  color: #25072f;
+  border-color: #25072f;
 }

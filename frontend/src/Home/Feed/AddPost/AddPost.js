@@ -50,7 +50,7 @@ class AddPost extends Component {
     const { currentUser } = this.props;
     return (
       <form onSubmit={this.handleSubmit} className='new-post-form'>
-        <p>{`Add new post as ${currentUser.firstName} ${currentUser.lastName}`}</p>
+        <p className='prompt'>{`Add new post as ${currentUser.firstName} ${currentUser.lastName}`}</p>
         <input
           onChange={this.onPostTitleChange}
           type='text'
@@ -58,6 +58,8 @@ class AddPost extends Component {
           value={this.state.postTitle}
           className='new-post-field'/>
         <textarea
+          rows='4'
+          cols='40'
           onChange={this.onPostBodyChange}
           placeholder='Add a post'
           value={this.state.postBody}

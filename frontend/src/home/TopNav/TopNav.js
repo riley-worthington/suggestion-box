@@ -5,7 +5,7 @@ const TopNav = ({ user, onSignOut }) => {
   return (
     <header className='nav-header'>
       <div className='site-title'>
-        SuggestionBox
+        Disco
       </div>
       <nav className='top-nav'>
         <div className='dropdown'>

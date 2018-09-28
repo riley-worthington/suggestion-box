@@ -44,7 +44,9 @@ class Home extends Component {
         <TopNav user={currentUser} onSignOut={onSignOut}/>
         <main>
           <SideBar teamIds={currentUser.teams}/>
-          {this.bodyLoader()}
+          <div className='home-content'>
+            {this.bodyLoader()}
+          </div>
         </main>
       </div>
     );

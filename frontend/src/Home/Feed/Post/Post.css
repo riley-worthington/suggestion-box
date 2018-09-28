@@ -1,10 +1,11 @@
 .post-malone {
-  border: 1px solid black;
+  /* border-top: 1px solid grey;
+  border-bottom: 1px solid grey; */
   padding: 10px;
-  margin: 10px;
+  margin: 0 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   max-width: 600px;
 }
 
@@ -12,12 +13,17 @@
   white-space: pre-wrap;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
+  align-items: flex-start;
+  margin-left: 10px;
 }
 
 .title {
+  text-decoration: none;
+  cursor: pointer;
+  color: #399ee8;
   font-size: 18px;
   font-weight: bold;
+  margin: 5px 0;
 }
 
 .author {
