@@ -29,9 +29,7 @@ class Home extends Component {
     return (url === '/') ?
       <h1>Home Page</h1>
       :
-      <div>
-        <PostFeed teamId={teamId} />
-      </div>
+      <PostFeed teamId={teamId} />
   }
 
   render() {
@@ -41,12 +39,17 @@ class Home extends Component {
 
     return (
       <div className='home-container'>
-        <TopNav user={currentUser} onSignOut={onSignOut}/>
-        <main>
-          <SideBar teamIds={currentUser.teams}/>
-          <div className='home-content'>
-            {this.bodyLoader()}
-          </div>
+        <header className='navigation'>
+          <TopNav
+            user={currentUser}
+            onSignOut={onSignOut}
+          />
+        </header>
+        <nav className='sidebar' role='navigation'>
+          <SideBar teamIds={currentUser.teams} />
+        </nav>
+        <main className='home-content'>
+          {this.bodyLoader()}
         </main>
       </div>
     );

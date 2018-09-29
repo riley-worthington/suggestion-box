@@ -91,6 +91,7 @@ export const postsById = (state=initialState, action={}) => {
           }
         };
       }
+      return state;
     case SUBMIT_POST_SUCCESS:
       return {
         ...state,

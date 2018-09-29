@@ -25,10 +25,10 @@
 
 .voted-up {
   opacity: 1;
-  color: green;
+  color: #03d703;
 }
 
 .voted-down {
   opacity: 1;
-  color: red;
+  color: #ff0000;
 }

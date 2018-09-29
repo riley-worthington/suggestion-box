@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
 import { loadPostListByTeam } from './postFeedActions';
+import './PostFeed.css'
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -42,7 +43,7 @@ class PostFeed extends Component {
         Loading...
       </div>
     ) : (
-      <div>
+      <div className='post-feed'>
         <AddPost currentUser={currentUser}/>
         { postList.map((postId, i) =>
           <Post

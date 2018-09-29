@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Router, Route } from "react-router-dom";
 
 import Home from './Home/Home';
@@ -12,11 +12,11 @@ class App extends Component {
   render() {
     return (
       <Router history={history}>
-        <div style={{'height': '100%'}}>
+        <Fragment>
           <Route path='/signin' component={SignIn} />
           <PrivateRoute exact path='/' component={Home} />
           <PrivateRoute path={`/teams/:teamId`} component={Home} />
-        </div>
+        </Fragment>
       </Router>
     );
   }

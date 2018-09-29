@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import './TopNav.css';
 
 const TopNav = ({ user, onSignOut }) => {
   return (
-    <header className='nav-header'>
-      <div className='site-title'>
+    <Fragment>
+      <h1 className='site-title'>
         Disco
-      </div>
+      </h1>
       <nav className='top-nav'>
         <div className='dropdown'>
           {user.firstName}
         </div>
         <button onClick={onSignOut} className='signout-button'>Sign Out</button>
       </nav>
-    </header>
+    </Fragment>
   )
 }
 

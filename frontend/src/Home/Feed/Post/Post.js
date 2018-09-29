@@ -27,7 +27,7 @@ class Post extends Component {
     const originalPoster = users[post.originalPoster];
     const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
     return (
-      <div className='post-malone'>
+      <article className='post-malone'>
         <Vote
           post={post}
           onUpvote={() => upvotePost(postId)}
@@ -35,17 +35,19 @@ class Post extends Component {
           onRemoveVote={() => removeVoteFromPost(postId)}
         />
         <div className='post-body'>
-          <div className='title'>
-            {post.title}
-          </div>
-          <div className='author'>
-            {opName}
-          </div>
-          <div className='content'>
+          <header>
+            <h1 className='title'>
+              {post.title}
+            </h1>
+            <h2 className='author'>
+              {opName}
+            </h2>
+          </header>
+          <p className='content'>
             {post.content}
-          </div>
+          </p>
         </div>
-      </div>
+      </article>
     );
   }
 }

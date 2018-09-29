@@ -2,7 +2,19 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 10px 10px 20px 10px;
+  padding: 10px;
+  /* margin: 10px 10px 20px 10px; */
+}
+
+.visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 .new-post-button {
@@ -18,7 +30,7 @@
   transition: 0.2s;
 }
 
-.new-post-button:hover {
+.new-post-button:hover, .new-post-button:focus  {
   border-color: #1c62da;
   background-color: #1c62da;
   transition: 0.2s;
@@ -37,8 +49,10 @@
 
 .new-post-field:focus {
   border-color: #1c62da;
+  /* box-shadow: 0 0 0 1px rgb(77, 144, 254); */
 }
 
 .prompt {
+  font-size: 18px;
   color: #25072f;
 }

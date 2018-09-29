@@ -1,13 +1,37 @@
 .home-container {
   position: relative;
+  display: grid;
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  grid-template-rows: 130px
+                      1fr;
+  grid-template-areas: 'na na'
+                       'si co';
+  min-height: 100vh;
+}
+
+.sidebar {
+  grid-area: si;
+  background-color: #171c28;
+  color: #c1c1d0;
+  height: 100%;
+}
+
+.navigation {
+  grid-area: na;
   display: flex;
-  flex-direction: column;
-  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  background-color: #b889d1;
+  color: #25072f;
   height: 100%;
 }
 
 .home-content {
-  padding-left: 20px;
+  grid-area: co;
+  /* padding-left: 20px; */
 }
 
 main {
