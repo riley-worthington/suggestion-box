@@ -23,7 +23,12 @@
   padding: 5px;
 }
 
-.vote-button.voted {
+.voted-up {
+  opacity: 1;
+  color: green;
+}
+
+.voted-down {
   opacity: 1;
   color: red;
 }

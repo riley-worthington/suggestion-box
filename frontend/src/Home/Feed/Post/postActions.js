@@ -1,4 +1,4 @@
-import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE } from './postConstants';
+import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE, REMOVE_VOTE_FROM_POST } from './postConstants';
 import { posts, userVotes } from '../../../fakeDatabase';
 
 export const upvotePost = postId => dispatch => {
@@ -38,5 +38,12 @@ export const downvotePost = postId => dispatch => {
       type: DOWNVOTE_POST_FAILURE,
       payload: postId
     }
+  }
+}
+
+export const removeVoteFromPost = postId => {
+  return {
+    type: REMOVE_VOTE_FROM_POST,
+    payload: postId
   }
 }

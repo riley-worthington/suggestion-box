@@ -1,4 +1,4 @@
-import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE } from './postConstants';
+import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE, REMOVE_VOTE_FROM_POST } from './postConstants';
 import { LOAD_POST_LIST_SUCCESS, SUBMIT_POST_SUCCESS } from '../PostFeed/postFeedConstants';
 
 /* STORE SCHEMA
@@ -64,6 +64,33 @@ export const postsById = (state=initialState, action={}) => {
           }
         }
       };
+    case REMOVE_VOTE_FROM_POST:
+      const currentUserVote = state.postsById[postId].currentUserVote;
+      if (currentUserVote === -1) {
+        return {
+          ...state,
+          postsById: {
+            ...state.postsById,
+            [payload]: {
+              ...state.postsById[payload],
+              downvotes: state.postsById[postId].downvotes - 1,
+              currentUserVote: 0
+            }
+          }
+        };
+      } else if (currentUserVote === 1) {
+        return {
+          ...state,
+          postsById: {
+            ...state.postsById,
+            [payload]: {
+              ...state.postsById[payload],
+              upvotes: state.postsById[postId].upvotes - 1,
+              currentUserVote: 0
+            }
+          }
+        };
+      }
     case SUBMIT_POST_SUCCESS:
       return {
         ...state,
@@ -71,7 +98,7 @@ export const postsById = (state=initialState, action={}) => {
           ...state.postsById,
           [payload.postId]: payload
         }
-      }
+      };
     case UPVOTE_POST_FAILURE:
     case DOWNVOTE_POST_FAILURE:
     default:
