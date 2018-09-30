@@ -21,7 +21,7 @@ const SideBar = ({ teamIds }) => {
               key={team.teamId}
               activeStyle={{
                 fontWeight: 'bold',
-                color: '#a383c6'
+                color: '#71eeb8'
               }}>
               {team.name}
             </NavLink>

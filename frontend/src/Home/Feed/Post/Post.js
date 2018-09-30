@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import Vote from '../Vote/Vote';
 import './Post.css';
 import { upvotePost, downvotePost, removeVoteFromPost } from './postActions';
@@ -24,8 +25,10 @@ const mapDispatchToProps = dispatch => {
 class Post extends Component {
   render() {
     const { postId, post, upvotePost, downvotePost, removeVoteFromPost } = this.props;
+    console.log('post', post)
     const originalPoster = users[post.originalPoster];
     const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
+    const numComments = post.comments.length;
     return (
       <article className='post-malone'>
         <Vote
@@ -37,7 +40,9 @@ class Post extends Component {
         <div className='post-body'>
           <header>
             <h1 className='title'>
-              {post.title}
+              <Link to={`/posts/${postId}`} >
+                {post.title}
+              </Link>
             </h1>
             <h2 className='author'>
               {opName}
@@ -45,6 +50,9 @@ class Post extends Component {
           </header>
           <p className='content'>
             {post.content}
+          </p>
+          <p className='comments-tag'>
+            {numComments + (numComments === 1 ? ' comment' : ' comments')}
           </p>
         </div>
       </article>

@@ -57,7 +57,7 @@ export const posts = {
     originalPoster: 1,
     upvotes: 7,
     downvotes: 3,
-    comments: [],
+    comments: [1, 2],
     postId: 1,
     title: 'Come play quiddich',
     content: 'We got the pitch reserved, come out'
@@ -66,7 +66,7 @@ export const posts = {
     originalPoster: 2,
     upvotes: 10,
     downvotes: 0,
-    comments: [],
+    comments: [3],
     postId: 2,
     title: "Join Dumbledore's Army",
     content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -81,6 +81,30 @@ export const comments = {
     upvotes: 5,
     downvotes: 2,
     content: "This is serious business Harry. You're being distracting."
+  },
+  '1': {
+    commenter: 1,
+    post: 1,
+    commentId: 1,
+    upvotes: 2,
+    downvotes: 0,
+    content: "This is serious business Harry. You're being distracting."
+  },
+  '2': {
+    commenter: 2,
+    post: 1,
+    commentId: 2,
+    upvotes: 3,
+    downvotes: 1,
+    content: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  },
+  '3': {
+    commenter: 1,
+    post: 2,
+    commentId: 3,
+    upvotes: 5,
+    downvotes: 1,
+    content: "Cool"
   }
 }
 

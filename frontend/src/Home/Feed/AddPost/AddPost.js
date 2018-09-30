@@ -14,22 +14,53 @@ class AddPost extends Component {
     super(props);
     this.state = {
       postTitle: '',
-      postBody: ''
+      postBody: '',
+      alertBox: '',
+      titleInvalid: false,
+      bodyInvalid: false
     }
   }
 
   onPostTitleChange = (event) => {
-    this.setState({postTitle: event.target.value});
+    let invalid = true
+    if (event.target.value.length > 0) {
+      invalid = false
+    }
+    this.setState({
+      postTitle: event.target.value,
+      titleInvalid: invalid
+    });
   }
 
   onPostBodyChange = (event) => {
     this.setState({postBody: event.target.value});
+    if (event.target.value.length > 280) {
+      this.setState({
+        bodyInvalid: true,
+        alertBox: 'Post cannot be longer than 280 characters'
+      })
+    } else {
+      this.setState({
+        bodyInvalid: false,
+        alertBox: ''
+      })
+    }
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     const { onSubmitPost, currentUser } = this.props;
     const { postTitle, postBody } = this.state;
+    if (postBody.length > 280) {
+      return;
+    }
+    if (postTitle === '') {
+      this.setState({
+        alertBox: 'Please enter a title',
+        titleInvalid: true
+      })
+      return;
+    }
     const newPost = {
       originalPoster: currentUser.userId,
       upvotes: 0,
@@ -42,8 +73,13 @@ class AddPost extends Component {
     onSubmitPost(newPost);
     this.setState({
       postTitle: '',
-      postBody: ''
+      postBody: '',
+      alertBox: ''
     });
+  }
+
+  displayAlert() {
+    return this.state.alertBox;
   }
 
   render() {
@@ -58,14 +94,15 @@ class AddPost extends Component {
             {` ${currentUser.firstName} ${currentUser.lastName}`}
           </b>
         </p>
-        <label htmlFor="title" className='visually-hidden'>Title</label>
+        <label htmlFor='title' className='visually-hidden'>Title</label>
         <input
           type='text'
           id='title'
           onChange={this.onPostTitleChange}
           placeholder='Title'
           value={this.state.postTitle}
-          className='new-post-field'/>
+          className={'new-post-field' + (this.state.titleInvalid ? ' invalid' : '')}
+        />
         <label htmlFor='post' className='visually-hidden'>New Post</label>
         <textarea
           id='post'
@@ -75,8 +112,12 @@ class AddPost extends Component {
           onChange={this.onPostBodyChange}
           placeholder='Add a post'
           value={this.state.postBody}
-          className='new-post-field' />
+          className={'new-post-field' + (this.state.bodyInvalid ? ' invalid' : '')}
+        />
         <button onClick={this.handleSubmit} className='new-post-button'>Post</button>
+        <div className='alert-box'>
+          {this.displayAlert()}
+        </div>
       </form>
     );
   }
