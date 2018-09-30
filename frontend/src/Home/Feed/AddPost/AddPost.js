@@ -65,7 +65,7 @@ class AddPost extends Component {
       originalPoster: currentUser.userId,
       upvotes: 0,
       downvotes: 0,
-      comments: [0],
+      comments: [],
       postId: 3,
       title: postTitle,
       content: postBody

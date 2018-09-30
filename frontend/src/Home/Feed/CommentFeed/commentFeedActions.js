@@ -36,3 +36,29 @@ export const loadCommentListByPost = postId => dispatch => {
     }
   }
 }
+
+export const submitComment = comment => dispatch => {
+  dispatch(submitCommentRequest(comment));
+  dispatch(submitCommentSuccess(comment));
+
+  function submitCommentRequest(comment) {
+    return {
+      type: SUBMIT_COMMENT_REQUEST,
+      payload: comment
+    }
+  }
+
+  function submitCommentSuccess(comment) {
+    return {
+      type: SUBMIT_COMMENT_SUCCESS,
+      payload: comment
+    }
+  }
+
+  function submitCommentFailure(error) {
+    return {
+      type: SUBMIT_COMMENT_FAILURE,
+      payload: error
+    }
+  }
+}

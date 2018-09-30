@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { loadCommentListByPost } from './commentFeedActions';
 import { getCommentsAsList } from './commentFeedSelectors';
 import Comment from '../Comment/Comment';
+import AddComment from '../AddComment/AddComment';
 import './CommentFeed.css';
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.auth.currentUser,
     commentList: getCommentsAsList(state)
   }
 }
@@ -28,7 +30,7 @@ class CommentFeed extends Component {
   }
 
   render() {
-    const { commentList } = this.props;
+    const { currentUser, commentList, postId } = this.props;
     console.log(commentList)
     return (
       <div className='comment-feed'>
@@ -38,6 +40,7 @@ class CommentFeed extends Component {
               commentObj={commentObj}
             />
           ) }
+        <AddComment currentUser={currentUser} postId={postId}/>
       </div>
     );
   }

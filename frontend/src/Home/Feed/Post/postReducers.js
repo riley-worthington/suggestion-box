@@ -1,5 +1,6 @@
 import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE, REMOVE_VOTE_FROM_POST } from './postConstants';
 import { LOAD_POST_LIST_SUCCESS, SUBMIT_POST_SUCCESS } from '../PostFeed/postFeedConstants';
+import { SUBMIT_COMMENT_SUCCESS } from '../CommentFeed/commentFeedConstants';
 
 /* STORE SCHEMA
 
@@ -93,6 +94,7 @@ export const postsById = (state=initialState, action={}) => {
       }
       return state;
     case SUBMIT_POST_SUCCESS:
+      // add new post object to postsById
       return {
         ...state,
         postsById: {
@@ -100,6 +102,21 @@ export const postsById = (state=initialState, action={}) => {
           [payload.postId]: payload
         }
       };
+    case SUBMIT_COMMENT_SUCCESS:
+      // insert commentId into comment list on corresponding post
+      return {
+        ...state,
+        postsById: {
+          ...state.postsById,
+          [payload.post]: {
+            ...state.postsById[payload.post],
+            comments: [
+              ...state.postsById[payload.post].comments,
+              payload.commentId
+            ]
+          }
+        }
+      }
     case UPVOTE_POST_FAILURE:
     case DOWNVOTE_POST_FAILURE:
     default:
