@@ -26,6 +26,14 @@
   margin: 5px 0;
 }
 
+.post-link {
+  text-decoration: none;
+}
+
+.post-link:active {
+  color: inherit;
+}
+
 .author {
   color: grey;
   font-size: 18px;

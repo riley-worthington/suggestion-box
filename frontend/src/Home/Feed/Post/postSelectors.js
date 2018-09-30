@@ -6,3 +6,7 @@ const getPostList = state => state.postList;
 export const getPostById = (state, postId) => {
   return state.postsById.postsById[postId];
 }
+
+// export const getCommentIdListByPostId = (state, postId) => {
+//   return state.postsById.postsById[postId].comments;
+// }

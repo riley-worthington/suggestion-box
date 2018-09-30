@@ -1,0 +1,18 @@
+
+.comment-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  padding: 10px;
+}
+
+.commenter-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: normal;
+  color: grey;
+}
+
+.commenter-body {
+
+}

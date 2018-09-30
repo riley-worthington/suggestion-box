@@ -83,7 +83,7 @@ export const comments = {
     content: "This is serious business Harry. You're being distracting."
   },
   '1': {
-    commenter: 1,
+    commenter: 2,
     post: 1,
     commentId: 1,
     upvotes: 2,
@@ -91,7 +91,7 @@ export const comments = {
     content: "This is serious business Harry. You're being distracting."
   },
   '2': {
-    commenter: 2,
+    commenter: 1,
     post: 1,
     commentId: 2,
     upvotes: 3,

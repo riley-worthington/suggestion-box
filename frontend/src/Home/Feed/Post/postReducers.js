@@ -29,15 +29,15 @@ export const postsById = (state=initialState, action={}) => {
 
   switch (type) {
     case LOAD_POST_LIST_SUCCESS:
-    const posts = postList.reduce((obj, post) => {
-      post['currentUserVote'] = 0;
-       obj[post.postId] = post;
-       return obj;
-     }, {});
-    return {
-      ...state,
-      postsById: posts
-    }
+      const posts = postList.reduce((obj, post) => {
+        post['currentUserVote'] = 0;
+         obj[post.postId] = post;
+         return obj;
+       }, {});
+      return {
+        ...state,
+        postsById: posts
+      }
     case UPVOTE_POST_SUCCESS:
       const currentUpvotes = state.postsById[postId].upvotes;
       return {

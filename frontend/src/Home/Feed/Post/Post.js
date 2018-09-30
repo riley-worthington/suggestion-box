@@ -40,7 +40,10 @@ class Post extends Component {
         <div className='post-body'>
           <header>
             <h1 className='title'>
-              <Link to={`/posts/${postId}`} >
+              <Link
+                to={`/posts/${postId}`}
+                className='post-link'
+              >
                 {post.title}
               </Link>
             </h1>
