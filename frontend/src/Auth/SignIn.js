@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom'
 import './SignIn.css';
 import { signIn } from './authActions';
 
@@ -33,7 +34,8 @@ class SignIn extends Component {
     this.handleSubmit(); // Things you want to do.
   }
 
-  handleSubmit = () => {
+  handleSubmit = (event) => {
+    event.preventDefault();
     const { signInEmail, signInPassword } = this.state;
     const { onSubmitSignIn } = this.props;
     onSubmitSignIn(signInEmail, signInPassword);
@@ -45,7 +47,9 @@ class SignIn extends Component {
         <header className="App-header">
           <h1 className="App-title">SuggestionBox</h1>
         </header>
-        <div className="signin-form">
+        <form
+          className="signin-form"
+          onSubmit={this.handleSubmit}>
           <input
             className="signin-field"
             type="email"
@@ -69,9 +73,12 @@ class SignIn extends Component {
             onClick={this.handleSubmit}>
               Sign In
           </button>
-        </div>
+        </form>
         <p className="App-intro">
           A place for creative collaboration.
+        </p>
+        <p>
+          Don't have an account? <Link to='/register'>Register</Link>
         </p>
       </div>
     );
