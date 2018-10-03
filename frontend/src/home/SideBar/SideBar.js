@@ -4,7 +4,9 @@ import './SideBar.css';
 
 import { teams } from '../../fakeDatabase';
 
-const SideBar = ({ teamIds }) => {
+
+const SideBar = ({ teamIds, selected }) => {
+  console.log('selected', selected)
   const currTeams = teamIds.map(id => teams[id]);
   return (
     <Fragment>
@@ -14,20 +16,18 @@ const SideBar = ({ teamIds }) => {
 
       <ul className='group-list'>
         {currTeams.map((team, i) =>
-          <li>
+          <li key={team.teamId}>
             <NavLink
-              className='sidebar-team'
+              className={'sidebar-team' + (team.teamId === selected ? ' selected' : '')}
               to={`/teams/${team.teamId}`}
-              key={team.teamId}
-              activeStyle={{
-                fontWeight: 'bold',
-                color: '#71eeb8'
-              }}>
+            >
               {team.name}
             </NavLink>
           </li>
         )}
       </ul>
+
+      <button className='join-team-button'>+ Join team</button>
     </Fragment>
   )
 }

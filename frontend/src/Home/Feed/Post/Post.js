@@ -55,7 +55,11 @@ class Post extends Component {
             {post.content}
           </p>
           <p className='comments-tag'>
-            {numComments + (numComments === 1 ? ' comment' : ' comments')}
+            <Link
+              to={`/posts/${postId}`}
+              className='comments-tag' >
+              {numComments + (numComments === 1 ? ' comment' : ' comments')}
+            </Link>
           </p>
         </div>
       </article>

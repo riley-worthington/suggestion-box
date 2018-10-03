@@ -12,7 +12,8 @@ import { signOut } from '../Auth/authActions';
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.auth.currentUser
+    currentUser: state.auth.currentUser,
+    selectedTeam: state.postList.selectedTeam,
   }
 }
 
@@ -50,9 +51,9 @@ class Home extends Component {
   }
 
   render() {
-    const currentUser = this.props.currentUser;
-    const { onSignOut, match } = this.props;
+    const { currentUser, selectedTeam, onSignOut, match } = this.props;
     const teamId = +match.params.teamId;
+    const postId = +match.params.postId;
 
     return (
       <div className='home-container'>
@@ -63,7 +64,7 @@ class Home extends Component {
           />
         </header>
         <nav className='sidebar' role='navigation'>
-          <SideBar teamIds={currentUser.teams} />
+          <SideBar teamIds={currentUser.teams} selected={selectedTeam}/>
         </nav>
         <main className='home-content'>
           {this.bodyLoader()}

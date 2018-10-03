@@ -14,7 +14,8 @@ const initialState = {
   loadPostListPending: false,
   postList: [],
   pendingPost: false,
-  newPost: null
+  newPost: null,
+  selectedTeam: null
 }
 
 export const postList = (state=initialState, action={}) => {
@@ -23,7 +24,8 @@ export const postList = (state=initialState, action={}) => {
     case LOAD_POST_LIST_REQUEST:
       return {
         ...state,
-        loadPostListPending: true
+        loadPostListPending: true,
+        selectedTeam: payload
       };
     case LOAD_POST_LIST_SUCCESS:
       const postIds = payload.map(post => post.postId)
