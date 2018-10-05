@@ -1,5 +1,16 @@
-import { LOAD_COMMENT_LIST_REQUEST, LOAD_COMMENT_LIST_SUCCESS, LOAD_COMMENT_LIST_FAILURE } from './commentFeedConstants';
-import { SUBMIT_COMMENT_REQUEST, SUBMIT_COMMENT_SUCCESS, SUBMIT_COMMENT_FAILURE } from './commentFeedConstants';
+import {
+  LOAD_COMMENT_LIST_REQUEST,
+  LOAD_COMMENT_LIST_SUCCESS,
+  LOAD_COMMENT_LIST_FAILURE,
+  SUBMIT_COMMENT_REQUEST,
+  SUBMIT_COMMENT_SUCCESS,
+  SUBMIT_COMMENT_FAILURE,
+  UPVOTE_COMMENT_SUCCESS,
+  UPVOTE_COMMENT_FAILURE,
+  DOWNVOTE_COMMENT_SUCCESS,
+  DOWNVOTE_COMMENT_FAILURE,
+  REMOVE_VOTE_FROM_COMMENT,
+} from './commentFeedConstants';
 
 /* STORE SCHEMA
 
@@ -67,6 +78,60 @@ export const commentsReducer = (state=initialState, action={}) => {
         ...state,
         pendingComment: false
       }
+    case UPVOTE_COMMENT_SUCCESS:
+      const currentUpvotes = state.commentsById[payload].upvotes;
+      return {
+        ...state,
+        commentsById: {
+          ...state.commentsById,
+          [payload]: {
+            ...state.commentsById[payload],
+            upvotes: currentUpvotes + 1,
+            currentUserVote: 1
+          }
+        }
+      };
+    case DOWNVOTE_COMMENT_SUCCESS:
+      const currentDownvotes = state.commentsById[payload].downvotes;
+      return {
+        ...state,
+        commentsById: {
+          ...state.commentsById,
+          [payload]: {
+            ...state.commentsById[payload],
+            downvotes: currentDownvotes + 1,
+            currentUserVote: -1
+          }
+        }
+      };
+    case REMOVE_VOTE_FROM_COMMENT:
+      const currentUserVote = state.commentsById[payload].currentUserVote;
+      if (currentUserVote === -1) {
+        return {
+          ...state,
+          commentsById: {
+            ...state.commentsById,
+            [payload]: {
+              ...state.commentsById[payload],
+              downvotes: state.commentsById[payload].downvotes - 1,
+              currentUserVote: 0
+            }
+          }
+        };
+      } else if (currentUserVote === 1) {
+        return {
+          ...state,
+          commentsById: {
+            ...state.commentsById,
+            [payload]: {
+              ...state.commentsById[payload],
+              upvotes: state.commentsById[payload].upvotes - 1,
+              currentUserVote: 0
+            }
+          }
+        };
+      }
+      return state;
     default:
       return state;
   }

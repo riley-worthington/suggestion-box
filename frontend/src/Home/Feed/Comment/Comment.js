@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { Component } from 'react';
+import Vote from '../Vote/Vote';
 import './Comment.css';
 
 import { users } from '../../../fakeDatabase';
