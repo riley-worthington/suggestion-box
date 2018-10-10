@@ -1,5 +1,12 @@
-import { LOAD_POST_LIST_REQUEST, LOAD_POST_LIST_SUCCESS, LOAD_POST_LIST_FAILURE } from './postFeedConstants';
-import { SUBMIT_POST_REQUEST, SUBMIT_POST_SUCCESS, SUBMIT_POST_FAILURE } from './postFeedConstants';
+import {
+  LOAD_POST_LIST_REQUEST,
+  LOAD_POST_LIST_SUCCESS,
+  LOAD_POST_LIST_FAILURE,
+  SUBMIT_POST_REQUEST,
+  SUBMIT_POST_SUCCESS,
+  SUBMIT_POST_FAILURE,
+  LOAD_TEAM_MEMBERS
+ } from './postFeedConstants';
 
 import { posts, userVotes } from '../../../fakeDatabase';
 
@@ -13,19 +20,19 @@ export const loadPostListByTeam = teamId => dispatch => {
   dispatch(loadPostListRequest(teamId));
 
   // Request team post list from backend
-  fetch(`http://localhost:3000/teams/1/posts`, {
-    method: 'get'
-  })
-  .then(response => response.json())
-  .then(postList => {
-    if (postList) {
-      dispatch(loadPostListSuccess(postList));
-    } else {
-      dispatch(loadPostListFailure('failed'));
-    }
-  })
+  // fetch(`http://localhost:3000/teams/1/posts`, {
+  //   method: 'get'
+  // })
+  // .then(response => response.json())
+  // .then(postList => {
+  //   if (postList) {
+  //     dispatch(loadPostListSuccess(postList));
+  //   } else {
+  //     dispatch(loadPostListFailure('failed'));
+  //   }
+  // })
 
-  // dispatch(loadPostListSuccess(samplePostList));
+  dispatch(loadPostListSuccess(samplePostList));
 }
 
 export const loadPostListByUser = userId => dispatch => {
@@ -51,6 +58,27 @@ const loadPostListFailure = error => {
   return {
     type: LOAD_POST_LIST_FAILURE,
     payload: error
+  }
+}
+
+export const loadTeamMembers = teamId => dispatch => {
+  fetch(`http://localhost:3000/teams/1/members`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(teamMembers => {
+    if (teamMembers) {
+      dispatch(loadTeamMembersSuccess(teamMembers))
+    } else {
+      console.log('could not load team members')
+    }
+  })
+
+  function loadTeamMembersSuccess(teamMembers) {
+    return {
+      type: LOAD_TEAM_MEMBERS,
+      payload: teamMembers
+    }
   }
 }
 

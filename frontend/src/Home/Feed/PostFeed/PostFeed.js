@@ -2,30 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
-import { loadPostListByTeam } from './postFeedActions';
+import { loadPostListByTeam, loadTeamMembers } from './postFeedActions';
 import './PostFeed.css'
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId))
+    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
+    loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId))
   }
 }
 
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    loadPostListPending: state.postList.loadPostListPending,
-    postList: state.postList.postList
+    loadPostListPending: state.feed.loadPostListPending,
+    postList: state.feed.postList
   }
 }
 
 class PostFeed extends Component {
   componentDidMount() {
     // get posts
-    const { currentUser, loadPostListByTeam, teamId } = this.props;
+    const {
+      currentUser,
+      loadPostListByTeam,
+      teamId,
+      loadTeamMembers
+    } = this.props;
 
     if (teamId !== undefined) {
       loadPostListByTeam(teamId);
+      loadTeamMembers(teamId);
     }
   }
 

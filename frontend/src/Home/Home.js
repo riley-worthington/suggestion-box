@@ -13,7 +13,7 @@ import { signOut } from '../Auth/authActions';
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    selectedTeam: state.postList.selectedTeam,
+    selectedTeam: state.feed.selectedTeam,
   }
 }
 

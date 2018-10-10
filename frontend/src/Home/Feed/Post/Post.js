@@ -5,12 +5,16 @@ import Vote from '../Vote/Vote';
 import './Post.css';
 import { upvotePost, downvotePost, removeVoteFromPost } from './postActions';
 import { getPostById } from './postSelectors';
+import { getUserById } from '../PostFeed/postFeedSelectors';
 
 import { users } from '../../../fakeDatabase';
 
 const mapStateToProps = (state, props) => {
+  const post = getPostById(state, props.postId);
+  console.log('post', post)
   return {
-    post: getPostById(state, props.postId)
+    post: post,
+    originalPoster: getUserById(state, post.originalPoster)
   }
 }
 
@@ -24,8 +28,15 @@ const mapDispatchToProps = dispatch => {
 
 class Post extends Component {
   render() {
-    const { postId, post, upvotePost, downvotePost, removeVoteFromPost } = this.props;
-    console.log('post', post)
+    const {
+      postId,
+      post,
+      // originalPoster,
+      upvotePost,
+      downvotePost,
+      removeVoteFromPost
+    } = this.props;
+    // console.log('OP', originalPoster)
     const originalPoster = users[post.originalPoster];
     const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
     const numComments = post.comments.length;
