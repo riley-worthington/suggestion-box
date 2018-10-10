@@ -10,9 +10,22 @@ const samplePostList = [
 ]
 
 export const loadPostListByTeam = teamId => dispatch => {
-  // Request team post list from backend
   dispatch(loadPostListRequest(teamId));
-  dispatch(loadPostListSuccess(samplePostList));
+
+  // Request team post list from backend
+  fetch(`http://localhost:3000/teams/1/posts`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(postList => {
+    if (postList) {
+      dispatch(loadPostListSuccess(postList));
+    } else {
+      dispatch(loadPostListFailure('failed'));
+    }
+  })
+
+  // dispatch(loadPostListSuccess(samplePostList));
 }
 
 export const loadPostListByUser = userId => dispatch => {

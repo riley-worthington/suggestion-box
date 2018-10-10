@@ -28,15 +28,21 @@ app.get('/', (req, res) => {
   res.send("It's working");
 })
 
+// POST requests
 app.post('/signin', signin.handleSignin(db, bcrypt));
-
 app.post('/register', register.handleRegister(db, bcrypt));
-
 app.post('/teams', teams.createNewTeam(db));
-
 app.post('/posts', posts.createNewPost(db));
-
 app.post('/teams/:teamId/members', teams.addTeamMember(db));
+// app.post('/posts/:postId/comments', comments.addComment(db));
+
+// GET requests
+app.get('/teams/:teamId/posts', posts.getPosts(db));
+app.get('/teams/:teamId/members', teams.getTeamMembers(db));
+// app.get('')
+
+// PUT requests
+// app.put('/posts/:postId/vote', team)
 
 app.listen(3000, () => {
   console.log('app is running on port 3000');

@@ -45,7 +45,19 @@ const addTeamMember = db => (req, res) => {
   .catch(err => res.status(400).json('unable to add team member'))
 }
 
+const getTeamMembers = db => (req, res) => {
+  const teamId = req.params.teamId;
+  db.select('users.first_name', 'users.last_name', 'users.user_id')
+    .from('users')
+    .innerJoin('team_members', 'team_members.user_id', '=', 'users.user_id')
+    .where('team_members.team_id', '=', teamId)
+    .then(members => {
+      res.json(members)
+    })
+}
+
 module.exports = {
   createNewTeam: createNewTeam,
-  addTeamMember: addTeamMember
+  addTeamMember: addTeamMember,
+  getTeamMembers: getTeamMembers
 }
