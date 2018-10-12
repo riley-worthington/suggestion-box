@@ -1,4 +1,9 @@
-import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authConstants';
+import {
+  // SIGNIN_REQUEST, 
+  SIGNIN_SUCCESS,
+  SIGNIN_FAILURE,
+  SIGNOUT
+} from './authConstants';
 
 let user = JSON.parse(localStorage.getItem('user'));
 console.log('found in local storage:', user)

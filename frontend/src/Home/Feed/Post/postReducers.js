@@ -32,7 +32,7 @@ export const postsById = (state=initialState, action={}) => {
     case LOAD_POST_LIST_SUCCESS:
       const posts = postList.reduce((obj, post) => {
         post['currentUserVote'] = 0;
-         obj[post.postId] = post;
+         obj[post.post_id] = post;
          return obj;
        }, {});
       return {

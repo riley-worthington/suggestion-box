@@ -7,14 +7,13 @@ import { upvotePost, downvotePost, removeVoteFromPost } from './postActions';
 import { getPostById } from './postSelectors';
 import { getUserById } from '../PostFeed/postFeedSelectors';
 
-import { users } from '../../../fakeDatabase';
+// import { users } from '../../../fakeDatabase';
 
 const mapStateToProps = (state, props) => {
   const post = getPostById(state, props.postId);
-  console.log('post', post)
   return {
     post: post,
-    originalPoster: getUserById(state, post.originalPoster)
+    originalPoster: getUserById(state, post.user_id)
   }
 }
 
@@ -37,7 +36,7 @@ class Post extends Component {
       removeVoteFromPost
     } = this.props;
     const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
-    const numComments = post.comments.length;
+    // const numComments = post.comments.length;
     return (
       <article className='post-malone'>
         <Vote
@@ -67,7 +66,7 @@ class Post extends Component {
             <Link
               to={`/posts/${postId}`}
               className='comments-tag' >
-              {numComments + (numComments === 1 ? ' comment' : ' comments')}
+              {/* {numComments + (numComments === 1 ? ' comment' : ' comments')} */}
             </Link>
           </p>
         </div>

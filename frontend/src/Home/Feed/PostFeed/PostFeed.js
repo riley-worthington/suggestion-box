@@ -25,7 +25,6 @@ class PostFeed extends Component {
   componentDidMount() {
     // get posts
     const {
-      currentUser,
       loadPostListByTeam,
       teamId,
       loadTeamMembers

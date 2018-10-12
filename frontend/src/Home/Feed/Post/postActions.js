@@ -1,5 +1,12 @@
-import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE, REMOVE_VOTE_FROM_POST } from './postConstants';
-import { posts, userVotes } from '../../../fakeDatabase';
+import {
+  UPVOTE_POST_SUCCESS,
+  UPVOTE_POST_FAILURE,
+  DOWNVOTE_POST_SUCCESS,
+  DOWNVOTE_POST_FAILURE,
+  REMOVE_VOTE_FROM_POST
+} from './postConstants';
+
+// import { posts, userVotes } from '../../../fakeDatabase';
 
 export const upvotePost = postId => dispatch => {
   // make API call

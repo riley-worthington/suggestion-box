@@ -22,19 +22,19 @@ export const loadPostListByTeam = teamId => dispatch => {
   dispatch(loadPostListRequest(teamId));
 
   // Request team post list from backend
-  // fetch(`http://localhost:3000/teams/1/posts`, {
-  //   method: 'get'
-  // })
-  // .then(response => response.json())
-  // .then(postList => {
-  //   if (postList) {
-  //     dispatch(loadPostListSuccess(postList));
-  //   } else {
-  //     dispatch(loadPostListFailure('failed'));
-  //   }
-  // })
+  fetch(`http://localhost:3000/teams/${teamId}/posts`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(postList => {
+    if (postList) {
+      dispatch(loadPostListSuccess(postList));
+    } else {
+      dispatch(loadPostListFailure('failed'));
+    }
+  })
 
-  dispatch(loadPostListSuccess(samplePostList));
+  // dispatch(loadPostListSuccess(samplePostList));
 }
 
 export const loadPostListByUser = userId => dispatch => {
@@ -66,7 +66,7 @@ const loadPostListFailure = error => {
 export const loadTeamMembers = teamId => dispatch => {
   dispatch(loadTeamMembersRequest(teamId));
 
-  fetch(`http://localhost:3000/teams/1/members`, {
+  fetch(`http://localhost:3000/teams/${teamId}/members`, {
     method: 'get'
   })
   .then(response => response.json())

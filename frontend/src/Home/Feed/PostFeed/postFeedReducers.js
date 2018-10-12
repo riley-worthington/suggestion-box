@@ -49,7 +49,7 @@ export const feed = (state=initialState, action={}) => {
         selectedTeam: payload
       };
     case LOAD_POST_LIST_SUCCESS:
-      const postIds = payload.map(post => post.postId)
+      const postIds = payload.map(post => post.post_id)
       return  {
         ...state,
         loadPostListPending: false,

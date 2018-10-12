@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { Route } from 'react-router-dom';
 
 import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
@@ -51,9 +50,9 @@ class Home extends Component {
   }
 
   render() {
-    const { currentUser, selectedTeam, onSignOut, match } = this.props;
-    const teamId = +match.params.teamId;
-    const postId = +match.params.postId;
+    const { currentUser, selectedTeam, onSignOut } = this.props;
+    // const teamId = +match.params.teamId;
+    // const postId = +match.params.postId;
 
     return (
       <div className='home-container'>
@@ -63,7 +62,7 @@ class Home extends Component {
             onSignOut={onSignOut}
           />
         </header>
-        <nav className='sidebar' role='navigation'>
+        <nav className='sidebar'>
           <SideBar teamIds={currentUser.teams} selected={selectedTeam}/>
         </nav>
         <main className='home-content'>
