@@ -16,6 +16,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     loadPostListPending: state.feed.loadPostListPending,
+    loadTeamMembersPending: state.feed.loadTeamMembersPending,
     postList: state.feed.postList
   }
 }
@@ -40,12 +41,13 @@ class PostFeed extends Component {
     const {
       currentUser,
       loadPostListPending,
+      loadTeamMembersPending,
       postList,
       loadPostListByTeam,
       teamId
     } = this.props;
 
-    return loadPostListPending ? (
+    return (loadPostListPending || loadTeamMembersPending) ? (
       <div>
         Loading...
       </div>

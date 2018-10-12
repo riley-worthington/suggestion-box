@@ -5,7 +5,9 @@ import {
   SUBMIT_POST_REQUEST,
   SUBMIT_POST_SUCCESS,
   SUBMIT_POST_FAILURE,
-  LOAD_TEAM_MEMBERS
+  LOAD_TEAM_MEMBERS_REQUEST,
+  LOAD_TEAM_MEMBERS_SUCCESS,
+  LOAD_TEAM_MEMBERS_FAILURE
  } from './postFeedConstants';
 
 /* STORE SCHEMA
@@ -29,6 +31,7 @@ import {
 
 const initialState = {
   loadPostListPending: false,
+  loadTeamMembersPending: false,
   postList: [],
   pendingPost: false,
   newPost: null,
@@ -75,7 +78,12 @@ export const feed = (state=initialState, action={}) => {
         ...state,
         pendingPost: false
       };
-    case LOAD_TEAM_MEMBERS:
+    case LOAD_TEAM_MEMBERS_REQUEST:
+      return {
+        ...state,
+        loadTeamMembersPending: true
+      }
+    case LOAD_TEAM_MEMBERS_SUCCESS:
       console.log(payload)
       const users = payload.reduce((obj, user) => {
         obj[user.user_id] = user;
@@ -83,7 +91,13 @@ export const feed = (state=initialState, action={}) => {
        }, {});
       return {
         ...state,
-        teamMembersById: users
+        teamMembersById: users,
+        loadTeamMembersPending: false
+      }
+    case LOAD_TEAM_MEMBERS_FAILURE:
+      return {
+        ...state,
+        loadTeamMembersPending: false
       }
     default:
       return state;

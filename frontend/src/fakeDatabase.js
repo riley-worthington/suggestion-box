@@ -54,7 +54,7 @@ export const posts = {
     content: "Where is everybody?"
   },
   '1': {
-    originalPoster: 1,
+    originalPoster: 2,
     upvotes: 7,
     downvotes: 3,
     comments: [1, 2],
@@ -63,7 +63,7 @@ export const posts = {
     content: 'We got the pitch reserved, come out'
   },
   '2': {
-    originalPoster: 2,
+    originalPoster: 3,
     upvotes: 10,
     downvotes: 0,
     comments: [3],

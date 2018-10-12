@@ -5,7 +5,9 @@ import {
   SUBMIT_POST_REQUEST,
   SUBMIT_POST_SUCCESS,
   SUBMIT_POST_FAILURE,
-  LOAD_TEAM_MEMBERS
+  LOAD_TEAM_MEMBERS_REQUEST,
+  LOAD_TEAM_MEMBERS_SUCCESS,
+  LOAD_TEAM_MEMBERS_FAILURE
  } from './postFeedConstants';
 
 import { posts, userVotes } from '../../../fakeDatabase';
@@ -62,22 +64,38 @@ const loadPostListFailure = error => {
 }
 
 export const loadTeamMembers = teamId => dispatch => {
+  dispatch(loadTeamMembersRequest(teamId));
+
   fetch(`http://localhost:3000/teams/1/members`, {
     method: 'get'
   })
   .then(response => response.json())
   .then(teamMembers => {
     if (teamMembers) {
-      dispatch(loadTeamMembersSuccess(teamMembers))
+      dispatch(loadTeamMembersSuccess(teamMembers));
     } else {
-      console.log('could not load team members')
+      dispatch(loadTeamMembersFailure('Could not load team members'));
     }
   })
 
+  function loadTeamMembersRequest(teamId) {
+    return {
+      type: LOAD_TEAM_MEMBERS_REQUEST,
+      payload: teamId
+    }
+  }
+
   function loadTeamMembersSuccess(teamMembers) {
     return {
-      type: LOAD_TEAM_MEMBERS,
+      type: LOAD_TEAM_MEMBERS_SUCCESS,
       payload: teamMembers
+    }
+  }
+
+  function loadTeamMembersFailure(error) {
+    return {
+      type: LOAD_TEAM_MEMBERS_FAILURE,
+      payload: error
     }
   }
 }

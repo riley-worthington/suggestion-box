@@ -31,14 +31,12 @@ class Post extends Component {
     const {
       postId,
       post,
-      // originalPoster,
+      originalPoster,
       upvotePost,
       downvotePost,
       removeVoteFromPost
     } = this.props;
-    // console.log('OP', originalPoster)
-    const originalPoster = users[post.originalPoster];
-    const opName = originalPoster.firstName + ' ' + originalPoster.lastName;
+    const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
     const numComments = post.comments.length;
     return (
       <article className='post-malone'>
