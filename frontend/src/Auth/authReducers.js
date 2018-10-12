@@ -1,8 +1,8 @@
 import {
-  // SIGNIN_REQUEST, 
+  // SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
-  SIGNOUT
+  SIGNOUT,
 } from './authConstants';
 
 let user = JSON.parse(localStorage.getItem('user'));

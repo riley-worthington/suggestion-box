@@ -2,12 +2,8 @@ import React, { Fragment } from 'react';
 import { NavLink } from 'react-router-dom';
 import './SideBar.css';
 
-import { teams } from '../../fakeDatabase';
-
-
-const SideBar = ({ teamIds, selected }) => {
+const SideBar = ({ teams, selected }) => {
   console.log('selected', selected)
-  const currTeams = teamIds.map(id => teams[id]);
   return (
     <Fragment>
       <h1 className='sidebar-title'>
@@ -15,11 +11,11 @@ const SideBar = ({ teamIds, selected }) => {
       </h1>
 
       <ul className='group-list'>
-        {currTeams.map((team, i) =>
-          <li key={team.teamId}>
+        {teams.map((team, i) =>
+          <li key={team.team_id}>
             <NavLink
-              className={'sidebar-team' + (team.teamId === selected ? ' selected' : '')}
-              to={`/teams/${team.teamId}`}
+              className={'sidebar-team' + (team.team_id === selected ? ' selected' : '')}
+              to={`/teams/${team.team_id}`}
             >
               {team.name}
             </NavLink>

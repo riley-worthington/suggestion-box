@@ -8,26 +8,35 @@ import PostPage from './Feed/PostPage/PostPage';
 import './Home.css';
 
 import { signOut } from '../Auth/authActions';
+import { getUserTeams } from './homeActions';
 
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     selectedTeam: state.feed.selectedTeam,
+    userTeams: state.home.userTeams,
+    getUserTeamsPending: state.home.getUserTeamsPending,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSignOut: () => dispatch(signOut())
+    onSignOut: () => dispatch(signOut()),
+    getUserTeams: userId => dispatch(getUserTeams(userId)),
   }
 }
 
 class Home extends Component {
+  componentDidMount() {
+    const { currentUser, getUserTeams } = this.props;
+    getUserTeams(currentUser.user_id);
+  }
+
   bodyLoader() {
     const { match } = this.props;
-    console.log(match)
     const url = match.url;
     const teamId = +match.params.teamId;
+    console.log('here', teamId)
     const postId = +match.params.postId;
     if (!match.isExact) {
       return (
@@ -46,13 +55,27 @@ class Home extends Component {
         <PostPage postId={postId} />
       );
     }
+  }
 
+  sidebarLoader() {
+    const { getUserTeamsPending, userTeams, selectedTeam } = this.props;
+    if (getUserTeamsPending || Object.keys(userTeams).length === 0) {
+      return (
+        <h2>Loading...</h2>
+      );
+    } else {
+      const userTeamsArray = Object.entries(userTeams).map(pair => pair[1]);
+      return (
+        <SideBar teams={userTeamsArray} selected={selectedTeam}/>
+      );
+    }
   }
 
   render() {
-    const { currentUser, selectedTeam, onSignOut } = this.props;
+    const { currentUser, userTeams, selectedTeam, onSignOut } = this.props;
     // const teamId = +match.params.teamId;
     // const postId = +match.params.postId;
+
 
     return (
       <div className='home-container'>
@@ -63,7 +86,7 @@ class Home extends Component {
           />
         </header>
         <nav className='sidebar'>
-          <SideBar teamIds={currentUser.teams} selected={selectedTeam}/>
+          {this.sidebarLoader()}
         </nav>
         <main className='home-content'>
           {this.bodyLoader()}

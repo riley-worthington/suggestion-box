@@ -8,6 +8,7 @@ const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 const posts = require('./controllers/posts');
 const teams = require('./controllers/teams');
+const users = require('./controllers/users');
 
 const db = knex({
   client: 'pg',
@@ -39,6 +40,7 @@ app.post('/teams/:teamId/members', teams.addTeamMember(db));
 // GET requests
 app.get('/teams/:teamId/posts', posts.getPosts(db));
 app.get('/teams/:teamId/members', teams.getTeamMembers(db));
+app.get('/users/:userId/teams', users.getUserTeams(db));
 // app.get('')
 
 // PUT requests

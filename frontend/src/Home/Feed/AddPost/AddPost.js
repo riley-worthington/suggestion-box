@@ -91,7 +91,7 @@ class AddPost extends Component {
         className='new-post-form'>
         <p className='prompt'>Add new post as
           <b>
-            {` ${currentUser.firstName} ${currentUser.lastName}`}
+            {` ${currentUser.first_name} ${currentUser.last_name}`}
           </b>
         </p>
         <label htmlFor='title' className='visually-hidden'>Title</label>

@@ -1,7 +1,14 @@
 import history from '../helpers/history';
 import { users } from '../fakeDatabase';
-import { SIGNIN_REQUEST, SIGNIN_SUCCESS, SIGNIN_FAILURE, SIGNOUT } from './authConstants';
-import { REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from './authConstants';
+import {
+  SIGNIN_REQUEST,
+  SIGNIN_SUCCESS,
+  SIGNIN_FAILURE,
+  SIGNOUT,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
+} from './authConstants';
 
 const sample_user = users[1];
 
@@ -9,12 +16,32 @@ export const signIn = (email, password) => dispatch => {
   console.log('signing in');
   console.log('email: ', email, 'password: ', password);
 
-  // Make API call here
   dispatch(signInRequest(email, password))
 
-  history.push('/');
-  localStorage.setItem('user', JSON.stringify(sample_user));
-  dispatch(signInSuccess(sample_user));
+  // Make API call here
+  fetch('http://localhost:3000/signin', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: email,
+      password: password
+    })
+  }).then(response => response.json())
+    .then(user => {
+      console.log(user)
+      if (user.user_id) {
+        history.push('/');
+        localStorage.setItem('user', JSON.stringify(user));
+        dispatch(signInSuccess(user));
+      } else {
+        alert('Wrong credentials');
+        dispatch(signInFailure('Wrong credentials'));
+      }
+    })
+
+  // history.push('/');
+  // localStorage.setItem('user', JSON.stringify(sample_user));
+  // dispatch(signInSuccess(sample_user));
 
   function signInRequest(email, password) {
     return {
