@@ -67,11 +67,11 @@ export const feed = (state=initialState, action={}) => {
         newPost: payload
       };
     case SUBMIT_POST_SUCCESS:
-      console.log(payload.postId);
+      console.log(payload.post_id);
       return {
         ...state,
         pendingPost: false,
-        postList: [...state.postList, payload.postId]
+        postList: [...state.postList, payload.post_id]
       };
     case SUBMIT_POST_FAILURE:
       return {

@@ -30,9 +30,9 @@ export const signIn = (email, password) => dispatch => {
     .then(user => {
       console.log(user)
       if (user.user_id) {
-        history.push('/');
         localStorage.setItem('user', JSON.stringify(user));
         dispatch(signInSuccess(user));
+        history.push('/');
       } else {
         alert('Wrong credentials');
         dispatch(signInFailure('Wrong credentials'));

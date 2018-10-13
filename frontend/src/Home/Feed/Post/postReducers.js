@@ -99,7 +99,7 @@ export const postsById = (state=initialState, action={}) => {
         ...state,
         postsById: {
           ...state.postsById,
-          [payload.postId]: payload
+          [payload.post_id]: payload
         }
       };
     case SUBMIT_COMMENT_SUCCESS:

@@ -9,7 +9,7 @@ const TopNav = ({ user, onSignOut }) => {
       </h1>
       <nav className='top-nav'>
         <div className='dropdown'>
-          {user.firstName}
+          {user.first_name}
         </div>
         <button onClick={onSignOut} className='signout-button'>Sign Out</button>
       </nav>

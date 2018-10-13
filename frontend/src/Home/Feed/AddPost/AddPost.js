@@ -3,6 +3,15 @@ import { connect } from 'react-redux';
 import { submitPost } from '../PostFeed/postFeedActions';
 import './AddPost.css';
 
+const mapStateToProps = (state, ownProps) => {
+  const { currentTeam } = ownProps;
+  console.log('current team:', currentTeam);
+  console.log(state.home.userTeams)
+  return {
+    currentTeamName: state.home.userTeams[currentTeam].name,
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
     onSubmitPost: post => dispatch(submitPost(post))
@@ -49,7 +58,7 @@ class AddPost extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { onSubmitPost, currentUser } = this.props;
+    const { onSubmitPost, currentUser, currentTeam } = this.props;
     const { postTitle, postBody } = this.state;
     if (postBody.length > 280) {
       return;
@@ -62,11 +71,8 @@ class AddPost extends Component {
       return;
     }
     const newPost = {
-      originalPoster: currentUser.userId,
-      upvotes: 0,
-      downvotes: 0,
-      comments: [],
-      postId: 3,
+      userId: currentUser.user_id,
+      teamId: currentTeam,
       title: postTitle,
       content: postBody
     }
@@ -83,13 +89,17 @@ class AddPost extends Component {
   }
 
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, currentTeamName } = this.props;
     return (
       <form
         id='newPost'
         onSubmit={this.handleSubmit}
         className='new-post-form'>
-        <p className='prompt'>Add new post as
+        <p className='prompt'>Add new post in
+          <b>
+            {` ${currentTeamName} `}
+          </b>
+           as
           <b>
             {` ${currentUser.first_name} ${currentUser.last_name}`}
           </b>
@@ -123,4 +133,4 @@ class AddPost extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPost);

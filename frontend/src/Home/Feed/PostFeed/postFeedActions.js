@@ -102,8 +102,28 @@ export const loadTeamMembers = teamId => dispatch => {
 
 
 export const submitPost = post => dispatch => {
+  const { userId, teamId, title, content } = post;
+  console.log(userId, teamId, title, content)
   dispatch(submitPostRequest(post));
-  dispatch(submitPostSuccess(post));
+  console.log('fetching that shit')
+  fetch('http://localhost:3000/posts', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId,
+      teamId: teamId,
+      title: title,
+      content: content
+    })
+  })
+  .then(response => response.json())
+  .then(post => {
+    console.log('post', post)
+    dispatch(submitPostSuccess(post));
+  })
+  // .catch(error => {
+  //   dispatch(submitPostFailure(error));
+  // })
 
   function submitPostRequest(post) {
     return {

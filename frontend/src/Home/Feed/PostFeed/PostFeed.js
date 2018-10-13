@@ -17,7 +17,9 @@ const mapStateToProps = state => {
     currentUser: state.auth.currentUser,
     loadPostListPending: state.feed.loadPostListPending,
     loadTeamMembersPending: state.feed.loadTeamMembersPending,
-    postList: state.feed.postList
+    postList: state.feed.postList,
+    getUserTeamsPending: state.home.getUserTeamsPending,
+    userTeams: state.home.userTeams,
   }
 }
 
@@ -44,16 +46,18 @@ class PostFeed extends Component {
       loadTeamMembersPending,
       postList,
       loadPostListByTeam,
-      teamId
+      teamId,
+      getUserTeamsPending,
+      userTeams,
     } = this.props;
 
-    return (loadPostListPending || loadTeamMembersPending) ? (
+    return (loadPostListPending || loadTeamMembersPending || getUserTeamsPending || Object.keys(userTeams).length === 0) ? (
       <div>
         Loading...
       </div>
     ) : (
       <div className='post-feed'>
-        <AddPost currentUser={currentUser}/>
+        <AddPost currentUser={currentUser} currentTeam={teamId} />
         { postList.map((postId, i) =>
           <Post
             key={postId}
