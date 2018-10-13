@@ -48,7 +48,7 @@ class Home extends Component {
       );
     } else if (url.startsWith('/teams/')) {
       return (
-        <PostFeed teamId={teamId} />
+        <PostFeed key={teamId} teamId={teamId} />
       );
     } else if (url.startsWith('/posts/')) {
       return (
