@@ -28,9 +28,11 @@ const createNewPost = db => (req, res) => {
   .catch(err => res.status(400).json('unable to create post'));
 }
 
-const getPosts = db => (req, res) => {
+const getPostsByTeam = db => (req, res) => {
   const teamId = req.params.teamId;
-  db.select('*').from('posts').where('team_id', '=', teamId)
+  db.select('*')
+    .from('posts')
+    .where('team_id', '=', teamId)
     .then(posts => {
       res.json(posts)
     })
@@ -39,5 +41,5 @@ const getPosts = db => (req, res) => {
 
 module.exports = {
   createNewPost: createNewPost,
-  getPosts: getPosts
+  getPostsByTeam: getPostsByTeam
 }

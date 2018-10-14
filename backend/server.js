@@ -7,6 +7,7 @@ const knex = require('knex');
 const signin = require('./controllers/signin');
 const register = require('./controllers/register');
 const posts = require('./controllers/posts');
+const comments = require('./controllers/comments');
 const teams = require('./controllers/teams');
 const users = require('./controllers/users');
 const votes = require('./controllers/votes');
@@ -36,12 +37,13 @@ app.post('/register', register.handleRegister(db, bcrypt));
 app.post('/teams', teams.createNewTeam(db));
 app.post('/posts', posts.createNewPost(db));
 app.post('/teams/:teamId/members', teams.addTeamMember(db));
-// app.post('/posts/:postId/comments', comments.addComment(db));
+app.post('/posts/:postId/comments', comments.addComment(db));
 
 // GET requests
-app.get('/teams/:teamId/posts', posts.getPosts(db));
+app.get('/teams/:teamId/posts', posts.getPostsByTeam(db));
 app.get('/teams/:teamId/members', teams.getTeamMembers(db));
 app.get('/users/:userId/teams', users.getUserTeams(db));
+app.get('/posts/:postId/comments', comments.getCommentsByPost(db));
 // app.get('')
 
 // PUT requests

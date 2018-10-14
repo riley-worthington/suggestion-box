@@ -36,7 +36,7 @@ class CommentFeed extends Component {
       <div className='comment-feed'>
         { commentList.map((commentObj, i) =>
             <Comment
-              key={commentObj.commentId}
+              key={commentObj.comment_id}
               commentObj={commentObj}
             />
           ) }

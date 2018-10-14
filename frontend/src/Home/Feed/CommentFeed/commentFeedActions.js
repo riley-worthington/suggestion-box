@@ -12,18 +12,26 @@ import {
   REMOVE_VOTE_FROM_COMMENT,
 } from './commentFeedConstants';
 
-import { comments } from '../../../fakeDatabase';
-const sampleCommentList = [
-  comments[1],
-  comments[2]
-]
 
 export const loadCommentListByPost = postId => dispatch => {
   // Get list of comment IDs from redux store, need a selector
 
   // Request comment list from backend
   dispatch(loadCommentListRequest(postId));
-  dispatch(loadCommentListSuccess(sampleCommentList));
+
+  fetch(`http://localhost:3000/posts/${postId}/comments`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(commentList => {
+    console.log(commentList);
+    if (commentList) {
+      dispatch(loadCommentListSuccess(commentList));
+    } else {
+      dispatch(loadCommentListFailure('failed'));
+    }
+  })
+
 
   function loadCommentListRequest(postId) {
     return {

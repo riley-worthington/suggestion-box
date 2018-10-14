@@ -46,7 +46,7 @@ export const commentsReducer = (state=initialState, action={}) => {
     case LOAD_COMMENT_LIST_SUCCESS:
       const comments = payload.reduce((obj, comment) => {
         comment['currentUserVote'] = 0;
-         obj[comment.commentId] = comment;
+         obj[comment.comment_id] = comment;
          return obj;
        }, {});
       return {
