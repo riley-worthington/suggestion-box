@@ -3,7 +3,6 @@ import { NavLink } from 'react-router-dom';
 import './SideBar.css';
 
 const SideBar = ({ teams, selected }) => {
-  console.log('selected', selected)
   return (
     <Fragment>
       <h1 className='sidebar-title'>

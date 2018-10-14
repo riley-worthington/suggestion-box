@@ -33,7 +33,6 @@ class PostFeed extends Component {
     } = this.props;
 
     if (teamId !== undefined) {
-      console.log('postFeed loading:', teamId)
       loadPostListByTeam(teamId);
       loadTeamMembers(teamId);
     }

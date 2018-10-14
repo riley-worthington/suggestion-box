@@ -12,7 +12,6 @@ export const getUserTeams = userId => dispatch => {
   })
   .then(response => response.json())
   .then(teams => {
-    console.log(teams);
     if (teams[0]) {
       dispatch(getUserTeamsSuccess(teams));
     } else {

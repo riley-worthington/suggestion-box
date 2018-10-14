@@ -36,7 +36,6 @@ class Home extends Component {
     const { match } = this.props;
     const url = match.url;
     const teamId = +match.params.teamId;
-    console.log('here', teamId)
     const postId = +match.params.postId;
     if (!match.isExact) {
       return (

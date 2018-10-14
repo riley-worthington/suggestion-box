@@ -5,8 +5,6 @@ import './AddPost.css';
 
 const mapStateToProps = (state, ownProps) => {
   const { currentTeam } = ownProps;
-  console.log('current team:', currentTeam);
-  console.log(state.home.userTeams)
   return {
     currentTeamName: state.home.userTeams[currentTeam].name,
   }

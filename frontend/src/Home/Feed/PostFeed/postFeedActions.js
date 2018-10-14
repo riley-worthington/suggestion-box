@@ -105,7 +105,6 @@ export const submitPost = post => dispatch => {
   const { userId, teamId, title, content } = post;
   console.log(userId, teamId, title, content)
   dispatch(submitPostRequest(post));
-  console.log('fetching that shit')
   fetch('http://localhost:3000/posts', {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },

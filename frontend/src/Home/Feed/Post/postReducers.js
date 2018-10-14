@@ -90,21 +90,21 @@ export const postsById = (state=initialState, action={}) => {
           [payload.post_id]: payload
         }
       };
-    case SUBMIT_COMMENT_SUCCESS:
-      // insert commentId into comment list on corresponding post
-      return {
-        ...state,
-        postsById: {
-          ...state.postsById,
-          [payload.post]: {
-            ...state.postsById[payload.post],
-            comments: [
-              ...state.postsById[payload.post].comments,
-              payload.commentId
-            ]
-          }
-        }
-      }
+    // case SUBMIT_COMMENT_SUCCESS:
+    //   // insert commentId into comment list on corresponding post
+    //   return {
+    //     ...state,
+    //     postsById: {
+    //       ...state.postsById,
+    //       [payload.post]: {
+    //         ...state.postsById[payload.post],
+    //         comments: [
+    //           ...state.postsById[payload.post].comments,
+    //           payload.commentId
+    //         ]
+    //       }
+    //     }
+    //   }
     case UPVOTE_POST_FAILURE:
     case DOWNVOTE_POST_FAILURE:
     default:

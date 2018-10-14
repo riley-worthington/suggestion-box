@@ -29,11 +29,8 @@ class AddComment extends Component {
     const { commentBody } = this.state;
 
     const newComment = {
-      commenter: currentUser.userId,
-      post: postId,
-      upvotes: 0,
-      downvotes: 0,
-      commentId: 5,
+      userId: currentUser.user_id,
+      postId: postId,
       content: commentBody
     }
 
@@ -57,7 +54,7 @@ class AddComment extends Component {
           rows='4'
           cols='40'
           onChange={this.onCommentBodyChange}
-          placeholder={`Add a comment as ${currentUser.firstName} ${currentUser.lastName}`}
+          placeholder={`Add a comment as ${currentUser.first_name} ${currentUser.last_name}`}
           value={this.state.commentBody}
           className={'new-comment-field'}
         />

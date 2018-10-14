@@ -57,8 +57,27 @@ export const loadCommentListByPost = postId => dispatch => {
 }
 
 export const submitComment = comment => dispatch => {
+  const { userId, postId, content } = comment;
   dispatch(submitCommentRequest(comment));
-  dispatch(submitCommentSuccess(comment));
+
+  fetch(`http://localhost:3000/posts/${postId}/comments`, {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId,
+      content: content
+    })
+  })
+  .then(response => response.json())
+  .then(comment => {
+    console.log('New comment:', comment);
+    if (comment) {
+      dispatch(submitCommentSuccess(comment));
+    } else {
+      dispatch(submitCommentFailure('failed to add comment'))
+    }
+  })
+
 
   function submitCommentRequest(comment) {
     return {
