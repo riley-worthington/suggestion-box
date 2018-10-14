@@ -93,56 +93,63 @@ const updateVote = (db, userId, postId, currentVote, newVote, res) => {
 }
 
 const makeNewVote = (db, userId, postId, newVote, res) => {
-  if (newVote === true) {
-    db.insert({
-      user_id: userId,
-      post_id: postId,
-      user_vote: newVote,
-      time_voted: new Date()
-    })
-    .into('post_votes')
-    .then(() => {
-      db('posts')
-        .where({
-          user_id: userId,
-          post_id: postId
-        })
-        .increment('upvotes', 1)
-        .returning('*')
-        .then(post => {
-          res.json(post[0]);
-        })
-    })
-  } else if (newVote === false) {
-    db.insert({
-      user_id: userId,
-      post_id: postId,
-      user_vote: newVote,
-      time_voted: new Date()
-    })
-    .into('post_votes')
-    .then(() => {
-      db('posts')
-        .where({
-          user_id: userId,
-          post_id: postId
-        })
-        .increment('downvotes', 1)
-        .returning('*')
-        .then(post => {
-          res.json(post[0]);
-        })
-    })
-  } else {
-    res.status(400).json('No previous vote recorded');
-  }
+  db.transaction(trx => {
+    if (newVote === true) {
+      trx.insert({
+        user_id: userId,
+        post_id: postId,
+        user_vote: newVote,
+        time_voted: new Date()
+      })
+      .into('post_votes')
+      .then(() => {
+        return trx('posts')
+          .where({
+            post_id: postId
+          })
+          .update({
+            'upvotes': db.raw('upvotes + 1')
+          })
+          .returning('*')
+          .then(post => {
+            res.json(post[0]);
+          })
+      })
+      .then(trx.commit)
+      .catch(trx.rollback)
+    } else if (newVote === false) {
+      trx.insert({
+        user_id: userId,
+        post_id: postId,
+        user_vote: newVote,
+        time_voted: new Date()
+      })
+      .into('post_votes')
+      .then(() => {
+        return trx('posts')
+          .where({
+            post_id: postId
+          })
+          .update({
+            'downvotes': db.raw('downvotes + 1')
+          })
+          .returning('*')
+          .then(post => {
+            res.json(post[0]);
+          })
+      })
+      .then(trx.commit)
+      .catch(trx.rollback)
+    } else {
+      res.status(400).json('No previous vote recorded');
+    }
+  })
 }
 
 const voteOnPost = db => (req, res) => {
   const { userId } = req.body;
   const { postId } = req.params;
   const { dir } = req.query;
-  console.log(userId, postId, dir);
 
   let newVote;
   if (dir === '1') {
@@ -151,15 +158,15 @@ const voteOnPost = db => (req, res) => {
     newVote = false;
   } else if (dir === '0') {
     newVote = null;
+  } else {
+    res.status(400).json('Only 1, -1, and 0 are valid direction values');
   }
 
   // check if they have already voted
   hasAlreadyVoted(db, userId, postId).then(currentVote => {
     if (currentVote === undefined) {
-      console.log('making new vote');
       makeNewVote(db, userId, postId, newVote, res);
     } else {
-      console.log('updating vote');
       updateVote(db, userId, postId, currentVote, newVote, res);
     }
   })

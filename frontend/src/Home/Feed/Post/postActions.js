@@ -8,49 +8,104 @@ import {
 
 // import { posts, userVotes } from '../../../fakeDatabase';
 
-export const upvotePost = postId => dispatch => {
+export const upvotePost = (userId, postId) => dispatch => {
   // make API call
-  console.log('upvoting', postId);
-  dispatch(upvotePostSuccess(postId));
+  fetch(`http://localhost:3000/posts/${postId}/vote?dir=1`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(post => {
+    if (post.post_id) {
+      dispatch(upvotePostSuccess(post));
+    } else {
+      throw post;
+    }
+  })
+  .catch(error => {
+    dispatch(upvotePostFailure(error));
+  })
 
-  function upvotePostSuccess(postId) {
+
+  function upvotePostSuccess(post) {
     return {
       type: UPVOTE_POST_SUCCESS,
-      payload: postId
+      payload: post
     }
   }
 
-  function upvotePostFailure(postId) {
+  function upvotePostFailure(error) {
     return {
       type: UPVOTE_POST_FAILURE,
-      payload: postId
+      payload: error
     }
   }
 }
 
-export const downvotePost = postId => dispatch => {
-  // make API call, have database return updated post object
-  console.log('downvoting', postId);
-  dispatch(downvotePostSuccess(postId));
+export const downvotePost = (userId, postId) => dispatch => {
+  // make API call
+  fetch(`http://localhost:3000/posts/${postId}/vote?dir=-1`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(post => {
+    if (post.post_id) {
+      dispatch(downvotePostSuccess(post));
+    } else {
+      throw post;
+    }
+  })
+  .catch(error => {
+    dispatch(downvotePostFailure(error));
+  })
 
-  function downvotePostSuccess(postId) {
+  function downvotePostSuccess(post) {
     return {
       type: DOWNVOTE_POST_SUCCESS,
-      payload: postId
+      payload: post
     }
   }
 
-  function downvotePostFailure(postId) {
+  function downvotePostFailure(error) {
     return {
       type: DOWNVOTE_POST_FAILURE,
-      payload: postId
+      payload: error
     }
   }
 }
 
-export const removeVoteFromPost = postId => {
-  return {
-    type: REMOVE_VOTE_FROM_POST,
-    payload: postId
+export const removeVoteFromPost = (userId, postId) => dispatch => {
+  // make API call
+  fetch(`http://localhost:3000/posts/${postId}/vote?dir=0`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(post => {
+    if (post.post_id) {
+      dispatch(removeVoteFromPostSuccess(post));
+    } else {
+      throw post;
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  })
+
+  function removeVoteFromPostSuccess(post) {
+    return {
+      type: REMOVE_VOTE_FROM_POST,
+      payload: post
+    }
   }
 }

@@ -11,7 +11,7 @@ const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
     if (currentUserVote === UPVOTE) {
       onRemoveVote()
     } else if (currentUserVote === DOWNVOTE) {
-      onRemoveVote()
+      // onRemoveVote()
       onUpvote()
     } else {
       onUpvote()
@@ -22,7 +22,7 @@ const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
     if (currentUserVote === DOWNVOTE) {
       onRemoveVote()
     } else if (currentUserVote === UPVOTE) {
-      onRemoveVote()
+      // onRemoveVote()
       onDownvote()
     } else {
       onDownvote()

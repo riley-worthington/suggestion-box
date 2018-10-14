@@ -12,6 +12,7 @@ import { getUserById } from '../PostFeed/postFeedSelectors';
 const mapStateToProps = (state, props) => {
   const post = getPostById(state, props.postId);
   return {
+    currentUser: state.auth.currentUser,
     post: post,
     originalPoster: getUserById(state, post.user_id)
   }
@@ -19,9 +20,9 @@ const mapStateToProps = (state, props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    upvotePost: postId => dispatch(upvotePost(postId)),
-    downvotePost: postId => dispatch(downvotePost(postId)),
-    removeVoteFromPost: postId => dispatch(removeVoteFromPost(postId))
+    upvotePost: (userId, postId) => dispatch(upvotePost(userId, postId)),
+    downvotePost: (userId, postId) => dispatch(downvotePost(userId, postId)),
+    removeVoteFromPost: (userId, postId) => dispatch(removeVoteFromPost(userId, postId))
   }
 }
 
@@ -33,17 +34,19 @@ class Post extends Component {
       originalPoster,
       upvotePost,
       downvotePost,
-      removeVoteFromPost
+      removeVoteFromPost,
+      currentUser,
     } = this.props;
     const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
     // const numComments = post.comments.length;
+    const userId = currentUser.user_id;
     return (
       <article className='post-malone'>
         <Vote
           post={post}
-          onUpvote={() => upvotePost(postId)}
-          onDownvote={() => downvotePost(postId)}
-          onRemoveVote={() => removeVoteFromPost(postId)}
+          onUpvote={() => upvotePost(userId, postId)}
+          onDownvote={() => downvotePost(userId, postId)}
+          onRemoveVote={() => removeVoteFromPost(userId, postId)}
         />
         <div className='post-body'>
           <header>

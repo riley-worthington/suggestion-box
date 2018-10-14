@@ -40,59 +40,47 @@ export const postsById = (state=initialState, action={}) => {
         postsById: posts
       }
     case UPVOTE_POST_SUCCESS:
-      const currentUpvotes = state.postsById[postId].upvotes;
+      // const currentUpvotes = state.postsById[postId].upvotes;
       return {
         ...state,
         postsById: {
           ...state.postsById,
-          [payload]: {
-            ...state.postsById[payload],
-            upvotes: currentUpvotes + 1,
+          [payload.post_id]: {
+            ...state.postsById[payload.post_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
             currentUserVote: 1
           }
         }
       };
     case DOWNVOTE_POST_SUCCESS:
-      const currentDownvotes = state.postsById[postId].downvotes;
+      // const currentDownvotes = state.postsById[postId].downvotes;
       return {
         ...state,
         postsById: {
           ...state.postsById,
-          [payload]: {
-            ...state.postsById[payload],
-            downvotes: currentDownvotes + 1,
+          [payload.post_id]: {
+            ...state.postsById[payload.post_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
             currentUserVote: -1
           }
         }
       };
     case REMOVE_VOTE_FROM_POST:
-      const currentUserVote = state.postsById[postId].currentUserVote;
-      if (currentUserVote === -1) {
-        return {
-          ...state,
-          postsById: {
-            ...state.postsById,
-            [payload]: {
-              ...state.postsById[payload],
-              downvotes: state.postsById[postId].downvotes - 1,
-              currentUserVote: 0
-            }
+      // const currentUserVote = state.postsById[postId].currentUserVote;
+      return {
+        ...state,
+        postsById: {
+          ...state.postsById,
+          [payload.post_id]: {
+            ...state.postsById[payload.post_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
+            currentUserVote: 0
           }
-        };
-      } else if (currentUserVote === 1) {
-        return {
-          ...state,
-          postsById: {
-            ...state.postsById,
-            [payload]: {
-              ...state.postsById[payload],
-              upvotes: state.postsById[postId].upvotes - 1,
-              currentUserVote: 0
-            }
-          }
-        };
+        }
       }
-      return state;
     case SUBMIT_POST_SUCCESS:
       // add new post object to postsById
       return {
