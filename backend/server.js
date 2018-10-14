@@ -9,6 +9,7 @@ const register = require('./controllers/register');
 const posts = require('./controllers/posts');
 const teams = require('./controllers/teams');
 const users = require('./controllers/users');
+const votes = require('./controllers/votes');
 
 const db = knex({
   client: 'pg',
@@ -44,7 +45,7 @@ app.get('/users/:userId/teams', users.getUserTeams(db));
 // app.get('')
 
 // PUT requests
-// app.put('/posts/:postId/vote', team)
+app.put('/posts/:postId/vote', votes.voteOnPost(db));
 
 app.listen(3000, () => {
   console.log('app is running on port 3000');
