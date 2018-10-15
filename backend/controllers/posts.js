@@ -39,7 +39,23 @@ const getPostsByTeam = db => (req, res) => {
     .catch(err => res.status(400).json('error getting posts'));
 }
 
+const getPostById = db => (req, res) => {
+  const { postId } = req.params;
+  db.select('*')
+    .from('posts')
+    .where('post_id', '=', postId)
+    .then(post => {
+      if (post.length > 0) {
+        res.json(post[0]);
+      } else {
+        res.status(400).json('no such post exists');
+      }
+    })
+    .catch(err => res.status(400).json('error getting posts'));
+}
+
 module.exports = {
   createNewPost: createNewPost,
-  getPostsByTeam: getPostsByTeam
+  getPostsByTeam: getPostsByTeam,
+  getPostById: getPostById,
 }
