@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
 import { loadPostListByTeam, loadTeamMembers } from './postFeedActions';
+import { getPostById } from '../Post/postSelectors';
 import './PostFeed.css'
 
 const mapDispatchToProps = dispatch => {
@@ -17,7 +18,7 @@ const mapStateToProps = state => {
     currentUser: state.auth.currentUser,
     loadPostListPending: state.feed.loadPostListPending,
     loadTeamMembersPending: state.feed.loadTeamMembersPending,
-    postList: state.feed.postList,
+    postList: state.feed.postList.map(id => getPostById(state, id)),
     getUserTeamsPending: state.home.getUserTeamsPending,
     userTeams: state.home.userTeams,
   }
@@ -57,10 +58,10 @@ class PostFeed extends Component {
     ) : (
       <div className='post-feed'>
         <AddPost currentUser={currentUser} currentTeam={teamId} />
-        { postList.map((postId, i) =>
+        { postList.map((post, i) =>
           <Post
-            key={postId}
-            postId={postId}
+            key={post.post_id}
+            postObj={post}
           /> ) }
       </div>
     )

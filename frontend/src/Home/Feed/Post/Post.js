@@ -9,11 +9,10 @@ import { getUserById } from '../PostFeed/postFeedSelectors';
 
 
 const mapStateToProps = (state, props) => {
-  const post = getPostById(state, props.postId);
+  const { postObj } = props;
   return {
     currentUser: state.auth.currentUser,
-    post: post,
-    originalPoster: getUserById(state, post.user_id)
+    originalPoster: getUserById(state, postObj.user_id)
   }
 }
 
@@ -28,8 +27,7 @@ const mapDispatchToProps = dispatch => {
 class Post extends Component {
   render() {
     const {
-      postId,
-      post,
+      postObj,
       originalPoster,
       upvotePost,
       downvotePost,
@@ -38,13 +36,14 @@ class Post extends Component {
     } = this.props;
 
     const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
-    const numComments = post.num_comments;
+    const numComments = postObj.num_comments;
     const userId = currentUser.user_id;
+    const postId = postObj.post_id;
 
     return (
       <article className='post-malone'>
         <Vote
-          post={post}
+          post={postObj}
           onUpvote={() => upvotePost(userId, postId)}
           onDownvote={() => downvotePost(userId, postId)}
           onRemoveVote={() => removeVoteFromPost(userId, postId)}
@@ -56,7 +55,7 @@ class Post extends Component {
                 to={`/posts/${postId}`}
                 className='post-link'
               >
-                {post.title}
+                {postObj.title}
               </Link>
             </h1>
             <h2 className='author'>
@@ -64,7 +63,7 @@ class Post extends Component {
             </h2>
           </header>
           <p className='content'>
-            {post.content}
+            {postObj.content}
           </p>
           <p className='comments-tag'>
             <Link
