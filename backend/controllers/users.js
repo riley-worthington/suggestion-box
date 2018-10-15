@@ -10,6 +10,17 @@ const getUserTeams = db => (req, res) => {
     })
 }
 
+const getUserVotes = db => (req, res) => {
+  const { userId } = req.params;
+  db.select('*')
+    .from('post_votes')
+    .where('user_id', '=', userId)
+    .then(votes => {
+      res.json(votes)
+    })
+}
+
 module.exports = {
-  getUserTeams: getUserTeams
+  getUserTeams: getUserTeams,
+  getUserVotes: getUserVotes,
 }

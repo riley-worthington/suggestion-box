@@ -84,7 +84,6 @@ export const feed = (state=initialState, action={}) => {
         loadTeamMembersPending: true
       }
     case LOAD_TEAM_MEMBERS_SUCCESS:
-      console.log(payload)
       const users = payload.reduce((obj, user) => {
         obj[user.user_id] = user;
         return obj;

@@ -31,7 +31,6 @@ class CommentFeed extends Component {
 
   render() {
     const { currentUser, commentList, postId } = this.props;
-    console.log(commentList)
     return (
       <div className='comment-feed'>
         { commentList.map((commentObj, i) =>

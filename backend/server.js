@@ -44,6 +44,7 @@ app.get('/teams/:teamId/posts', posts.getPostsByTeam(db));
 app.get('/teams/:teamId/members', teams.getTeamMembers(db));
 app.get('/users/:userId/teams', users.getUserTeams(db));
 app.get('/posts/:postId/comments', comments.getCommentsByPost(db));
+app.get('/users/:userId/votes', users.getUserVotes(db));
 // app.get('')
 
 // PUT requests
