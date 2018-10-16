@@ -34,6 +34,7 @@ class Post extends Component {
       removeVoteFromPost,
       currentUser,
     } = this.props;
+    console.log('post:', postObj)
 
     const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
     const numComments = postObj.num_comments;

@@ -36,6 +36,7 @@ class Comment extends Component {
       commenter,
     } = this.props;
     const commentId = commentObj.comment_id;
+    console.log('COMMENT ID:', commentId)
     return (
       <article className='comment-container'>
         <Vote

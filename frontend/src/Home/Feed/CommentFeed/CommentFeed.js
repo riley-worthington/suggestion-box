@@ -23,6 +23,7 @@ class CommentFeed extends Component {
   componentDidMount() {
     // get posts
     const { currentUser, loadCommentListByPost, postId } = this.props;
+    console.log('HERE', postId)
 
     if (postId !== undefined) {
       loadCommentListByPost(postId);
@@ -30,7 +31,13 @@ class CommentFeed extends Component {
   }
 
   render() {
+    console.log('WHOOPS')
     const { currentUser, commentList, postId } = this.props;
+    if (commentList.length > 0 && commentList[0].post_id !== postId) {
+      return (
+        <div>Loading...</div>
+      );
+    }
     return (
       <div className='comment-feed'>
         { commentList.map((commentObj, i) =>

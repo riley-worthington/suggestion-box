@@ -3,10 +3,50 @@ import {
   UPVOTE_POST_FAILURE,
   DOWNVOTE_POST_SUCCESS,
   DOWNVOTE_POST_FAILURE,
-  REMOVE_VOTE_FROM_POST
+  REMOVE_VOTE_FROM_POST,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS,
+  LOAD_POST_FAILURE,
 } from './postConstants';
 
-// import { posts, userVotes } from '../../../fakeDatabase';
+
+export const loadPostById = (postId) => dispatch => {
+  dispatch(loadPostRequest(postId));
+
+  fetch(`http://localhost:3000/posts/${postId}`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(post => {
+    if (post.post_id) {
+      dispatch(loadPostSuccess(post));
+    } else {
+      dispatch(loadPostFailure(post));
+    }
+  })
+  .catch(err => {
+    dispatch(loadPostFailure(err));
+  })
+
+  function loadPostRequest(postId) {
+    return {
+      type: LOAD_POST_REQUEST,
+      payload: postId
+    }
+  }
+  function loadPostSuccess(post) {
+    return {
+      type: LOAD_POST_SUCCESS,
+      payload: post
+    }
+  }
+  function loadPostFailure(error) {
+    return {
+      type: LOAD_POST_FAILURE,
+      payload: error
+    }
+  }
+}
 
 export const upvotePost = (userId, postId) => dispatch => {
   // make API call

@@ -9,6 +9,9 @@ import {
   LOAD_TEAM_MEMBERS_SUCCESS,
   LOAD_TEAM_MEMBERS_FAILURE
  } from './postFeedConstants';
+ import {
+   LOAD_POST_SUCCESS
+ } from '../Post/postConstants';
 
 /* STORE SCHEMA
 
@@ -97,6 +100,11 @@ export const feed = (state=initialState, action={}) => {
       return {
         ...state,
         loadTeamMembersPending: false
+      }
+    case LOAD_POST_SUCCESS:
+      return {
+        ...state,
+        selectedTeam: payload.team_id
       }
     default:
       return state;

@@ -4,14 +4,14 @@ import { SIGNOUT } from './Auth/authConstants';
 import { auth } from './Auth/authReducers';
 import { feed } from './Home/Feed/PostFeed/postFeedReducers';
 import { home } from './Home/homeReducers';
-import { postsById } from './Home/Feed/Post/postReducers';
+import { posts } from './Home/Feed/Post/postReducers';
 import { commentsReducer } from './Home/Feed/CommentFeed/commentFeedReducers';
 
 const appReducer = combineReducers({
   auth,
   feed,
   home,
-  postsById,
+  posts,
   commentsReducer,
 })
 

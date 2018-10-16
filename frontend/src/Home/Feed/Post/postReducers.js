@@ -1,6 +1,20 @@
-import { UPVOTE_POST_SUCCESS, UPVOTE_POST_FAILURE, DOWNVOTE_POST_SUCCESS, DOWNVOTE_POST_FAILURE, REMOVE_VOTE_FROM_POST } from './postConstants';
-import { LOAD_POST_LIST_SUCCESS, SUBMIT_POST_SUCCESS } from '../PostFeed/postFeedConstants';
-import { SUBMIT_COMMENT_SUCCESS } from '../CommentFeed/commentFeedConstants';
+import {
+  UPVOTE_POST_SUCCESS,
+  UPVOTE_POST_FAILURE,
+  DOWNVOTE_POST_SUCCESS,
+  DOWNVOTE_POST_FAILURE,
+  REMOVE_VOTE_FROM_POST,
+  LOAD_POST_REQUEST,
+  LOAD_POST_SUCCESS,
+  LOAD_POST_FAILURE,
+ } from './postConstants';
+import {
+  LOAD_POST_LIST_SUCCESS,
+  SUBMIT_POST_SUCCESS,
+} from '../PostFeed/postFeedConstants';
+import {
+  SUBMIT_COMMENT_SUCCESS
+} from '../CommentFeed/commentFeedConstants';
 
 /* STORE SCHEMA
 
@@ -19,9 +33,13 @@ import { SUBMIT_COMMENT_SUCCESS } from '../CommentFeed/commentFeedConstants';
 
 */
 
-const initialState = {};
+const initialState = {
+  postsById: {},
+  loadPostPending: false,
+  currentPost: null
+};
 
-export const postsById = (state=initialState, action={}) => {
+export const posts = (state=initialState, action={}) => {
   const { type, payload } = action;
 
   // payload could be a postList or postId
@@ -38,6 +56,22 @@ export const postsById = (state=initialState, action={}) => {
       return {
         ...state,
         postsById: posts
+      }
+    case LOAD_POST_REQUEST:
+      return {
+        ...state,
+        loadPostPending: true
+      }
+    case LOAD_POST_SUCCESS:
+      return {
+        ...state,
+        loadPostPending: false,
+        currentPost: payload
+      }
+    case LOAD_POST_FAILURE:
+      return {
+        ...state,
+        loadPostPending: false
       }
     case UPVOTE_POST_SUCCESS:
       // const currentUpvotes = state.postsById[postId].upvotes;
@@ -90,21 +124,6 @@ export const postsById = (state=initialState, action={}) => {
           [payload.post_id]: payload
         }
       };
-    // case SUBMIT_COMMENT_SUCCESS:
-    //   // insert commentId into comment list on corresponding post
-    //   return {
-    //     ...state,
-    //     postsById: {
-    //       ...state.postsById,
-    //       [payload.post]: {
-    //         ...state.postsById[payload.post],
-    //         comments: [
-    //           ...state.postsById[payload.post].comments,
-    //           payload.commentId
-    //         ]
-    //       }
-    //     }
-    //   }
     case UPVOTE_POST_FAILURE:
     case DOWNVOTE_POST_FAILURE:
     default:
