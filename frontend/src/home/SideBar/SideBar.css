@@ -10,6 +10,10 @@ li {
   font-weight: bold;
 }
 
+.sidebar-team:hover {
+  color: darkgrey;
+}
+
 .sidebar-team.selected {
   color: #71eeb8 !important;
 }
@@ -38,5 +42,5 @@ li {
 }
 
 .join-team-button:hover {
-  color: grey;
+  color: darkgrey;
 }

@@ -2,7 +2,7 @@
   /* border-top: 1px solid grey;
   border-bottom: 1px solid grey; */
   padding: 10px;
-  /* margin: 0 10px; */
+  margin: 20px 0;
   display: flex;
   flex-direction: row;
   align-items: flex-start;
@@ -46,8 +46,17 @@
 }
 
 .comments-tag {
+  display: flex;
   margin: 0;
+  color: black;
+}
+
+.comments-tag > Link {
   text-decoration: underline;
   cursor: pointer;
-  color: black;
+}
+
+.comments-tag > p {
+  margin: 0;
+  margin-left: 15px;
 }

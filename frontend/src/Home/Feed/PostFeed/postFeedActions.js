@@ -117,12 +117,12 @@ export const submitPost = post => dispatch => {
   })
   .then(response => response.json())
   .then(post => {
-    console.log('post', post)
-    dispatch(submitPostSuccess(post));
+    if (post.post_id) {
+      dispatch(submitPostSuccess(post));
+    } else {
+      dispatch(submitPostFailure(post));
+    }
   })
-  // .catch(error => {
-  //   dispatch(submitPostFailure(error));
-  // })
 
   function submitPostRequest(post) {
     return {

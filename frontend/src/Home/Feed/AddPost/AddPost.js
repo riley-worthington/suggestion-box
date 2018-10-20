@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { submitPost } from '../PostFeed/postFeedActions';
 import './AddPost.css';
 
+const CHAR_LIMIT = 280;
+
 const mapStateToProps = (state, ownProps) => {
   const { currentTeam } = ownProps;
   return {
@@ -41,10 +43,10 @@ class AddPost extends Component {
 
   onPostBodyChange = (event) => {
     this.setState({postBody: event.target.value});
-    if (event.target.value.length > 280) {
+    if (event.target.value.length > CHAR_LIMIT) {
       this.setState({
         bodyInvalid: true,
-        alertBox: 'Post cannot be longer than 280 characters'
+        alertBox: `Post cannot be longer than ${CHAR_LIMIT} characters`
       })
     } else {
       this.setState({
@@ -58,7 +60,7 @@ class AddPost extends Component {
     event.preventDefault();
     const { onSubmitPost, currentUser, currentTeam } = this.props;
     const { postTitle, postBody } = this.state;
-    if (postBody.length > 280) {
+    if (postBody.length > CHAR_LIMIT) {
       return;
     }
     if (postTitle === '') {
