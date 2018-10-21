@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { register } from './authActions';
 
 import './Register.css';
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitRegister: (firstName, lastName, email, password) => dispatch(register(firstName, lastName, email, password))
+  }
+}
 
 class Register extends Component {
   constructor(props) {
@@ -19,7 +27,9 @@ class Register extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
+    const { firstName, lastName, email, password } = this.state;
+    const { onSubmitRegister } = this.props;
+    onSubmitRegister(firstName, lastName, email, password);
   }
 
   render() {
@@ -72,4 +82,4 @@ class Register extends Component {
   }
 }
 
-export default Register;
+export default connect(null, mapDispatchToProps)(Register);

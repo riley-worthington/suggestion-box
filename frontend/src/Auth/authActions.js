@@ -79,6 +79,26 @@ export const register = (firstName, lastName, email, password) => dispatch => {
   dispatch(registerRequest(firstName, lastName, email, password));
 
   // Send data to API, get user object as response
+  fetch('http://localhost:3000/register', {
+    method: 'post',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: email,
+      password: password,
+      firstName: firstName,
+      lastName: lastName
+    })
+  }).then(response => response.json())
+    .then(user => {
+      console.log(user)
+      if (user.user_id) {
+        localStorage.setItem('user', JSON.stringify(user));
+        dispatch(registerSuccess(user));
+        history.push('/');
+      } else {
+        dispatch(registerFailure(user));
+      }
+    })
 
   function registerRequest(firstName, lastName, email, password) {
     return {

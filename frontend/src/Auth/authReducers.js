@@ -3,6 +3,9 @@ import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
   SIGNOUT,
+  REGISTER_REQUEST,
+  REGISTER_SUCCESS,
+  REGISTER_FAILURE,
 } from './authConstants';
 
 let user = JSON.parse(localStorage.getItem('user'));
@@ -46,6 +49,20 @@ export const auth = (state=initialState, action={}) => {
         isAuthenticated: false,
         invalid: false,
         currentUser: null,
+      }
+    case REGISTER_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: true,
+        invalid: false,
+        currentUser: payload
+      }
+    case REGISTER_FAILURE:
+      return {
+        ...state,
+        isAuthenticated: false,
+        invalid: true,
+        currentUser: null
       }
     default:
       return state;
