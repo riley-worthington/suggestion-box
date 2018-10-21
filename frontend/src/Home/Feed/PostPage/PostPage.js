@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import CommentFeed from '../CommentFeed/CommentFeed';
 import './PostPage.css';
 import Post from '../Post/Post';
-import { getPostById } from '../Post/postSelectors';
 import { loadPostById } from '../Post/postActions';
 import { loadTeamMembers, loadUserVotes } from '../PostFeed/postFeedActions';
 
@@ -32,7 +31,6 @@ class PostPage extends Component {
       postId,
       currentPost,
       loadPostById,
-      loadTeamMembers,
       loadUserVotes,
       currentUser,
     } = this.props;

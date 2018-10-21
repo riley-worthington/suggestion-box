@@ -1,5 +1,4 @@
 import history from '../helpers/history';
-import { users } from '../fakeDatabase';
 import {
   SIGNIN_REQUEST,
   SIGNIN_SUCCESS,
@@ -10,12 +9,8 @@ import {
   REGISTER_FAILURE,
 } from './authConstants';
 
-const sample_user = users[1];
 
 export const signIn = (email, password) => dispatch => {
-  console.log('signing in');
-  console.log('email: ', email, 'password: ', password);
-
   dispatch(signInRequest(email, password))
 
   // Make API call here
@@ -38,10 +33,6 @@ export const signIn = (email, password) => dispatch => {
       }
     })
 
-  // history.push('/');
-  // localStorage.setItem('user', JSON.stringify(sample_user));
-  // dispatch(signInSuccess(sample_user));
-
   function signInRequest(email, password) {
     return {
       type: SIGNIN_REQUEST,
@@ -51,12 +42,14 @@ export const signIn = (email, password) => dispatch => {
       }
     }
   }
+
   function signInSuccess(user) {
     return {
       type: SIGNIN_SUCCESS,
       payload: user
     }
   }
+
   function signInFailure(error) {
     return {
       type: SIGNIN_FAILURE,

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import Vote from '../Vote/Vote';
 import './Post.css';
 import { upvotePost, downvotePost, removeVoteFromPost } from './postActions';
-import { getPostById } from './postSelectors';
 import { getUserById } from '../PostFeed/postFeedSelectors';
 
 

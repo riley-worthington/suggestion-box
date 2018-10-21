@@ -50,7 +50,6 @@ class PostFeed extends Component {
       loadPostListPending,
       loadTeamMembersPending,
       postList,
-      loadPostListByTeam,
       teamId,
       getUserTeamsPending,
       userTeams,

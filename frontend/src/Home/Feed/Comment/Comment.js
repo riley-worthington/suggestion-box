@@ -9,7 +9,6 @@ import { getUserById } from '../PostFeed/postFeedSelectors';
 import Vote from '../Vote/Vote';
 import './Comment.css';
 
-import { users } from '../../../fakeDatabase';
 
 const mapStateToProps = (state, ownProps) => {
   const { commentObj } = ownProps;

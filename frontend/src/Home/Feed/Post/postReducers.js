@@ -12,9 +12,6 @@ import {
   LOAD_POST_LIST_SUCCESS,
   SUBMIT_POST_SUCCESS,
 } from '../PostFeed/postFeedConstants';
-import {
-  SUBMIT_COMMENT_SUCCESS
-} from '../CommentFeed/commentFeedConstants';
 
 /* STORE SCHEMA
 
@@ -27,7 +24,6 @@ import {
       upvotes: integer,
       downvotes: integer,
       currentUserVote: -1, 0, or 1,
-      comments: array of commentIds
     }
   }
 
@@ -42,13 +38,9 @@ const initialState = {
 export const posts = (state=initialState, action={}) => {
   const { type, payload } = action;
 
-  // payload could be a postList or postId
-  const postList = payload;
-  const postId = payload;
-
   switch (type) {
     case LOAD_POST_LIST_SUCCESS:
-      const posts = postList.reduce((obj, post) => {
+      const posts = payload.reduce((obj, post) => {
         post['currentUserVote'] = 0;
          obj[post.post_id] = post;
          return obj;

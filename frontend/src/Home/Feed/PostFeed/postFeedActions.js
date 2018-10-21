@@ -13,13 +13,6 @@ import {
   LOAD_USER_VOTES_FAILURE,
  } from './postFeedConstants';
 
-import { posts, userVotes } from '../../../fakeDatabase';
-
-// What the postList would look like coming from the API
-const samplePostList = [
-  posts[1],
-  posts[2]
-]
 
 export const loadPostListByTeam = teamId => dispatch => {
   dispatch(loadPostListRequest(teamId));
@@ -36,13 +29,11 @@ export const loadPostListByTeam = teamId => dispatch => {
       dispatch(loadPostListFailure('failed'));
     }
   })
-
-  // dispatch(loadPostListSuccess(samplePostList));
 }
 
 export const loadPostListByUser = userId => dispatch => {
   // Request user post list from backend
-  dispatch(loadPostListSuccess(samplePostList));
+  console.log('not implemented yet');
 }
 
 const loadPostListRequest = teamId => {

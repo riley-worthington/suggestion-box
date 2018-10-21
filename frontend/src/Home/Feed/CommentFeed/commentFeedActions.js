@@ -6,9 +6,9 @@ import {
   SUBMIT_COMMENT_SUCCESS,
   SUBMIT_COMMENT_FAILURE,
   UPVOTE_COMMENT_SUCCESS,
-  UPVOTE_COMMENT_FAILURE,
+  // UPVOTE_COMMENT_FAILURE,
   DOWNVOTE_COMMENT_SUCCESS,
-  DOWNVOTE_COMMENT_FAILURE,
+  // DOWNVOTE_COMMENT_FAILURE,
   REMOVE_VOTE_FROM_COMMENT,
 } from './commentFeedConstants';
 
@@ -111,12 +111,12 @@ export const upvoteComment = commentId => dispatch => {
     }
   }
 
-  function upvoteCommentFailure(commentId) {
-    return {
-      type: UPVOTE_COMMENT_FAILURE,
-      payload: commentId
-    }
-  }
+  // function upvoteCommentFailure(commentId) {
+  //   return {
+  //     type: UPVOTE_COMMENT_FAILURE,
+  //     payload: commentId
+  //   }
+  // }
 }
 
 export const downvoteComment = commentId => dispatch => {
@@ -131,12 +131,12 @@ export const downvoteComment = commentId => dispatch => {
     }
   }
 
-  function downvoteCommentFailure(commentId) {
-    return {
-      type: DOWNVOTE_COMMENT_FAILURE,
-      payload: commentId
-    }
-  }
+  // function downvoteCommentFailure(commentId) {
+  //   return {
+  //     type: DOWNVOTE_COMMENT_FAILURE,
+  //     payload: commentId
+  //   }
+  // }
 }
 
 export const removeVoteFromComment = commentId => {

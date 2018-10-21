@@ -63,7 +63,7 @@ class Home extends Component {
   }
 
   sidebarLoader() {
-    const { getUserTeamsPending, userTeams, selectedTeam } = this.props;
+    const { userTeams, selectedTeam } = this.props;
     if (userTeams === null) {
       return (
         <h2>Loading...</h2>
@@ -77,10 +77,7 @@ class Home extends Component {
   }
 
   render() {
-    const { currentUser, userTeams, selectedTeam, onSignOut } = this.props;
-    // const teamId = +match.params.teamId;
-    // const postId = +match.params.postId;
-
+    const { currentUser, onSignOut } = this.props;
 
     return (
       <div className='home-container'>

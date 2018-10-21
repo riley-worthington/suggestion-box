@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
 class CommentFeed extends Component {
   componentDidMount() {
     // get posts
-    const { currentUser, loadCommentListByPost, postId } = this.props;
+    const { postId, loadCommentListByPost } = this.props;
 
     if (postId !== undefined) {
       loadCommentListByPost(postId);
