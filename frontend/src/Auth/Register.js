@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { register } from './authActions';
-
+import { Link } from 'react-router-dom';
 import './Register.css';
 
 const mapDispatchToProps = dispatch => {
@@ -77,6 +77,9 @@ class Register extends Component {
               Register
           </button>
         </form>
+        <p>
+          Already have an account? <Link to='/signin'>Sign In</Link>
+        </p>
       </div>
     );
   }
