@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom'
 import './SignIn.css';
 import { signIn } from './authActions';
 
+const mapStateToProps = state => {
+  return {
+    invalid: state.auth.invalid,
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -34,14 +39,15 @@ class SignIn extends Component {
     this.handleSubmit(); // Things you want to do.
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  handleSubmit = () => {
+    // event.preventDefault();
     const { signInEmail, signInPassword } = this.state;
     const { onSubmitSignIn } = this.props;
     onSubmitSignIn(signInEmail, signInPassword);
   }
 
   render() {
+    const { invalid } = this.props;
     return (
       <div className="signin-container">
         <header className="App-header">
@@ -50,7 +56,9 @@ class SignIn extends Component {
         <form
           className="signin-form"
           onSubmit={this.handleSubmit}>
+          <label htmlFor='post' className='visually-hidden'>Email</label>
           <input
+            id='email'
             className="signin-field"
             type="email"
             name="email"
@@ -58,7 +66,9 @@ class SignIn extends Component {
             onChange={this.onEmailChange}
             onKeyUp={this.handleKeyUp}
           />
+          <label htmlFor='password' className='visually-hidden'>Password</label>
           <input
+            id='password'
             className="signin-field"
             type="password"
             name="password"
@@ -66,6 +76,9 @@ class SignIn extends Component {
             onChange={this.onPasswordChange}
             onKeyUp={this.handleKeyUp}
           />
+          <p className='error-message'>
+            {invalid ? 'Wrong credentials' : ''}
+          </p>
           <button
             className="signin-button"
             type="button"
@@ -85,4 +98,4 @@ class SignIn extends Component {
   }
 }
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(mapStateToProps, mapDispatchToProps)(SignIn);

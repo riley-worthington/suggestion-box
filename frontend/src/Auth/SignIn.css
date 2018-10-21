@@ -14,7 +14,7 @@
   margin: 20px;
 }
 
-.signin-form > * {
+.signin-form > input, button {
   margin: 10px;
   border: 1px solid #38d161;
   border-radius: 5px;
@@ -45,4 +45,10 @@
 
 input:invalid:not(:focus) {
   border: 1px solid red;
+}
+
+.error-message {
+  font-size: 16px;
+  margin: 0;
+  color: red;
 }

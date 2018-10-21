@@ -34,7 +34,6 @@ export const signIn = (email, password) => dispatch => {
         dispatch(signInSuccess(user));
         history.push('/');
       } else {
-        alert('Wrong credentials');
         dispatch(signInFailure('Wrong credentials'));
       }
     })
