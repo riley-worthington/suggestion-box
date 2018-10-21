@@ -12,7 +12,7 @@ export const getUserTeams = userId => dispatch => {
   })
   .then(response => response.json())
   .then(teams => {
-    if (teams[0]) {
+    if (teams instanceof Array) {
       dispatch(getUserTeamsSuccess(teams));
     } else {
       dispatch(getUserTeamsFailure('Failed to load teams'));

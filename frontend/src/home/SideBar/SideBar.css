@@ -39,6 +39,7 @@ li {
   border: none;
   cursor: pointer;
   outline: none;
+  padding: 0 20px;
 }
 
 .join-team-button:hover {
