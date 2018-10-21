@@ -24,7 +24,6 @@ export const loadCommentListByPost = postId => dispatch => {
   })
   .then(response => response.json())
   .then(commentList => {
-    console.log(commentList);
     if (commentList) {
       dispatch(loadCommentListSuccess(commentList));
     } else {
@@ -70,7 +69,6 @@ export const submitComment = comment => dispatch => {
   })
   .then(response => response.json())
   .then(comment => {
-    console.log('New comment:', comment);
     if (comment) {
       dispatch(submitCommentSuccess(comment));
     } else {

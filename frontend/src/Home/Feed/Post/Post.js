@@ -12,7 +12,8 @@ const mapStateToProps = (state, props) => {
   const { postObj } = props;
   return {
     currentUser: state.auth.currentUser,
-    originalPoster: getUserById(state, postObj.user_id)
+    originalPoster: getUserById(state, postObj.user_id),
+    userVote: state.feed.userVotes[postObj.post_id] === undefined ? null : state.feed.userVotes[postObj.post_id].user_vote,
   }
 }
 
@@ -33,8 +34,8 @@ class Post extends Component {
       downvotePost,
       removeVoteFromPost,
       currentUser,
+      userVote,
     } = this.props;
-    console.log('post:', postObj)
 
     const opName = originalPoster.first_name + ' ' + originalPoster.last_name;
     const numComments = postObj.num_comments;
@@ -60,6 +61,8 @@ class Post extends Component {
       <article className='post-malone'>
         <Vote
           post={postObj}
+          key={postObj.post_id}
+          userVote={userVote}
           onUpvote={() => upvotePost(userId, postId)}
           onDownvote={() => downvotePost(userId, postId)}
           onRemoveVote={() => removeVoteFromPost(userId, postId)}

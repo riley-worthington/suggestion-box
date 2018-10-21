@@ -1,16 +1,15 @@
 import React from 'react';
 import './Vote.css';
 
-const UPVOTE = 1;
-const DOWNVOTE = -1;
+const UPVOTE = true;
+const DOWNVOTE = false;
 
-const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
-  const currentUserVote = post.currentUserVote;
+const Vote = ({ post, onUpvote, onDownvote, onRemoveVote, userVote }) => {
 
   function handleUpClick() {
-    if (currentUserVote === UPVOTE) {
+    if (userVote === UPVOTE) {
       onRemoveVote()
-    } else if (currentUserVote === DOWNVOTE) {
+    } else if (userVote === DOWNVOTE) {
       // onRemoveVote()
       onUpvote()
     } else {
@@ -19,9 +18,9 @@ const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
   }
 
   function handleDownClick() {
-    if (currentUserVote === DOWNVOTE) {
+    if (userVote === DOWNVOTE) {
       onRemoveVote()
-    } else if (currentUserVote === UPVOTE) {
+    } else if (userVote === UPVOTE) {
       // onRemoveVote()
       onDownvote()
     } else {
@@ -30,9 +29,9 @@ const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
   }
 
   function getClass() {
-    if (currentUserVote === UPVOTE) {
+    if (userVote === UPVOTE) {
       return ' voted-up'
-    } else if (currentUserVote === DOWNVOTE) {
+    } else if (userVote === DOWNVOTE) {
       return ' voted-down'
     } else {
       return ''
@@ -42,13 +41,13 @@ const Vote = ({ post, onUpvote, onDownvote, onRemoveVote }) => {
   return (
     <div className='vote-container'>
       <button
-        className={'vote-button' + (currentUserVote === UPVOTE ? ' voted-up' : '')}
+        className={'vote-button' + (userVote === UPVOTE ? ' voted-up' : '')}
         onClick={handleUpClick}>&#9650;</button>
       <div className={'vote-display' + getClass()}>
         {post.upvotes - post.downvotes}
       </div>
       <button
-        className={'vote-button' + (currentUserVote === DOWNVOTE ? ' voted-down' : '')}
+        className={'vote-button' + (userVote === DOWNVOTE ? ' voted-down' : '')}
         onClick={handleDownClick}>&#9660;</button>
     </div>
   );

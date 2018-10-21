@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
-import { loadPostListByTeam, loadTeamMembers } from './postFeedActions';
+import { loadPostListByTeam, loadTeamMembers, loadUserVotes } from './postFeedActions';
 import { getPostById } from '../Post/postSelectors';
 import './PostFeed.css'
 
 const mapDispatchToProps = dispatch => {
   return {
     loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
-    loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId))
+    loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId)),
+    loadUserVotes: userId => dispatch(loadUserVotes(userId)),
   }
 }
 
@@ -21,6 +22,7 @@ const mapStateToProps = state => {
     postList: state.feed.postList.map(id => getPostById(state, id)),
     getUserTeamsPending: state.home.getUserTeamsPending,
     userTeams: state.home.userTeams,
+    loadUserVotesPending: state.feed.loadUserVotesPending,
   }
 }
 
@@ -28,15 +30,18 @@ class PostFeed extends Component {
   componentDidMount() {
     // get posts
     const {
-      loadPostListByTeam,
       teamId,
-      loadTeamMembers
+      loadPostListByTeam,
+      loadTeamMembers,
+      loadUserVotes,
+      currentUser,
     } = this.props;
 
     if (teamId !== undefined) {
       loadPostListByTeam(teamId);
       loadTeamMembers(teamId);
     }
+    loadUserVotes(currentUser.user_id);
   }
 
   render() {
@@ -49,9 +54,10 @@ class PostFeed extends Component {
       teamId,
       getUserTeamsPending,
       userTeams,
+      loadUserVotesPending,
     } = this.props;
 
-    return (loadPostListPending || loadTeamMembersPending || getUserTeamsPending || Object.keys(userTeams).length === 0) ? (
+    return (loadPostListPending || loadTeamMembersPending || getUserTeamsPending || loadUserVotesPending || userTeams === null) ? (
       <div>
         Loading...
       </div>

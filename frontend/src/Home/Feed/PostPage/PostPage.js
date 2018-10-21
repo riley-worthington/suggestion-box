@@ -5,13 +5,16 @@ import './PostPage.css';
 import Post from '../Post/Post';
 import { getPostById } from '../Post/postSelectors';
 import { loadPostById } from '../Post/postActions';
-import { loadTeamMembers } from '../PostFeed/postFeedActions'
+import { loadTeamMembers, loadUserVotes } from '../PostFeed/postFeedActions';
 
 const mapStateToProps = (state, ownProps) => {
+  const currentPostId = state.posts.currentPost;
   return {
-    currentPost: state.posts.currentPost,
+    currentUser: state.auth.currentUser,
+    currentPost: state.posts.postsById[currentPostId],
     loadPostPending: state.posts.loadPostPending,
     teamMembersById: state.feed.teamMembersById,
+    userVotes: state.feed.userVotes,
   }
 }
 
@@ -19,30 +22,45 @@ const mapDispatchToProps = dispatch => {
   return {
     loadPostById: postId => dispatch(loadPostById(postId)),
     loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId)),
+    loadUserVotes: userId => dispatch(loadUserVotes(userId)),
   }
 }
 
 class PostPage extends Component {
   componentDidMount() {
-    const { postId, currentPost, loadPostById, loadTeamMembers } = this.props;
-    console.log(postId, currentPost)
+    const {
+      postId,
+      currentPost,
+      loadPostById,
+      loadTeamMembers,
+      loadUserVotes,
+      currentUser,
+    } = this.props;
     if (!currentPost) {
       loadPostById(postId);
     } else if (currentPost.post_id !== postId) {
       loadPostById(postId);
     }
-
+    loadUserVotes(currentUser.user_id);
   }
 
   render() {
-    const { currentPost, postId, teamMembersById, loadTeamMembers } = this.props;
-    console.log('POST ID:', postId)
+    const {
+      currentPost,
+      postId,
+      teamMembersById,
+      loadTeamMembers,
+      userVotes,
+    } = this.props;
     if (currentPost && Object.keys(teamMembersById).length < 1) {
       loadTeamMembers(currentPost.team_id);
     }
-    return (currentPost && currentPost.post_id === postId && (Object.keys(teamMembersById).length > 0)) ? (
+    return (currentPost && currentPost.post_id === postId && (Object.keys(teamMembersById).length > 0) && userVotes !== null) ? (
       <div className='post-page'>
-        <Post postObj={currentPost} />
+        <Post
+          key={postId}
+          postObj={currentPost}
+        />
         <CommentFeed key={postId} postId={postId} />
       </div>
     ) : (

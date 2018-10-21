@@ -66,7 +66,11 @@ export const posts = (state=initialState, action={}) => {
       return {
         ...state,
         loadPostPending: false,
-        currentPost: payload
+        currentPost: payload.post_id,
+        postsById: {
+          ...state.postsById,
+          [payload.post_id]: payload
+        }
       }
     case LOAD_POST_FAILURE:
       return {

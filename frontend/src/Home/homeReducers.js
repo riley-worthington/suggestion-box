@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   getUserTeamsPending: false,
-  userTeams: {}
+  userTeams: null
 }
 
 export const home = (state=initialState, action={}) => {

@@ -7,7 +7,10 @@ import {
   SUBMIT_POST_FAILURE,
   LOAD_TEAM_MEMBERS_REQUEST,
   LOAD_TEAM_MEMBERS_SUCCESS,
-  LOAD_TEAM_MEMBERS_FAILURE
+  LOAD_TEAM_MEMBERS_FAILURE,
+  LOAD_USER_VOTES_REQUEST,
+  LOAD_USER_VOTES_SUCCESS,
+  LOAD_USER_VOTES_FAILURE,
  } from './postFeedConstants';
 
 import { posts, userVotes } from '../../../fakeDatabase';
@@ -141,6 +144,43 @@ export const submitPost = post => dispatch => {
   function submitPostFailure(error) {
     return {
       type: SUBMIT_POST_FAILURE,
+      payload: error
+    }
+  }
+}
+
+export const loadUserVotes = userId => dispatch => {
+  dispatch(loadUserVotesRequest(userId));
+
+  fetch(`http://localhost:3000/users/${userId}/votes`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(userVotes => {
+    if (userVotes.constructor === Array) {
+      dispatch(loadUserVotesSuccess(userVotes));
+    } else {
+      dispatch(loadUserVotesFailure(userVotes));
+    }
+  })
+
+  function loadUserVotesRequest(userId) {
+    return {
+      type: LOAD_USER_VOTES_REQUEST,
+      payload: userId
+    }
+  }
+
+  function loadUserVotesSuccess(userVotes) {
+    return {
+      type: LOAD_USER_VOTES_SUCCESS,
+      payload: userVotes
+    }
+  }
+
+  function loadUserVotesFailure(error) {
+    return {
+      type: LOAD_USER_VOTES_FAILURE,
       payload: error
     }
   }

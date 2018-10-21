@@ -28,8 +28,14 @@ const mapDispatchToProps = dispatch => {
 
 class Home extends Component {
   componentDidMount() {
-    const { currentUser, getUserTeams } = this.props;
-    getUserTeams(currentUser.user_id);
+    const {
+      currentUser,
+      getUserTeams,
+      userTeams,
+    } = this.props;
+    if (userTeams === null) {
+      getUserTeams(currentUser.user_id);
+    }
   }
 
   bodyLoader() {
@@ -58,7 +64,7 @@ class Home extends Component {
 
   sidebarLoader() {
     const { getUserTeamsPending, userTeams, selectedTeam } = this.props;
-    if (getUserTeamsPending || Object.keys(userTeams).length === 0) {
+    if (userTeams === null) {
       return (
         <h2>Loading...</h2>
       );
