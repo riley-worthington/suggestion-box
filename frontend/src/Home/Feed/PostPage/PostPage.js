@@ -58,7 +58,6 @@ class PostPage extends Component {
     return (currentPost && currentPost.post_id === postId && (Object.keys(teamMembersById).length > 0) && userVotes !== null) ? (
       <div className='post-page'>
         <Post
-          key={postId}
           postObj={currentPost}
         />
         <CommentFeed key={postId} postId={postId} />
