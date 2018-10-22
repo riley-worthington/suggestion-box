@@ -56,8 +56,18 @@ const getTeamMembers = db => (req, res) => {
     })
 }
 
+const getAllTeams = db => (req, res) => {
+  db.select('*')
+    .from('teams')
+    .then(teams => {
+      res.json(teams)
+    })
+    .catch(err => res.status(400).json(err))
+}
+
 module.exports = {
   createNewTeam: createNewTeam,
   addTeamMember: addTeamMember,
-  getTeamMembers: getTeamMembers
+  getTeamMembers: getTeamMembers,
+  getAllTeams: getAllTeams,
 }
