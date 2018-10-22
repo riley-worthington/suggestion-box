@@ -57,9 +57,7 @@ class PostFeed extends Component {
     } = this.props;
 
     return (loadPostListPending || loadTeamMembersPending || getUserTeamsPending || loadUserVotesPending || userTeams === null) ? (
-      <div>
-        Loading...
-      </div>
+      <div class='lds-dual-ring'></div>
     ) : (
       <div className='post-feed'>
         <AddPost currentUser={currentUser} currentTeam={teamId} />
