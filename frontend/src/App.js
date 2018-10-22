@@ -19,6 +19,7 @@ class App extends Component {
           <PrivateRoute exact path='/' component={Home} />
           <PrivateRoute path={`/teams/:teamId`} component={Home} />
           <PrivateRoute path={`/posts/:postId`} component={Home} />
+          <PrivateRoute exact path={'/join'} component={Home} />
         </Fragment>
       </Router>
     );

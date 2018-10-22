@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './SideBar.css';
 
 const SideBar = ({ teams, selected }) => {
@@ -21,8 +21,10 @@ const SideBar = ({ teams, selected }) => {
           </li>
         )}
       </ul>
-
-      <button className='join-team-button'>+ Join team</button>
+      <Link
+        className='join-team-button'
+        to={'/join'}>+ Join team</Link>
+      {/* <button className='join-team-button'>+ Join team</button> */}
     </Fragment>
   )
 }

@@ -5,6 +5,7 @@ import TopNav from './TopNav/TopNav';
 import SideBar from './SideBar/SideBar';
 import PostFeed from './Feed/PostFeed/PostFeed';
 import PostPage from './Feed/PostPage/PostPage';
+import JoinPage from './JoinPage/JoinPage';
 import './Home.css';
 
 import { signOut } from '../Auth/authActions';
@@ -58,6 +59,10 @@ class Home extends Component {
     } else if (url.startsWith('/posts/')) {
       return (
         <PostPage postId={postId} />
+      );
+    } else if (url === '/join') {
+      return (
+        <JoinPage />
       );
     }
   }

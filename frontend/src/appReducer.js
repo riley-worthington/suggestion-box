@@ -6,6 +6,7 @@ import { feed } from './Home/Feed/PostFeed/postFeedReducers';
 import { home } from './Home/homeReducers';
 import { posts } from './Home/Feed/Post/postReducers';
 import { commentsReducer } from './Home/Feed/CommentFeed/commentFeedReducers';
+import { join } from './Home/JoinPage/joinPageReducers';
 
 const appReducer = combineReducers({
   auth,
@@ -13,6 +14,7 @@ const appReducer = combineReducers({
   home,
   posts,
   commentsReducer,
+  join,
 })
 
 export const rootReducer = (state, action) => {
