@@ -5,8 +5,8 @@ const getUserTeams = db => (req, res) => {
     .from('teams')
     .innerJoin('team_members', 'team_members.team_id', '=', 'teams.team_id')
     .where('team_members.user_id', '=', userId)
-    .then(teamIds => {
-      res.json(teamIds)
+    .then(teams => {
+      res.json(teams)
     })
 }
 

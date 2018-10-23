@@ -3,6 +3,9 @@ import {
   GET_USER_TEAMS_SUCCESS,
   GET_USER_TEAMS_FAILURE,
 } from './homeConstants';
+import {
+  ADD_TEAM_MEMBER_SUCCESS
+} from './JoinPage/joinPageConstants';
 
 const initialState = {
   getUserTeamsPending: false,
@@ -31,6 +34,14 @@ export const home = (state=initialState, action={}) => {
       return {
         ...state,
         getUserTeamsPending: false
+      }
+    case ADD_TEAM_MEMBER_SUCCESS:
+      return {
+        ...state,
+        userTeams: {
+          ...state.userTeams,
+          [payload.team_id]: payload
+        }
       }
     default:
       return state;

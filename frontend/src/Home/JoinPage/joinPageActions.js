@@ -56,7 +56,7 @@ export const addTeamMember = (userId, teamId) => dispatch => {
   })
   .then(response => response.json())
   .then(data => {
-    if (data.team_id === teamId && data.user_id === userId) {
+    if (data.team_id === teamId) {
       dispatch(addTeamMemberSuccess(data));
     } else {
       dispatch(addTeamMemberFailure(data));

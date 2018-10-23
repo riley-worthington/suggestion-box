@@ -35,9 +35,14 @@ const addTeamMember = db => (req, res) => {
       date_joined: new Date()
     })
     .into('team_members')
-    .returning('*')
-    .then(data => {
-      res.status(201).json(data[0])
+    .returning('team_id')
+    .then(team_id => {
+      return trx('teams')
+        .select('*')
+        .where('team_id', '=', team_id[0])
+        .then(team => {
+          res.json(team[0])
+        })
     })
     .then(trx.commit)
     .catch(trx.rollback)
