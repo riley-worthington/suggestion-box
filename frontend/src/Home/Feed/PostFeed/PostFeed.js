@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
 import Filter from '../Filter/Filter';
+import Loader from '../../Loader/Loader';
 import { loadPostListByTeam, loadTeamMembers, loadUserVotes } from './postFeedActions';
 import { selectSortedPosts } from './postFeedSelectors';
-import './PostFeed.css'
+import './PostFeed.css';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -58,7 +59,7 @@ class PostFeed extends Component {
     } = this.props;
 
     return (loadPostListPending || loadTeamMembersPending || getUserTeamsPending || loadUserVotesPending || userTeams === null) ? (
-      <div className='lds-dual-ring'></div>
+      <Loader />
     ) : (
       <div className='post-feed'>
         <AddPost currentUser={currentUser} currentTeam={teamId} />
