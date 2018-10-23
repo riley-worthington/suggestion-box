@@ -11,6 +11,7 @@ import {
   LOAD_USER_VOTES_REQUEST,
   LOAD_USER_VOTES_SUCCESS,
   LOAD_USER_VOTES_FAILURE,
+  SET_POST_FEED_FILTER,
  } from './postFeedConstants';
 
 
@@ -176,3 +177,8 @@ export const loadUserVotes = userId => dispatch => {
     }
   }
 }
+
+export const setPostFeedFilter = filter => ({
+  type: SET_POST_FEED_FILTER,
+  payload: filter
+})

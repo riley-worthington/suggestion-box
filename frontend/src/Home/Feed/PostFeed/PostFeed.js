@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
+import Filter from '../Filter/Filter';
 import { loadPostListByTeam, loadTeamMembers, loadUserVotes } from './postFeedActions';
-import { getPostById } from '../Post/postSelectors';
+import { selectSortedPosts } from './postFeedSelectors';
 import './PostFeed.css'
 
 const mapDispatchToProps = dispatch => {
@@ -19,7 +20,7 @@ const mapStateToProps = state => {
     currentUser: state.auth.currentUser,
     loadPostListPending: state.feed.loadPostListPending,
     loadTeamMembersPending: state.feed.loadTeamMembersPending,
-    postList: state.feed.postList.map(id => getPostById(state, id)),
+    postList: selectSortedPosts(state),
     getUserTeamsPending: state.home.getUserTeamsPending,
     userTeams: state.home.userTeams,
     loadUserVotesPending: state.feed.loadUserVotesPending,
@@ -61,6 +62,7 @@ class PostFeed extends Component {
     ) : (
       <div className='post-feed'>
         <AddPost currentUser={currentUser} currentTeam={teamId} />
+        <Filter />
         { postList.map((post, i) =>
           <Post
             key={post.post_id}

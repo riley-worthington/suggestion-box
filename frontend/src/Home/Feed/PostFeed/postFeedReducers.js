@@ -11,6 +11,8 @@ import {
   LOAD_USER_VOTES_REQUEST,
   LOAD_USER_VOTES_SUCCESS,
   LOAD_USER_VOTES_FAILURE,
+  SET_POST_FEED_FILTER,
+  postFeedFilters,
  } from './postFeedConstants';
  import {
    LOAD_POST_SUCCESS,
@@ -48,6 +50,7 @@ const initialState = {
   teamMembersById: {},
   userVotes: {},
   loadUserVotesPending: false,
+  filter: postFeedFilters.MOST_RECENT,
 }
 
 export const feed = (state=initialState, action={}) => {
@@ -165,6 +168,11 @@ export const feed = (state=initialState, action={}) => {
             user_vote: null
           }
         }
+      }
+    case SET_POST_FEED_FILTER:
+      return {
+        ...state,
+        filter: payload
       }
     default:
       return state;
