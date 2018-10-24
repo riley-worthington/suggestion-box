@@ -6,7 +6,7 @@ import {
 
 const initialState = {
   getAllTeamsPending: false,
-  teams: []
+  teams: null
 }
 
 export const join = (state=initialState, action={}) => {

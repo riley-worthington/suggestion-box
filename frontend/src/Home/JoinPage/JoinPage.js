@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllTeams, addTeamMember } from './joinPageActions';
+import Loader from '../Loader/Loader';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -13,6 +14,7 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     teams: state.join.teams,
+    userTeams: state.home.userTeams,
   }
 }
 
@@ -22,16 +24,38 @@ class JoinPage extends Component {
     getAllTeams();
   }
 
+  // returns teams in otherTeams that are not in userTeams
+  getTeamsNotIn(userTeams, otherTeams) {
+    if (userTeams && otherTeams) {
+      return otherTeams.filter(team => !(team.team_id in userTeams));
+    }
+    return undefined;
+  }
+
   render() {
-    const { teams, addTeamMember, currentUser } = this.props;
+    const { teams, addTeamMember, currentUser, userTeams } = this.props;
     console.log(teams);
+    const teamsNotIn = this.getTeamsNotIn(userTeams, teams);
+
     return (
-      <div>
-        <h1>Join a team</h1>
-        {teams.map(team =>
-          <button key={team.team_id} onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>{team.name}</button>
-        )}
-      </div>
+      (teams && userTeams) ?
+        <div>
+          <h1>Join a team</h1>
+          {teamsNotIn.length > 0 ?
+            teamsNotIn.map(team =>
+              <button
+                key={team.team_id}
+                onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
+                {team.name}
+              </button>)
+            :
+            <p>
+              No teams to join
+            </p>
+          }
+        </div>
+        :
+        <Loader />
     );
   }
 }

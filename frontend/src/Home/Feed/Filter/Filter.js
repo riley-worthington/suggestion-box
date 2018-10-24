@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { postFeedFilters as filters } from '../PostFeed/postFeedConstants';
 import { setPostFeedFilter } from '../PostFeed/postFeedActions';
+import './Filter.css';
 
 const mapStateToProps = state => {
   return {
