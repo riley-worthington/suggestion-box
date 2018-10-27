@@ -4,14 +4,14 @@ li {
 
 .sidebar-team {
   font-size: 16px;
-  color: lightgrey;
+  color: white;
   padding: 10px 10px 10px 20px;
   text-decoration: none;
   font-weight: bold;
 }
 
 .sidebar-team:hover {
-  color: darkgrey;
+  color: lightgrey;
 }
 
 .sidebar-team.selected {
@@ -23,6 +23,7 @@ li {
   font-weight: bold;
   margin: 0;
   font-size: 20px;
+  color: white;
 }
 
 .group-list {
@@ -33,7 +34,7 @@ li {
 
 .join-team-button {
   background: transparent;
-  color: lightgrey;
+  color: white;
   font-size: 16px;
   margin: 10px;
   border: none;
@@ -44,5 +45,5 @@ li {
 }
 
 .join-team-button:hover {
-  color: darkgrey;
+  color: lightgrey;
 }

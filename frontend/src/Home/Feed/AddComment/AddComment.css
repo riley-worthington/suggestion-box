@@ -30,7 +30,7 @@
   transition: 0.2s;
 }
 
-.new-comment-button:hover {
+.new-comment-button:hover, .new-comment-button:focus {
   border-color: #1c62da;
   background-color: #1c62da;
   transition: 0.2s;

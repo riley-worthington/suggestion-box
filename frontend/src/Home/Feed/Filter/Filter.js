@@ -26,7 +26,7 @@ class Filter extends Component {
   render() {
     const { currentFilter } = this.props;
     return (
-      <div>
+      <div className='filter-widget'>
         <label htmlFor="post-filter">Filter by  </label>
         <select id="post-filter" value={currentFilter} onChange={this.onFilterChange}>
             <option value={filters.MOST_RECENT}>Most Recent</option>

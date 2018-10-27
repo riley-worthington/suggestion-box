@@ -67,7 +67,7 @@ class Post extends Component {
           onRemoveVote={() => removeVoteFromPost(userId, postId)}
         />
         <div className='post-body'>
-          <header>
+          <header className='post-info'>
             <h1 className='title'>
               <Link
                 to={`/posts/${postId}`}
@@ -83,7 +83,7 @@ class Post extends Component {
           <p className='content'>
             {postObj.content}
           </p>
-          <div className='comments-tag'>
+          <div className='post-stats'>
             <Link
               to={`/posts/${postId}`}
               className='comments-tag' >

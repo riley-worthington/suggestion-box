@@ -21,9 +21,9 @@ const SideBar = ({ teams, selected }) => {
           </li>
         )}
       </ul>
-      <Link
+      <NavLink
         className='join-team-button'
-        to={'/join'}>+ Join team</Link>
+        to={'/join'}>+ Join team</NavLink>
       {/* <button className='join-team-button'>+ Join team</button> */}
     </Fragment>
   )

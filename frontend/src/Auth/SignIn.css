@@ -1,26 +1,67 @@
-.signin-container {
+.App-title {
+  /* color: #4b8bf9; */
+  color: #25072f;
+  font-size: 64px;
+  margin: 0;
+}
+
+header {
+  /* height: 100%; */
+  margin: 30px 50px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+}
+
+.app-intro {
+  color: #4b8bf9;
+}
+
+.signin-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
   margin: auto auto;
+  /* background-color: #71eeb8; */
+  background: rgb(0,211,222);
+  background: linear-gradient(180deg, rgba(0,211,222,1) 0%, rgba(113,238,184,1) 50%, rgba(0,255,130,1) 100%);
+  height: 100%;
+}
+
+.signin-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 50px;
 }
 
 .signin-form {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  flex-direction: row;
   align-items: center;
-  max-width: 5em;
+  /* max-width: 5em; */
   font-size: 50px;
-  margin: 20px;
+  margin-top: 30px;
+  /* border: 2px solid #4b8bf9; */
+  border-radius: 10px;
+
 }
 
 .signin-form > input, button {
   margin: 10px;
-  border: 1px solid #38d161;
+  border: 1px solid #4b8bf9;
   border-radius: 5px;
   font-size: 18px;
   color: grey;
-  padding: 16px 20px;
+  padding: 12px;
+}
+
+input:focus {
+  /* box-shadow: 1px 1px 5px #1c62da; */
+
 }
 
 .signin-field {
@@ -33,18 +74,24 @@
 
 .signin-button {
   width: 100px;
-  color: #38d161;
+  /* color: #4b8bf9; */
+  color: #ffffff;
   cursor: pointer;
   outline: none;
+  /* background-color: #cddeff; */
+  background-color: #1da1f2;
+  transition: 0.3s;
 }
 
-.signin-button:hover {
-  background-color: #38d161;
-  color: white;
+.signin-button:hover, .signin-button:focus {
+  /* background-color: #b0c8f6; */
+  background-color: #006dbf;
+  transition: 0.3s;
+  /* color: white; */
 }
 
 input:invalid:not(:focus) {
-  border: 1px solid red;
+  border: 1px solid #ff4a22;
 }
 
 .error-message {
@@ -62,4 +109,44 @@ input:invalid:not(:focus) {
   padding: 0;
   position: absolute;
   width: 1px;
+}
+
+.register-memo {
+  color: #ffffff;
+}
+
+.register-link {
+  text-decoration: none;
+  font-weight: bold;
+  color: #4b8bf9;
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #4b8bf9;
+}
+
+.link-text {
+  margin: 0;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.register-link:hover {
+  color: #1c62da;
+}
+
+.hype {
+  color: #ffffff;
+  font-size: 60px;
+  margin: 30px 0;
+}
+
+.register-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
 }

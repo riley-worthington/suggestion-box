@@ -95,7 +95,7 @@ class AddPost extends Component {
         id='newPost'
         onSubmit={this.handleSubmit}
         className='new-post-form'>
-        <p className='prompt'>Add new post in
+        <p className='prompt'>Add a new post in
           <b>
             {` ${currentTeamName} `}
           </b>

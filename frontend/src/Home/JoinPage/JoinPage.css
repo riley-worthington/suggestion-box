@@ -1,0 +1,11 @@
+.join-page {
+  padding: 30px;
+}
+
+.join-button, .create-team-button {
+  cursor: pointer;
+  border: 1px solid black;
+  padding: 12px;
+  color: black;
+  outline: none;
+}

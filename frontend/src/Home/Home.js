@@ -40,7 +40,7 @@ class Home extends Component {
   }
 
   bodyLoader() {
-    const { match } = this.props;
+    const { match, currentUser } = this.props;
     const url = match.url;
     const teamId = +match.params.teamId;
     const postId = +match.params.postId;
@@ -50,7 +50,12 @@ class Home extends Component {
       );
     } else if (url === '/') {
       return (
-        <h1>Home Page</h1>
+        <div className='home-page'>
+          <h1>{`Welcome, ${currentUser.first_name}.`}</h1>
+          <p>
+            Select a team from the sidebar to get started.
+          </p>
+        </div>
       );
     } else if (url.startsWith('/teams/')) {
       return (

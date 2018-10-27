@@ -51,48 +51,55 @@ class SignIn extends Component {
     return (
       <div className="signin-container">
         <header className="App-header">
-          <h1 className="App-title">SuggestionBox</h1>
+          <h1 className="App-title">Suggestion<br/>Box</h1>
+          {/* <p className="app-intro">
+            A place for creative collaboration.
+          </p> */}
         </header>
-        <form
-          className="signin-form"
-          onSubmit={this.handleSubmit}>
-          <label htmlFor='post' className='visually-hidden'>Email</label>
-          <input
-            id='email'
-            className="signin-field"
-            type="email"
-            name="email"
-            placeholder="Email"
-            onChange={this.onEmailChange}
-            onKeyUp={this.handleKeyUp}
-          />
-          <label htmlFor='password' className='visually-hidden'>Password</label>
-          <input
-            id='password'
-            className="signin-field"
-            type="password"
-            name="password"
-            placeholder="Password"
-            onChange={this.onPasswordChange}
-            onKeyUp={this.handleKeyUp}
-          />
+        <div className='signin-section'>
+          <form
+            className="signin-form"
+            onSubmit={this.handleSubmit}>
+            <label htmlFor='post' className='visually-hidden'>Email</label>
+            <input
+              id='email'
+              className="signin-field"
+              type="email"
+              name="email"
+              placeholder="Email"
+              onChange={this.onEmailChange}
+              onKeyUp={this.handleKeyUp}
+            />
+            <label htmlFor='password' className='visually-hidden'>Password</label>
+            <input
+              id='password'
+              className="signin-field"
+              type="password"
+              name="password"
+              placeholder="Password"
+              onChange={this.onPasswordChange}
+              onKeyUp={this.handleKeyUp}
+            />
+            <button
+              className="signin-button"
+              type="button"
+              name="signin"
+              onClick={this.handleSubmit}>
+                Sign In
+            </button>
+          </form>
           <p className='error-message'>
-            {invalid ? 'Wrong credentials' : ''}
+            {invalid ? 'Wrong credentials' : <br/>}
           </p>
-          <button
-            className="signin-button"
-            type="button"
-            name="signin"
-            onClick={this.handleSubmit}>
-              Sign In
-          </button>
-        </form>
-        <p className="App-intro">
-          A place for creative collaboration.
-        </p>
-        <p>
-          Don't have an account? <Link to='/register'>Register</Link>
-        </p>
+          <div className='register-section'>
+            <h1 className='hype'>A place for<br/>creative collaboration.</h1>
+            <Link to='/register'>
+              <div className='register-link'>
+                <p className='link-text'>Register Today</p>
+              </div>
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }

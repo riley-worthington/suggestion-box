@@ -45,18 +45,23 @@
   /* padding-top: 8px; */
 }
 
-.comments-tag {
+.post-stats {
   display: flex;
   margin: 0;
   color: black;
 }
 
-.comments-tag > Link {
+.comments-tag {
   text-decoration: underline;
   cursor: pointer;
+  color: #000000;
 }
 
-.comments-tag > p {
+.post-stats > p {
   margin: 0;
   margin-left: 15px;
+}
+
+.post-info {
+  margin: 0;
 }

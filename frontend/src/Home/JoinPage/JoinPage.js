@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getAllTeams, addTeamMember } from './joinPageActions';
 import Loader from '../Loader/Loader';
+import './JoinPage.css';
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -38,24 +39,32 @@ class JoinPage extends Component {
     const teamsNotIn = this.getTeamsNotIn(userTeams, teams);
 
     return (
-      (teams && userTeams) ?
-        <div>
-          <h1>Join a team</h1>
-          {teamsNotIn.length > 0 ?
-            teamsNotIn.map(team =>
-              <button
-                key={team.team_id}
-                onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
-                {team.name}
-              </button>)
-            :
-            <p>
-              No teams to join
-            </p>
-          }
-        </div>
-        :
-        <Loader />
+      <div className='join-page'>
+        {(teams && userTeams) ?
+          <div>
+            <h1>Join a team</h1>
+            {teamsNotIn.length > 0 ?
+              teamsNotIn.map(team =>
+                <button
+                  className='join-button'
+                  key={team.team_id}
+                  onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
+                  {team.name}
+                </button>)
+              :
+              <div>
+                <p>
+                  No teams to join
+                </p>
+                <button className='create-team-button'>
+                  Create a team
+                </button>
+              </div>
+            }
+          </div>
+          :
+          <Loader />}
+      </div>
     );
   }
 }
