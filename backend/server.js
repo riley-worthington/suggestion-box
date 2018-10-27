@@ -45,7 +45,8 @@ app.get('/teams/:teamId/members', teams.getTeamMembers(db));
 app.get('/users/:userId/teams', users.getUserTeams(db));
 app.get('/posts/:postId/comments', comments.getCommentsByPost(db));
 app.get('/posts/:postId', posts.getPostById(db));
-app.get('/users/:userId/votes', users.getUserVotes(db));
+app.get('/users/:userId/postVotes', users.getUserPostVotes(db));
+app.get('/users/:userId/commentVotes', users.getUserCommentVotes(db));
 app.get('/teams', teams.getAllTeams(db));
 // app.get('')
 

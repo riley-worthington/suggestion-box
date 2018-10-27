@@ -2,6 +2,9 @@ import {
   LOAD_COMMENT_LIST_REQUEST,
   LOAD_COMMENT_LIST_SUCCESS,
   LOAD_COMMENT_LIST_FAILURE,
+  LOAD_USER_COMMENT_VOTES_REQUEST,
+  LOAD_USER_COMMENT_VOTES_SUCCESS,
+  LOAD_USER_COMMENT_VOTES_FAILURE,
   SUBMIT_COMMENT_REQUEST,
   SUBMIT_COMMENT_SUCCESS,
   SUBMIT_COMMENT_FAILURE,
@@ -31,7 +34,9 @@ import {
 const initialState = {
   loadCommentListPending: false,
   pendingComment: false,
-  commentsById: {}
+  commentsById: {},
+  userCommentVotes: null,
+  loadUserCommentVotesPending: false,
 };
 
 export const commentsReducer = (state=initialState, action={}) => {
@@ -58,6 +63,26 @@ export const commentsReducer = (state=initialState, action={}) => {
       return {
         ...state,
         loadCommentListPending: false
+      }
+    case LOAD_USER_COMMENT_VOTES_REQUEST:
+      return {
+        ...state,
+        loadUserCommentVotesPending: true
+      }
+    case LOAD_USER_COMMENT_VOTES_SUCCESS:
+      const userCommentVotes = payload.reduce((obj, vote) => {
+        obj[vote.comment_id] = vote;
+        return obj;
+       }, {});
+      return {
+        ...state,
+        userCommentVotes: userCommentVotes,
+        loadUserCommentVotesPending: false
+      }
+    case LOAD_USER_COMMENT_VOTES_FAILURE:
+      return {
+        ...state,
+        loadUserCommentVotesPending: false
       }
     case SUBMIT_COMMENT_REQUEST:
       return {
@@ -89,6 +114,13 @@ export const commentsReducer = (state=initialState, action={}) => {
             downvotes: payload.downvotes,
             currentUserVote: 1
           }
+        },
+        userCommentVotes: {
+          ...state.userCommentVotes,
+          [payload.comment_id]: {
+            ...state.userCommentVotes[payload.comment_id],
+            user_vote: true
+          }
         }
       };
     case DOWNVOTE_COMMENT_SUCCESS:
@@ -102,6 +134,13 @@ export const commentsReducer = (state=initialState, action={}) => {
             downvotes: payload.downvotes,
             currentUserVote: -1
           }
+        },
+        userCommentVotes: {
+          ...state.userCommentVotes,
+          [payload.comment_id]: {
+            ...state.userCommentVotes[payload.comment_id],
+            user_vote: false
+          }
         }
       };
     case REMOVE_VOTE_FROM_COMMENT:
@@ -114,6 +153,13 @@ export const commentsReducer = (state=initialState, action={}) => {
             upvotes: payload.upvotes,
             downvotes: payload.downvotes,
             currentUserVote: 0
+          }
+        },
+        userCommentVotes: {
+          ...state.userCommentVotes,
+          [payload.comment_id]: {
+            ...state.userCommentVotes[payload.comment_id],
+            user_vote: null
           }
         }
       }

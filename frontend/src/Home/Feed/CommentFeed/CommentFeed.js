@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { loadCommentListByPost } from './commentFeedActions';
+import { loadCommentListByPost, loadUserCommentVotes } from './commentFeedActions';
 import { getCommentsAsList } from './commentFeedSelectors';
 import Comment from '../Comment/Comment';
 import AddComment from '../AddComment/AddComment';
@@ -11,12 +11,14 @@ const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
     commentList: getCommentsAsList(state),
+    loadUserCommentVotesPending: state.commentsReducer.loadUserCommentVotesPending,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
     loadCommentListByPost: postId => dispatch(loadCommentListByPost(postId)),
+    loadUserCommentVotes: userId => dispatch(loadUserCommentVotes(userId)),
   }
 }
 
@@ -25,17 +27,24 @@ class CommentFeed extends Component {
     const {
       postId,
       loadCommentListByPost,
+      loadUserCommentVotes,
+      currentUser,
     } = this.props;
 
     if (postId !== undefined) {
       loadCommentListByPost(postId);
     }
+    loadUserCommentVotes(currentUser.user_id);
   }
 
   render() {
-    const { currentUser, commentList, postId } = this.props;
-    if (commentList.length > 0 && commentList[0].post_id !== postId) {
-      console.log(commentList.length, commentList[0].post_id, postId);
+    const {
+      currentUser,
+      commentList,
+      postId,
+      loadUserCommentVotesPending,
+    } = this.props;
+    if (loadUserCommentVotesPending || (commentList.length > 0 && commentList[0].post_id !== postId)) {
       return (
         <Loader />
       );

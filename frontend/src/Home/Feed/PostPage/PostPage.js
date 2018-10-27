@@ -5,7 +5,7 @@ import './PostPage.css';
 import Post from '../Post/Post';
 import Loader from '../../Loader/Loader';
 import { loadPostById } from '../Post/postActions';
-import { loadTeamMembers, loadUserVotes } from '../PostFeed/postFeedActions';
+import { loadTeamMembers, loadUserPostVotes } from '../PostFeed/postFeedActions';
 
 const mapStateToProps = (state, ownProps) => {
   const currentPostId = state.posts.currentPost;
@@ -22,7 +22,7 @@ const mapDispatchToProps = dispatch => {
   return {
     loadPostById: postId => dispatch(loadPostById(postId)),
     loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId)),
-    loadUserVotes: userId => dispatch(loadUserVotes(userId)),
+    loadUserPostVotes: userId => dispatch(loadUserPostVotes(userId)),
   }
 }
 
@@ -32,7 +32,7 @@ class PostPage extends Component {
       postId,
       currentPost,
       loadPostById,
-      loadUserVotes,
+      loadUserPostVotes,
       currentUser,
     } = this.props;
     if (!currentPost) {
@@ -40,7 +40,7 @@ class PostPage extends Component {
     } else if (currentPost.post_id !== postId) {
       loadPostById(postId);
     }
-    loadUserVotes(currentUser.user_id);
+    loadUserPostVotes(currentUser.user_id);
   }
 
   render() {

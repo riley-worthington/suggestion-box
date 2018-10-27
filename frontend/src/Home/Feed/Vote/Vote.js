@@ -5,7 +5,6 @@ const UPVOTE = true;
 const DOWNVOTE = false;
 
 const Vote = ({ post, onUpvote, onDownvote, onRemoveVote, userVote }) => {
-
   function handleUpClick() {
     if (userVote === UPVOTE) {
       onRemoveVote()

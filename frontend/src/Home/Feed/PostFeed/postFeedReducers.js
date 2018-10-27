@@ -8,9 +8,9 @@ import {
   LOAD_TEAM_MEMBERS_REQUEST,
   LOAD_TEAM_MEMBERS_SUCCESS,
   LOAD_TEAM_MEMBERS_FAILURE,
-  LOAD_USER_VOTES_REQUEST,
-  LOAD_USER_VOTES_SUCCESS,
-  LOAD_USER_VOTES_FAILURE,
+  LOAD_USER_POST_VOTES_REQUEST,
+  LOAD_USER_POST_VOTES_SUCCESS,
+  LOAD_USER_POST_VOTES_FAILURE,
   SET_POST_FEED_FILTER,
   postFeedFilters,
  } from './postFeedConstants';
@@ -116,12 +116,12 @@ export const feed = (state=initialState, action={}) => {
         ...state,
         selectedTeam: payload.team_id
       }
-    case LOAD_USER_VOTES_REQUEST:
+    case LOAD_USER_POST_VOTES_REQUEST:
       return {
         ...state,
         loadUserVotesPending: true
       }
-    case LOAD_USER_VOTES_SUCCESS:
+    case LOAD_USER_POST_VOTES_SUCCESS:
       const userVotes = payload.reduce((obj, vote) => {
         obj[vote.post_id] = vote;
         return obj;
@@ -131,7 +131,7 @@ export const feed = (state=initialState, action={}) => {
         userVotes: userVotes,
         loadUserVotesPending: false
       }
-    case LOAD_USER_VOTES_FAILURE:
+    case LOAD_USER_POST_VOTES_FAILURE:
       return {
         ...state,
         loadUserVotesPending: false

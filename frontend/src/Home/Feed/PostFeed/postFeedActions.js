@@ -8,9 +8,9 @@ import {
   LOAD_TEAM_MEMBERS_REQUEST,
   LOAD_TEAM_MEMBERS_SUCCESS,
   LOAD_TEAM_MEMBERS_FAILURE,
-  LOAD_USER_VOTES_REQUEST,
-  LOAD_USER_VOTES_SUCCESS,
-  LOAD_USER_VOTES_FAILURE,
+  LOAD_USER_POST_VOTES_REQUEST,
+  LOAD_USER_POST_VOTES_SUCCESS,
+  LOAD_USER_POST_VOTES_FAILURE,
   SET_POST_FEED_FILTER,
  } from './postFeedConstants';
 
@@ -141,38 +141,38 @@ export const submitPost = post => dispatch => {
   }
 }
 
-export const loadUserVotes = userId => dispatch => {
-  dispatch(loadUserVotesRequest(userId));
+export const loadUserPostVotes = userId => dispatch => {
+  dispatch(loadUserPostVotesRequest(userId));
 
-  fetch(`http://localhost:3000/users/${userId}/votes`, {
+  fetch(`http://localhost:3000/users/${userId}/postVotes`, {
     method: 'get'
   })
   .then(response => response.json())
   .then(userVotes => {
     if (userVotes.constructor === Array) {
-      dispatch(loadUserVotesSuccess(userVotes));
+      dispatch(loadUserPostVotesSuccess(userVotes));
     } else {
-      dispatch(loadUserVotesFailure(userVotes));
+      dispatch(loadUserPostVotesFailure(userVotes));
     }
   })
 
-  function loadUserVotesRequest(userId) {
+  function loadUserPostVotesRequest(userId) {
     return {
-      type: LOAD_USER_VOTES_REQUEST,
+      type: LOAD_USER_POST_VOTES_REQUEST,
       payload: userId
     }
   }
 
-  function loadUserVotesSuccess(userVotes) {
+  function loadUserPostVotesSuccess(userVotes) {
     return {
-      type: LOAD_USER_VOTES_SUCCESS,
+      type: LOAD_USER_POST_VOTES_SUCCESS,
       payload: userVotes
     }
   }
 
-  function loadUserVotesFailure(error) {
+  function loadUserPostVotesFailure(error) {
     return {
-      type: LOAD_USER_VOTES_FAILURE,
+      type: LOAD_USER_POST_VOTES_FAILURE,
       payload: error
     }
   }

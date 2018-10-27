@@ -4,17 +4,10 @@ import Post from '../Post/Post';
 import AddPost from '../AddPost/AddPost';
 import Filter from '../Filter/Filter';
 import Loader from '../../Loader/Loader';
-import { loadPostListByTeam, loadTeamMembers, loadUserVotes } from './postFeedActions';
+import { loadPostListByTeam, loadTeamMembers, loadUserPostVotes } from './postFeedActions';
 import { selectSortedPosts } from './postFeedSelectors';
 import './PostFeed.css';
 
-const mapDispatchToProps = dispatch => {
-  return {
-    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
-    loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId)),
-    loadUserVotes: userId => dispatch(loadUserVotes(userId)),
-  }
-}
 
 const mapStateToProps = state => {
   return {
@@ -28,6 +21,14 @@ const mapStateToProps = state => {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    loadPostListByTeam: teamId => dispatch(loadPostListByTeam(teamId)),
+    loadTeamMembers: teamId => dispatch(loadTeamMembers(teamId)),
+    loadUserPostVotes: userId => dispatch(loadUserPostVotes(userId)),
+  }
+}
+
 class PostFeed extends Component {
   componentDidMount() {
     // get posts
@@ -35,7 +36,7 @@ class PostFeed extends Component {
       teamId,
       loadPostListByTeam,
       loadTeamMembers,
-      loadUserVotes,
+      loadUserPostVotes,
       currentUser,
     } = this.props;
 
@@ -43,7 +44,7 @@ class PostFeed extends Component {
       loadPostListByTeam(teamId);
       loadTeamMembers(teamId);
     }
-    loadUserVotes(currentUser.user_id);
+    loadUserPostVotes(currentUser.user_id);
   }
 
   render() {

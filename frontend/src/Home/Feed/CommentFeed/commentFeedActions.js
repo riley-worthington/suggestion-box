@@ -2,6 +2,9 @@ import {
   LOAD_COMMENT_LIST_REQUEST,
   LOAD_COMMENT_LIST_SUCCESS,
   LOAD_COMMENT_LIST_FAILURE,
+  LOAD_USER_COMMENT_VOTES_REQUEST,
+  LOAD_USER_COMMENT_VOTES_SUCCESS,
+  LOAD_USER_COMMENT_VOTES_FAILURE,
   SUBMIT_COMMENT_REQUEST,
   SUBMIT_COMMENT_SUCCESS,
   SUBMIT_COMMENT_FAILURE,
@@ -50,6 +53,43 @@ export const loadCommentListByPost = postId => dispatch => {
   function loadCommentListFailure(error) {
     return {
       type: LOAD_COMMENT_LIST_FAILURE,
+      payload: error
+    }
+  }
+}
+
+export const loadUserCommentVotes = userId => dispatch => {
+  dispatch(loadUserCommentVotesRequest(userId));
+
+  fetch(`http://localhost:3000/users/${userId}/commentVotes`, {
+    method: 'get'
+  })
+  .then(response => response.json())
+  .then(userVotes => {
+    if (userVotes.constructor === Array) {
+      dispatch(loadUserCommentVotesSuccess(userVotes));
+    } else {
+      dispatch(loadUserCommentVotesFailure(userVotes));
+    }
+  })
+
+  function loadUserCommentVotesRequest(userId) {
+    return {
+      type: LOAD_USER_COMMENT_VOTES_REQUEST,
+      payload: userId
+    }
+  }
+
+  function loadUserCommentVotesSuccess(userVotes) {
+    return {
+      type: LOAD_USER_COMMENT_VOTES_SUCCESS,
+      payload: userVotes
+    }
+  }
+
+  function loadUserCommentVotesFailure(error) {
+    return {
+      type: LOAD_USER_COMMENT_VOTES_FAILURE,
       payload: error
     }
   }
@@ -170,7 +210,7 @@ export const downvoteComment = (userId, commentId) => dispatch => {
 }
 
 export const removeVoteFromComment = (userId, commentId) => dispatch => {
-  fetch(`http://localhost:3000/posts/${commentId}/vote?dir=0`, {
+  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=0`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

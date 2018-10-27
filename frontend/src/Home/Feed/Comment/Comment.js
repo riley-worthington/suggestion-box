@@ -15,6 +15,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     currentUser: state.auth.currentUser,
     commenter: getUserById(state, commentObj.user_id),
+    userVote: state.commentsReducer.userCommentVotes[commentObj.comment_id] === undefined ? null : state.commentsReducer.userCommentVotes[commentObj.comment_id].user_vote,
   }
 }
 
@@ -38,6 +39,7 @@ class Comment extends Component {
       downvoteComment,
       removeVoteFromComment,
       commenter,
+      userVote,
     } = this.props;
     const userId = currentUser.user_id;
     const commentId = commentObj.comment_id;
@@ -61,6 +63,8 @@ class Comment extends Component {
       <article className='comment-container'>
         <Vote
           post={commentObj}
+          key={commentObj.comment_id}
+          userVote={userVote}
           onUpvote={() => upvoteComment(userId, commentId)}
           onDownvote={() => downvoteComment(userId, commentId)}
           onRemoveVote={() => removeVoteFromComment(userId, commentId)}
