@@ -4,25 +4,28 @@ import { loadCommentListByPost } from './commentFeedActions';
 import { getCommentsAsList } from './commentFeedSelectors';
 import Comment from '../Comment/Comment';
 import AddComment from '../AddComment/AddComment';
+import Loader from '../../Loader/Loader';
 import './CommentFeed.css';
 
 const mapStateToProps = state => {
   return {
     currentUser: state.auth.currentUser,
-    commentList: getCommentsAsList(state)
+    commentList: getCommentsAsList(state),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    loadCommentListByPost: postId => dispatch(loadCommentListByPost(postId))
+    loadCommentListByPost: postId => dispatch(loadCommentListByPost(postId)),
   }
 }
 
 class CommentFeed extends Component {
   componentDidMount() {
-    // get posts
-    const { postId, loadCommentListByPost } = this.props;
+    const {
+      postId,
+      loadCommentListByPost,
+    } = this.props;
 
     if (postId !== undefined) {
       loadCommentListByPost(postId);
@@ -32,8 +35,9 @@ class CommentFeed extends Component {
   render() {
     const { currentUser, commentList, postId } = this.props;
     if (commentList.length > 0 && commentList[0].post_id !== postId) {
+      console.log(commentList.length, commentList[0].post_id, postId);
       return (
-        <div>Loading...</div>
+        <Loader />
       );
     }
     return (

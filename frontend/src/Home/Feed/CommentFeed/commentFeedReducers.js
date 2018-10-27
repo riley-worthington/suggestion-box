@@ -70,7 +70,7 @@ export const commentsReducer = (state=initialState, action={}) => {
         pendingComment: false,
         commentsById: {
           ...state.commentsById,
-          [payload.commentId]: payload
+          [payload.comment_id]: payload
         }
       }
     case SUBMIT_COMMENT_FAILURE:
@@ -79,59 +79,44 @@ export const commentsReducer = (state=initialState, action={}) => {
         pendingComment: false
       }
     case UPVOTE_COMMENT_SUCCESS:
-      const currentUpvotes = state.commentsById[payload].upvotes;
       return {
         ...state,
         commentsById: {
           ...state.commentsById,
-          [payload]: {
-            ...state.commentsById[payload],
-            upvotes: currentUpvotes + 1,
+          [payload.comment_id]: {
+            ...state.commentsById[payload.comment_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
             currentUserVote: 1
           }
         }
       };
     case DOWNVOTE_COMMENT_SUCCESS:
-      const currentDownvotes = state.commentsById[payload].downvotes;
       return {
         ...state,
         commentsById: {
           ...state.commentsById,
-          [payload]: {
-            ...state.commentsById[payload],
-            downvotes: currentDownvotes + 1,
+          [payload.comment_id]: {
+            ...state.commentsById[payload.comment_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
             currentUserVote: -1
           }
         }
       };
     case REMOVE_VOTE_FROM_COMMENT:
-      const currentUserVote = state.commentsById[payload].currentUserVote;
-      if (currentUserVote === -1) {
-        return {
-          ...state,
-          commentsById: {
-            ...state.commentsById,
-            [payload]: {
-              ...state.commentsById[payload],
-              downvotes: state.commentsById[payload].downvotes - 1,
-              currentUserVote: 0
-            }
+      return {
+        ...state,
+        commentsById: {
+          ...state.commentsById,
+          [payload.comment_id]: {
+            ...state.commentsById[payload.comment_id],
+            upvotes: payload.upvotes,
+            downvotes: payload.downvotes,
+            currentUserVote: 0
           }
-        };
-      } else if (currentUserVote === 1) {
-        return {
-          ...state,
-          commentsById: {
-            ...state.commentsById,
-            [payload]: {
-              ...state.commentsById[payload],
-              upvotes: state.commentsById[payload].upvotes - 1,
-              currentUserVote: 0
-            }
-          }
-        };
+        }
       }
-      return state;
     default:
       return state;
   }

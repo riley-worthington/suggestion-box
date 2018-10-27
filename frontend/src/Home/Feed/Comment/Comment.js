@@ -13,27 +13,33 @@ import './Comment.css';
 const mapStateToProps = (state, ownProps) => {
   const { commentObj } = ownProps;
   return {
-    commenter: getUserById(state, commentObj.user_id)
+    currentUser: state.auth.currentUser,
+    commenter: getUserById(state, commentObj.user_id),
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    upvoteComment: commentId => dispatch(upvoteComment(commentId)),
-    downvoteComment: commentId => dispatch(downvoteComment(commentId)),
-    removeVoteFromComment: commentId => dispatch(removeVoteFromComment(commentId)),
+    upvoteComment: (userId, commentId) =>
+      dispatch(upvoteComment(userId, commentId)),
+    downvoteComment: (userId, commentId) =>
+      dispatch(downvoteComment(userId, commentId)),
+    removeVoteFromComment: (userId, commentId) =>
+      dispatch(removeVoteFromComment(userId, commentId)),
   }
 }
 
 class Comment extends Component {
   render() {
     const {
+      currentUser,
       commentObj,
       upvoteComment,
       downvoteComment,
       removeVoteFromComment,
       commenter,
     } = this.props;
+    const userId = currentUser.user_id;
     const commentId = commentObj.comment_id;
 
     const date = new Date(commentObj.time_posted);
@@ -55,9 +61,9 @@ class Comment extends Component {
       <article className='comment-container'>
         <Vote
           post={commentObj}
-          onUpvote={() => upvoteComment(commentId)}
-          onDownvote={() => downvoteComment(commentId)}
-          onRemoveVote={() => removeVoteFromComment(commentId)}
+          onUpvote={() => upvoteComment(userId, commentId)}
+          onDownvote={() => downvoteComment(userId, commentId)}
+          onRemoveVote={() => removeVoteFromComment(userId, commentId)}
         />
         <div className='comment-body'>
           <header className='comment-info'>

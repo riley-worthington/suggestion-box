@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import CommentFeed from '../CommentFeed/CommentFeed';
 import './PostPage.css';
 import Post from '../Post/Post';
+import Loader from '../../Loader/Loader';
 import { loadPostById } from '../Post/postActions';
 import { loadTeamMembers, loadUserVotes } from '../PostFeed/postFeedActions';
 
@@ -61,7 +62,7 @@ class PostPage extends Component {
         <CommentFeed key={postId} postId={postId} />
       </div>
     ) : (
-      <div>Loading...</div>
+      <Loader />
     );
   }
 }

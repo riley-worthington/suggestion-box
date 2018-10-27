@@ -70,7 +70,6 @@ export const posts = (state=initialState, action={}) => {
         loadPostPending: false
       }
     case UPVOTE_POST_SUCCESS:
-      // const currentUpvotes = state.postsById[postId].upvotes;
       return {
         ...state,
         postsById: {
@@ -84,7 +83,6 @@ export const posts = (state=initialState, action={}) => {
         }
       };
     case DOWNVOTE_POST_SUCCESS:
-      // const currentDownvotes = state.postsById[postId].downvotes;
       return {
         ...state,
         postsById: {
@@ -98,7 +96,6 @@ export const posts = (state=initialState, action={}) => {
         }
       };
     case REMOVE_VOTE_FROM_POST:
-      // const currentUserVote = state.postsById[postId].currentUserVote;
       return {
         ...state,
         postsById: {

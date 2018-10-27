@@ -6,9 +6,9 @@ import {
   SUBMIT_COMMENT_SUCCESS,
   SUBMIT_COMMENT_FAILURE,
   UPVOTE_COMMENT_SUCCESS,
-  // UPVOTE_COMMENT_FAILURE,
+  UPVOTE_COMMENT_FAILURE,
   DOWNVOTE_COMMENT_SUCCESS,
-  // DOWNVOTE_COMMENT_FAILURE,
+  DOWNVOTE_COMMENT_FAILURE,
   REMOVE_VOTE_FROM_COMMENT,
 } from './commentFeedConstants';
 
@@ -99,49 +99,100 @@ export const submitComment = comment => dispatch => {
   }
 }
 
-export const upvoteComment = commentId => dispatch => {
-  // make API call
-  console.log('upvoting', commentId);
-  dispatch(upvoteCommentSuccess(commentId));
+export const upvoteComment = (userId, commentId) => dispatch => {
+  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=1`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(comment => {
+    if (comment.comment_id) {
+      dispatch(upvoteCommentSuccess(comment));
+    } else {
+      throw comment;
+    }
+  })
+  .catch(error => {
+    dispatch(upvoteCommentFailure(error));
+  })
 
-  function upvoteCommentSuccess(commentId) {
+  function upvoteCommentSuccess(comment) {
     return {
       type: UPVOTE_COMMENT_SUCCESS,
-      payload: commentId
+      payload: comment
     }
   }
 
-  // function upvoteCommentFailure(commentId) {
-  //   return {
-  //     type: UPVOTE_COMMENT_FAILURE,
-  //     payload: commentId
-  //   }
-  // }
+  function upvoteCommentFailure(error) {
+    return {
+      type: UPVOTE_COMMENT_FAILURE,
+      payload: error
+    }
+  }
 }
 
-export const downvoteComment = commentId => dispatch => {
-  // make API call, have database return updated comment object
-  console.log('downvoting', commentId);
-  dispatch(downvoteCommentSuccess(commentId));
+export const downvoteComment = (userId, commentId) => dispatch => {
+  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=-1`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(comment => {
+    if (comment.comment_id) {
+      dispatch(downvoteCommentSuccess(comment));
+    } else {
+      throw comment;
+    }
+  })
+  .catch(error => {
+    dispatch(downvoteCommentFailure(error));
+  })
 
-  function downvoteCommentSuccess(commentId) {
+  function downvoteCommentSuccess(comment) {
     return {
       type: DOWNVOTE_COMMENT_SUCCESS,
-      payload: commentId
+      payload: comment
     }
   }
 
-  // function downvoteCommentFailure(commentId) {
-  //   return {
-  //     type: DOWNVOTE_COMMENT_FAILURE,
-  //     payload: commentId
-  //   }
-  // }
+  function downvoteCommentFailure(error) {
+    return {
+      type: DOWNVOTE_COMMENT_FAILURE,
+      payload: error
+    }
+  }
 }
 
-export const removeVoteFromComment = commentId => {
-  return {
-    type: REMOVE_VOTE_FROM_COMMENT,
-    payload: commentId
+export const removeVoteFromComment = (userId, commentId) => dispatch => {
+  fetch(`http://localhost:3000/posts/${commentId}/vote?dir=0`, {
+    method: 'put',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      userId: userId
+    })
+  })
+  .then(response => response.json())
+  .then(comment => {
+    if (comment.comment_id) {
+      dispatch(removeVoteFromCommentSuccess(comment));
+    } else {
+      throw comment;
+    }
+  })
+  .catch(error => {
+    console.log(error);
+  })
+
+  function removeVoteFromCommentSuccess(comment) {
+    return {
+      type: REMOVE_VOTE_FROM_COMMENT,
+      payload: comment
+    }
   }
 }

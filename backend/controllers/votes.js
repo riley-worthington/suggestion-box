@@ -4,17 +4,17 @@ const POST = 'POST';
 const COMMENT = 'COMMENT';
 
 const hasAlreadyVoted = (db, userId, assetId, assetType) => {
-  let dbName, idLabel;
+  let votesTable, idLabel;
   if (assetType === POST) {
-    dbName = 'post_votes';
+    votesTable = 'post_votes';
     idLabel = 'post_id';
   } else if (assetType === COMMENT) {
-    dbName = 'comment_votes';
+    votesTable = 'comment_votes';
     idLabel = 'comment_id';
   }
 
   return db.select('*')
-    .from(dbName)
+    .from(votesTable)
     .where({
       user_id: userId,
       [idLabel]: assetId
