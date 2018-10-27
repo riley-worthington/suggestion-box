@@ -1,11 +1,23 @@
 const knex = require('knex');
 
-const hasAlreadyVoted = (db, userId, postId) => {
+const POST = 'POST';
+const COMMENT = 'COMMENT';
+
+const hasAlreadyVoted = (db, userId, assetId, assetType) => {
+  let dbName, idLabel;
+  if (assetType === POST) {
+    dbName = 'post_votes';
+    idLabel = 'post_id';
+  } else if (assetType === COMMENT) {
+    dbName = 'comment_votes';
+    idLabel = 'comment_id';
+  }
+
   return db.select('*')
-    .from('post_votes')
+    .from(dbName)
     .where({
       user_id: userId,
-      post_id: postId
+      [idLabel]: assetId
     })
     .then(entry => {
       if (entry.length > 0) {
@@ -16,72 +28,83 @@ const hasAlreadyVoted = (db, userId, postId) => {
     })
 }
 
-const updateVote = (db, userId, postId, currentVote, newVote, res) => {
+const updateVote = (db, userId, assetId, assetType, currentVote, newVote, res) => {
+  let votesTable, dbName, idLabel;
+  if (assetType === POST) {
+    votesTable = 'post_votes';
+    dbName = 'posts';
+    idLabel = 'post_id';
+  } else if (assetType === COMMENT) {
+    votesTable = 'comment_votes';
+    dbName = 'comments';
+    idLabel = 'comment_id';
+  }
+
   db.transaction(trx => {
-    trx('post_votes')
+    trx(votesTable)
       .where({
         user_id: userId,
-        post_id: postId
+        [idLabel]: assetId
       })
       .update({
         user_vote: newVote
       })
       .then(() => {
         if (currentVote === true && newVote === false) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'upvotes': db.raw('upvotes - 1'),
               'downvotes': db.raw('downvotes + 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else if (currentVote === false && newVote === true) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'upvotes': db.raw('upvotes + 1'),
               'downvotes': db.raw('downvotes - 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else if (currentVote === true && newVote === null) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'upvotes': db.raw('upvotes - 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else if (currentVote === false && newVote === null) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'downvotes': db.raw('downvotes - 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else if (currentVote === null && newVote === true) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'upvotes': db.raw('upvotes + 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else if (currentVote === null && newVote === false) {
-          return trx('posts').where('post_id', '=', postId)
+          return trx(dbName).where(idLabel, '=', assetId)
             .update({
               'downvotes': db.raw('downvotes + 1')
             })
             .returning('*')
-            .then(post => {
-              res.json(post[0]);
+            .then(data => {
+              res.json(data[0]);
             })
         } else {
           res.status(400).json('Cannot vote twice')
@@ -92,27 +115,38 @@ const updateVote = (db, userId, postId, currentVote, newVote, res) => {
   })
 }
 
-const makeNewVote = (db, userId, postId, newVote, res) => {
+const makeNewVote = (db, userId, assetId, assetType, newVote, res) => {
+  let votesTable, dbName, idLabel;
+  if (assetType === POST) {
+    votesTable = 'post_votes';
+    dbName = 'posts';
+    idLabel = 'post_id';
+  } else if (assetType === COMMENT) {
+    votesTable = 'comment_votes';
+    dbName = 'comments';
+    idLabel = 'comment_id';
+  }
+
   db.transaction(trx => {
     if (newVote === true) {
       trx.insert({
         user_id: userId,
-        post_id: postId,
+        [idLabel]: assetId,
         user_vote: newVote,
         time_voted: new Date()
       })
-      .into('post_votes')
+      .into(votesTable)
       .then(() => {
-        return trx('posts')
+        return trx(dbName)
           .where({
-            post_id: postId
+            [idLabel]: assetId
           })
           .update({
             'upvotes': db.raw('upvotes + 1')
           })
           .returning('*')
-          .then(post => {
-            res.json(post[0]);
+          .then(data => {
+            res.json(data[0]);
           })
       })
       .then(trx.commit)
@@ -120,22 +154,22 @@ const makeNewVote = (db, userId, postId, newVote, res) => {
     } else if (newVote === false) {
       trx.insert({
         user_id: userId,
-        post_id: postId,
+        [idLabel]: assetId,
         user_vote: newVote,
         time_voted: new Date()
       })
-      .into('post_votes')
+      .into(votesTable)
       .then(() => {
-        return trx('posts')
+        return trx(dbName)
           .where({
-            post_id: postId
+            [idLabel]: assetId
           })
           .update({
             'downvotes': db.raw('downvotes + 1')
           })
           .returning('*')
-          .then(post => {
-            res.json(post[0]);
+          .then(data => {
+            res.json(data[0]);
           })
       })
       .then(trx.commit)
@@ -146,10 +180,18 @@ const makeNewVote = (db, userId, postId, newVote, res) => {
   })
 }
 
-const voteOnPost = db => (req, res) => {
+const vote = db => (req, res) => {
   const { userId } = req.body;
-  const { postId } = req.params;
+  const { postId, commentId } = req.params;
+  const assetId = postId || commentId;
   const { dir } = req.query;
+
+  let assetType;
+  if (postId) {
+    assetType = POST;
+  } else if (commentId) {
+    assetType = COMMENT;
+  }
 
   let newVote;
   if (dir === '1') {
@@ -163,16 +205,16 @@ const voteOnPost = db => (req, res) => {
   }
 
   // check if they have already voted
-  hasAlreadyVoted(db, userId, postId).then(currentVote => {
+  hasAlreadyVoted(db, userId, assetId, assetType).then(currentVote => {
     if (currentVote === undefined) {
-      makeNewVote(db, userId, postId, newVote, res);
+      makeNewVote(db, userId, assetId, assetType, newVote, res);
     } else {
-      updateVote(db, userId, postId, currentVote, newVote, res);
+      updateVote(db, userId, assetId, assetType, currentVote, newVote, res);
     }
   })
 
 }
 
 module.exports = {
-  voteOnPost: voteOnPost
+  vote: vote
 }

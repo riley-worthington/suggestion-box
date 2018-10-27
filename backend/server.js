@@ -50,7 +50,8 @@ app.get('/teams', teams.getAllTeams(db));
 // app.get('')
 
 // PUT requests
-app.put('/posts/:postId/vote', votes.voteOnPost(db));
+app.put('/posts/:postId/vote', votes.vote(db));
+app.put('/comments/:commentId/vote', votes.vote(db));
 
 app.listen(3000, () => {
   console.log('app is running on port 3000');
