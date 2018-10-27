@@ -11,7 +11,8 @@ const SideBar = ({ teams, selected }) => {
 
       <ul className='group-list'>
         {teams.map((team, i) =>
-          <li key={team.team_id}>
+          <li className={'team-container' + (team.team_id === selected ? ' selected' : '')}
+            key={team.team_id}>
             <NavLink
               className={'sidebar-team' + (team.team_id === selected ? ' selected' : '')}
               to={`/teams/${team.team_id}`}
@@ -24,7 +25,6 @@ const SideBar = ({ teams, selected }) => {
       <NavLink
         className='join-team-button'
         to={'/join'}>+ Join team</NavLink>
-      {/* <button className='join-team-button'>+ Join team</button> */}
     </Fragment>
   )
 }
