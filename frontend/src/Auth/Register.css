@@ -2,7 +2,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto auto;
+  margin: 0 auto;
+  background-color: var(--accent-1);
+  height: 100%;
+}
+
+.reg-title {
+  color: #25072f;
+  /* color: #eded00; */
+  font-size: 80px;
+  margin-top: 40px;
+  font-family: 'Exo', sans-serif;
 }
 
 .register-form {
@@ -14,13 +24,14 @@
   margin: 20px;
 }
 
-.register-form > input {
+.register-field {
   margin: 10px;
-  border: 1px solid #38d1ac;
+  border: 1px solid #1da1f2;
   border-radius: 5px;
   font-size: 18px;
-  color: grey;
+  color: var(--text-color-normal);
   padding: 16px 20px;
+  outline: none;
 }
 
 .visually-hidden {
@@ -35,5 +46,35 @@
 }
 
 .register-button {
+  margin: 10px;
+  border: 1px solid #1da1f2;
+  border-radius: 5px;
+  font-size: 18px;
+  /* color: grey; */
+  /* color: #25072f; */
+  padding: 12px;
+  width: 100px;
+  /* color: #4b8bf9; */
+  color: #ffffff;
   cursor: pointer;
+  outline: none;
+  /* background-color: #cddeff; */
+  background-color: #1da1f2;
+  transition: 0.3s;
+}
+
+.register-button:hover, .register-button:focus {
+  background-color: #006dbf;
+  border-color: #006dbf;
+  transition: 0.3s;
+}
+
+.register-error-message {
+  font-size: 16px;
+  margin: 0;
+  color: red;
+}
+
+::placeholder {
+  color: grey;
 }

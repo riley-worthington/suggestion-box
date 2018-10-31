@@ -45,12 +45,21 @@ class JoinPage extends Component {
             <h1>Join a team</h1>
             {teamsNotIn.length > 0 ?
               teamsNotIn.map(team =>
-                <button
-                  className='join-button'
-                  key={team.team_id}
-                  onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
-                  {team.name}
-                </button>)
+                <div>
+                  <input type="checkbox"
+                         id={team.team_id}
+                         key={team.team_id}
+                         name={team.name}
+                         value={team.name} />
+                  <label htmlFor={team.name}>{team.name}</label>
+                </div>
+                // <button
+                //   className='join-button'
+                //   key={team.team_id}
+                //   onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
+                //   {team.name}
+                // </button>)
+              )
               :
               <div>
                 <p>

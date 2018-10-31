@@ -54,6 +54,10 @@ app.get('/teams', teams.getAllTeams(db));
 app.put('/posts/:postId/vote', votes.vote(db));
 app.put('/comments/:commentId/vote', votes.vote(db));
 
-app.listen(3000, () => {
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 3000;
+}
+app.listen(port, () => {
   console.log('app is running on port 3000');
 });
