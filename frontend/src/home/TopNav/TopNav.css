@@ -1,19 +1,9 @@
-.nav-header {
-  /* width: 100%; */
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 40px;
-  background-color: #b889d1;
-  color: #25072f;
-  /* opacity: 0.6; */
-  height: 100%;
-}
+
 
 .site-title {
-  font-size: 30px;
-  font-weight: bold;
+  font-size: 50px;
+  font-family: 'Exo', sans-serif;
+  color: inherit;
 }
 
 .top-nav {
@@ -27,16 +17,25 @@
 }
 
 .signout-button {
-  width: 110px;
-  color: #4e0e62;
-  cursor: pointer;
+  background-color: inherit;
   outline: none;
-  border: 2px solid #4e0e62;
-  border-radius: 5px;
-  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  border: 1px solid;
+  border-color: inherit;
+  border-radius: 8px;
+  transition: 0.3s;
 }
 
-.signout-button:hover {
-  color: #25072f;
-  border-color: #25072f;
+.signout-button:not(.dark):hover {
+  background-color: var(--accent-3);
+  border-color: var(--accent-3);
+  color: var(--accent-1);
+  transition: 0.3s;
+}
+
+.dark .signout-button:hover {
+  color: var(--background-dark);
+  background-color: var(--accent-1) !important;
+  transition: 0.3s;
 }

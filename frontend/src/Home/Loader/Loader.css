@@ -17,6 +17,11 @@
   animation: lds-dual-ring 1.2s linear infinite;
 }
 
+.dark .lds-dual-ring:after {
+  border: 5px solid var(--background);
+  border-color: var(--background) transparent var(--background) transparent;
+}
+
 @keyframes lds-dual-ring {
   0% {
     transform: rotate(0deg);

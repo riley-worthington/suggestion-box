@@ -2,14 +2,19 @@ import {
   GET_USER_TEAMS_REQUEST,
   GET_USER_TEAMS_SUCCESS,
   GET_USER_TEAMS_FAILURE,
+  TOGGLE_COLOR_THEME,
 } from './homeConstants';
 import {
   ADD_TEAM_MEMBER_SUCCESS
 } from './JoinPage/joinPageConstants';
 
+const LIGHT = 'LIGHT';
+const DARK = 'DARK';
+
 const initialState = {
   getUserTeamsPending: false,
-  userTeams: null
+  userTeams: null,
+  theme: LIGHT,
 }
 
 export const home = (state=initialState, action={}) => {
@@ -41,6 +46,19 @@ export const home = (state=initialState, action={}) => {
         userTeams: {
           ...state.userTeams,
           [payload.team_id]: payload
+        }
+      }
+    case TOGGLE_COLOR_THEME:
+      const currentTheme = state.theme;
+      if (currentTheme === DARK) {
+        return {
+          ...state,
+          theme: LIGHT
+        }
+      } else {
+        return {
+          ...state,
+          theme: DARK
         }
       }
     default:

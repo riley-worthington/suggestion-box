@@ -1,8 +1,10 @@
 .App-title {
   /* color: #4b8bf9; */
   color: #25072f;
-  font-size: 64px;
+  /* color: #eded00; */
+  font-size: 80px;
   margin: 0;
+  font-family: 'Exo', sans-serif;
 }
 
 header {
@@ -50,12 +52,13 @@ header {
 
 }
 
-.signin-form > input, button {
+.signin-form > input, .signin-form > button {
   margin: 10px;
   border: 1px solid #4b8bf9;
   border-radius: 5px;
   font-size: 18px;
-  color: grey;
+  /* color: grey; */
+  /* color: #25072f; */
   padding: 12px;
 }
 

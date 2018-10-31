@@ -28,14 +28,19 @@
 
 .post-link {
   text-decoration: none;
+  color: var(--post-title);
 }
 
 .post-link:active {
   color: inherit;
 }
 
+.post-link:visited {
+  color: #810081;
+}
+
 .author {
-  color: grey;
+  color: var(--post-info);
   font-size: 18px;
   font-weight: normal;
   margin: 0;
@@ -48,13 +53,13 @@
 .post-stats {
   display: flex;
   margin: 0;
-  color: black;
+  color: var(--post-info);
 }
 
 .comments-tag {
   text-decoration: underline;
   cursor: pointer;
-  color: #000000;
+  color: #585858;
 }
 
 .post-stats > p {

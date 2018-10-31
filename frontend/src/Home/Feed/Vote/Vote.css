@@ -13,6 +13,7 @@
   cursor: pointer;
   padding: 0;
   opacity: 0.5;
+  background-color: inherit;
 }
 
 .vote-button:hover {

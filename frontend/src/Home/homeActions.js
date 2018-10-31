@@ -2,6 +2,7 @@ import {
   GET_USER_TEAMS_REQUEST,
   GET_USER_TEAMS_SUCCESS,
   GET_USER_TEAMS_FAILURE,
+  TOGGLE_COLOR_THEME,
 } from './homeConstants';
 
 export const getUserTeams = userId => dispatch => {
@@ -36,5 +37,12 @@ function getUserTeamsFailure(error) {
   return {
     type: GET_USER_TEAMS_FAILURE,
     payload: error
+  }
+}
+
+export const toggleColorTheme = theme => {
+  return {
+    type: TOGGLE_COLOR_THEME,
+    payload: theme
   }
 }

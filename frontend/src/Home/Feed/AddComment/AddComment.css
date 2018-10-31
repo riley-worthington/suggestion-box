@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: flex-start;
   padding: 10px;
+  margin-top: 30px;
   /* margin: 10px 10px 20px 10px; */
 }
 
@@ -54,7 +55,7 @@
 
 .prompt {
   font-size: 18px;
-  color: #25072f;
+  /* color: #25072f; */
 }
 
 .alert-box {

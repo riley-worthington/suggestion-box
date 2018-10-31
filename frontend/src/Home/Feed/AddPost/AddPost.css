@@ -54,7 +54,8 @@
 
 .prompt {
   font-size: 18px;
-  color: #25072f;
+  color: inherit;
+  /* color: #25072f; */
 }
 
 .alert-box {

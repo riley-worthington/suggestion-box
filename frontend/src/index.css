@@ -4,15 +4,24 @@ body {
   font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
-/* html {
-  height: 100%;
-  position: relative;
+html {
+  --background: #eff4f7;
+  --background-dark: #171c28;
+  --text-color-normal: #1f1f1f;
+  --text-color-dark: #eff4f7;
+  --accent-1: #71eeb8;
+  --accent-2: #4e0e62;
+  --accent-3: #25072f;
+  --dark-2: #111010;
+  --post-title: #399ee8;
+  --post-info: #696969;
 }
 
-body {
-  min-height: 100%;
-  position: relative;
-} */
+html {
+  background-color: var(--background);
+  color: var(--text-color-normal));
+}
+
 
 #root {
   /* min-height: 100%;

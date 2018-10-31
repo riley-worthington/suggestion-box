@@ -5,13 +5,13 @@ const TopNav = ({ user, onSignOut }) => {
   return (
     <Fragment>
       <h1 className='site-title'>
-        Disco
+        PostUp
       </h1>
       <nav className='top-nav'>
         <div className='dropdown'>
           {user.first_name}
         </div>
-        <button onClick={onSignOut} className='signout-button'>Sign Out</button>
+        <button onClick={onSignOut} className='signout-button '>Sign Out</button>
       </nav>
     </Fragment>
   )

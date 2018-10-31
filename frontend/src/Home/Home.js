@@ -6,10 +6,11 @@ import SideBar from './SideBar/SideBar';
 import PostFeed from './Feed/PostFeed/PostFeed';
 import PostPage from './Feed/PostPage/PostPage';
 import JoinPage from './JoinPage/JoinPage';
+import ToggleSwitch from './ToggleSwitch/ToggleSwitch';
 import './Home.css';
 
 import { signOut } from '../Auth/authActions';
-import { getUserTeams } from './homeActions';
+import { getUserTeams, toggleColorTheme } from './homeActions';
 
 const mapStateToProps = state => {
   return {
@@ -17,6 +18,7 @@ const mapStateToProps = state => {
     selectedTeam: state.feed.selectedTeam,
     userTeams: state.home.userTeams,
     getUserTeamsPending: state.home.getUserTeamsPending,
+    theme: state.home.theme,
   }
 }
 
@@ -24,6 +26,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSignOut: () => dispatch(signOut()),
     getUserTeams: userId => dispatch(getUserTeams(userId)),
+    toggleColorTheme: theme => dispatch(toggleColorTheme(theme)),
   }
 }
 
@@ -87,10 +90,10 @@ class Home extends Component {
   }
 
   render() {
-    const { currentUser, onSignOut } = this.props;
+    const { currentUser, onSignOut, theme, toggleColorTheme } = this.props;
 
     return (
-      <div className='home-container'>
+      <div className={'home-container' + (theme === 'DARK' ? ' dark' : '')}>
         <header className='navigation'>
           <TopNav
             user={currentUser}
@@ -102,6 +105,7 @@ class Home extends Component {
         </nav>
         <main className='home-content'>
           {this.bodyLoader()}
+          <ToggleSwitch onChange={toggleColorTheme} checked={theme === 'DARK'}/>
         </main>
       </div>
     );
