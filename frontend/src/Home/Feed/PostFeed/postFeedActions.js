@@ -19,7 +19,7 @@ export const loadPostListByTeam = teamId => dispatch => {
   dispatch(loadPostListRequest(teamId));
 
   // Request team post list from backend
-  fetch(`http://localhost:3000/teams/${teamId}/posts`, {
+  fetch(`${process.env.REACT_APP_API_URL}/teams/${teamId}/posts`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -61,7 +61,7 @@ const loadPostListFailure = error => {
 export const loadTeamMembers = teamId => dispatch => {
   dispatch(loadTeamMembersRequest(teamId));
 
-  fetch(`http://localhost:3000/teams/${teamId}/members`, {
+  fetch(`${process.env.REACT_APP_API_URL}/teams/${teamId}/members`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -100,7 +100,7 @@ export const submitPost = post => dispatch => {
   const { userId, teamId, title, content } = post;
   console.log(userId, teamId, title, content)
   dispatch(submitPostRequest(post));
-  fetch('http://localhost:3000/posts', {
+  fetch(`${process.env.REACT_APP_API_URL}/posts`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -144,7 +144,7 @@ export const submitPost = post => dispatch => {
 export const loadUserPostVotes = userId => dispatch => {
   dispatch(loadUserPostVotesRequest(userId));
 
-  fetch(`http://localhost:3000/users/${userId}/postVotes`, {
+  fetch(`${process.env.REACT_APP_API_URL}/users/${userId}/postVotes`, {
     method: 'get'
   })
   .then(response => response.json())

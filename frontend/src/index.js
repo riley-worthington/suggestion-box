@@ -10,9 +10,10 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './appReducer';
 
-if (process.env.ENVIRONMENT === 'development') {
+if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
 }
+console.log('API', process.env.REACT_APP_API_URL);
 
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));

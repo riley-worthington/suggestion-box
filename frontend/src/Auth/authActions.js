@@ -14,7 +14,7 @@ export const signIn = (email, password) => dispatch => {
   dispatch(signInRequest(email, password))
 
   // Make API call here
-  fetch('http://localhost:3000/signin', {
+  fetch(`${process.env.REACT_APP_API_URL}/signin`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -72,7 +72,7 @@ export const register = (firstName, lastName, email, password) => dispatch => {
   dispatch(registerRequest(firstName, lastName, email, password));
 
   // Send data to API, get user object as response
-  fetch('http://localhost:3000/register', {
+  fetch(`${process.env.REACT_APP_API_URL}/register`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

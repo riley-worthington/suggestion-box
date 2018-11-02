@@ -22,7 +22,7 @@ export const loadCommentListByPost = postId => dispatch => {
   // Request comment list from backend
   dispatch(loadCommentListRequest(postId));
 
-  fetch(`http://localhost:3000/posts/${postId}/comments`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}/comments`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -61,7 +61,7 @@ export const loadCommentListByPost = postId => dispatch => {
 export const loadUserCommentVotes = userId => dispatch => {
   dispatch(loadUserCommentVotesRequest(userId));
 
-  fetch(`http://localhost:3000/users/${userId}/commentVotes`, {
+  fetch(`${process.env.REACT_APP_API_URL}/users/${userId}/commentVotes`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -99,7 +99,7 @@ export const submitComment = comment => dispatch => {
   const { userId, postId, content } = comment;
   dispatch(submitCommentRequest(comment));
 
-  fetch(`http://localhost:3000/posts/${postId}/comments`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}/comments`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -140,7 +140,7 @@ export const submitComment = comment => dispatch => {
 }
 
 export const upvoteComment = (userId, commentId) => dispatch => {
-  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=1`, {
+  fetch(`${process.env.REACT_APP_API_URL}/comments/${commentId}/vote?dir=1`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -175,7 +175,7 @@ export const upvoteComment = (userId, commentId) => dispatch => {
 }
 
 export const downvoteComment = (userId, commentId) => dispatch => {
-  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=-1`, {
+  fetch(`${process.env.REACT_APP_API_URL}/comments/${commentId}/vote?dir=-1`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -210,7 +210,7 @@ export const downvoteComment = (userId, commentId) => dispatch => {
 }
 
 export const removeVoteFromComment = (userId, commentId) => dispatch => {
-  fetch(`http://localhost:3000/comments/${commentId}/vote?dir=0`, {
+  fetch(`${process.env.REACT_APP_API_URL}/comments/${commentId}/vote?dir=0`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

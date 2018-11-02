@@ -13,7 +13,7 @@ import {
 export const loadPostById = (postId) => dispatch => {
   dispatch(loadPostRequest(postId));
 
-  fetch(`http://localhost:3000/posts/${postId}`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -50,7 +50,7 @@ export const loadPostById = (postId) => dispatch => {
 
 export const upvotePost = (userId, postId) => dispatch => {
   // make API call
-  fetch(`http://localhost:3000/posts/${postId}/vote?dir=1`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}/vote?dir=1`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -87,7 +87,7 @@ export const upvotePost = (userId, postId) => dispatch => {
 
 export const downvotePost = (userId, postId) => dispatch => {
   // make API call
-  fetch(`http://localhost:3000/posts/${postId}/vote?dir=-1`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}/vote?dir=-1`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -123,7 +123,7 @@ export const downvotePost = (userId, postId) => dispatch => {
 
 export const removeVoteFromPost = (userId, postId) => dispatch => {
   // make API call
-  fetch(`http://localhost:3000/posts/${postId}/vote?dir=0`, {
+  fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}/vote?dir=0`, {
     method: 'put',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({

@@ -8,7 +8,7 @@ import {
 export const getUserTeams = userId => dispatch => {
   dispatch(getUserTeamsRequest(userId));
 
-  fetch(`http://localhost:3000/users/${userId}/teams`, {
+  fetch(`${process.env.REACT_APP_API_URL}/users/${userId}/teams`, {
     method: 'get'
   })
   .then(response => response.json())

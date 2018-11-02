@@ -10,7 +10,7 @@ import {
 export const getAllTeams = () => dispatch => {
   dispatch(getAllTeamsRequest());
 
-  fetch('http://localhost:3000/teams', {
+  fetch(`${process.env.REACT_APP_API_URL}/teams`, {
     method: 'get'
   })
   .then(response => response.json())
@@ -47,7 +47,7 @@ export const getAllTeams = () => dispatch => {
 export const addTeamMember = (userId, teamId) => dispatch => {
   dispatch(addTeamMemberRequest(teamId));
 
-  fetch(`http://localhost:3000/teams/${teamId}/members`, {
+  fetch(`${process.env.REACT_APP_API_URL}/teams/${teamId}/members`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
