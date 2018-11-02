@@ -12,7 +12,7 @@ import { rootReducer } from './appReducer';
 
 let middleware = [thunkMiddleware];
 
-require('dotenv').config();
+// require('dotenv').config();
 console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   middleware.push(require('redux-logger').createLogger());
