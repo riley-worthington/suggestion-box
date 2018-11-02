@@ -14,12 +14,12 @@ class App extends Component {
     return (
       <Router history={history}>
         <Fragment>
-          <Route path={`${process.env.PUBLIC_URL}/signin`} component={SignIn} />
-          <Route path={`${process.env.PUBLIC_URL}/register`} component={Register} />
-          <PrivateRoute exact path={`${process.env.PUBLIC_URL}/`} component={Home} />
-          <PrivateRoute path={`${process.env.PUBLIC_URL}/teams/:teamId`} component={Home} />
-          <PrivateRoute path={`${process.env.PUBLIC_URL}/posts/:postId`} component={Home} />
-          <PrivateRoute exact path={`${process.env.PUBLIC_URL}/join`} component={Home} />
+          <Route path={`/signin`} component={SignIn} />
+          <Route path={`/register`} component={Register} />
+          <PrivateRoute exact path={`/`} component={Home} />
+          <PrivateRoute path={`/teams/:teamId`} component={Home} />
+          <PrivateRoute path={`/posts/:postId`} component={Home} />
+          <PrivateRoute exact path={`/join`} component={Home} />
         </Fragment>
       </Router>
     );
