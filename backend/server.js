@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
-const knex = require('knex');
+// const knex = require('knex');
 
 const signin = require('./controllers/signin');
 const register = require('./controllers/register');
@@ -12,15 +12,14 @@ const teams = require('./controllers/teams');
 const users = require('./controllers/users');
 const votes = require('./controllers/votes');
 
-const db = knex({
-  client: 'pg',
-  connection: {
-    host : '127.0.0.1',
-    user : 'riley',
-    password : '',
-    database : 'suggestion-box'
-  }
-});
+// const db = knex({
+//   client: 'pg',
+//   connection: {
+//     connectionString: process.env.DATABASE_URL,
+//     ssl: true,
+//   }
+// });
+const db = require('./knex/knex.js');
 
 const app = express();
 
