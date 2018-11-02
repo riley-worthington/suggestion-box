@@ -10,6 +10,10 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './appReducer';
 
+if (process.env.ENVIRONMENT === 'development') {
+  require('dotenv').config();
+}
+
 const logger = createLogger();
 const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
 
