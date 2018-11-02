@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
 
 import './index.css';
@@ -10,13 +9,15 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './appReducer';
 
+
+let middleware = [thunkMiddleware];
+
 if (process.env.NODE_ENV === 'development') {
   require('dotenv').config();
+  middleware.push(require('redux-logger').createLogger());
 }
-console.log('API', process.env.REACT_APP_API_URL);
 
-const logger = createLogger();
-const store = createStore(rootReducer, applyMiddleware(thunkMiddleware, logger));
+const store = createStore(rootReducer, applyMiddleware(...middleware));
 
 ReactDOM.render(
   <Provider store={store} >
