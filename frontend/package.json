@@ -1,5 +1,6 @@
 {
   "name": "suggestion-box",
+  "homepage": "http://worthirj.github.io/suggestion-box",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +20,11 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "publishheroku": "cd ../ && git subtree push --prefix frontend heroku-react-app master || true"
+    "publishheroku": "cd ../ && git subtree push --prefix frontend heroku-react-app master || true",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^2.0.1"
   }
 }
