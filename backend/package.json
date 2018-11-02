@@ -15,7 +15,8 @@
     "nodemon": "^1.18.4"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "node server.js",
+    "dev-start": "nodemon server.js",
     "publishheroku": "cd ../ && git subtree push --prefix backend heroku-api master || true"
 
   },
