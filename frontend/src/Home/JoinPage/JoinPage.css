@@ -4,8 +4,47 @@
 
 .join-button, .create-team-button {
   cursor: pointer;
-  border: 1px solid black;
-  padding: 12px;
-  color: black;
+  /* border: 2px solid #00ff00; */
+  border: none;
+  color: #ffffff;
+  background-color: #1da1f2;
+  border-radius: 5px;
+  /* height: 30px; */
+  /* width: 30px; */
+  font-size: 20px;
   outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  transition: 0.3s;
+}
+
+.join-button:disabled {
+  cursor: default;
+  background-color: #1da1f2 !important;
+}
+
+.join-button:not(disabled):hover, .join-button:focus {
+  background-color: #006dbf;
+  transition: 0.3s;
+}
+
+.add-team-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid inherit;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+}
+
+.join-team-name {
+  font-size: 22px;
+  margin: 0 0 0 15px;
+}
+
+.joined {
+  opacity: 0.5;
 }

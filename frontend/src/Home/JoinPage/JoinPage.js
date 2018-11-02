@@ -35,7 +35,6 @@ class JoinPage extends Component {
 
   render() {
     const { teams, addTeamMember, currentUser, userTeams } = this.props;
-    console.log(teams);
     const teamsNotIn = this.getTeamsNotIn(userTeams, teams);
 
     return (
@@ -43,15 +42,17 @@ class JoinPage extends Component {
         {(teams && userTeams) ?
           <div>
             <h1>Join a team</h1>
-            {teamsNotIn.length > 0 ?
-              teamsNotIn.map(team =>
-                <div>
-                  <input type="checkbox"
-                         id={team.team_id}
-                         key={team.team_id}
-                         name={team.name}
-                         value={team.name} />
-                  <label htmlFor={team.name}>{team.name}</label>
+            {teams.length > 0 ?
+              teams.map(team =>
+                <div
+                  key={team.team_id}
+                  className={'add-team-container' + ((team.team_id in userTeams) ? ' joined' : '')}>
+                  <button
+                    disabled={team.team_id in userTeams}
+                    className='join-button'
+                    key={team.team_id}
+                    onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>join</button>
+                  <p className='join-team-name'>{team.name}</p>
                 </div>
                 // <button
                 //   className='join-button'

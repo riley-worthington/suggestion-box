@@ -51,7 +51,7 @@ class SignIn extends Component {
     return (
       <div className="signin-container">
         <header className="App-header">
-          <h1 className="App-title">PostUp</h1>
+          <h1 className="App-title">Huddl</h1>
           {/* <p className="app-intro">
             A place for creative collaboration.
           </p> */}
