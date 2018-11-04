@@ -23,7 +23,6 @@ export const signIn = (email, password) => dispatch => {
     })
   }).then(response => response.json())
     .then(user => {
-      console.log(user)
       if (user.user_id) {
         localStorage.setItem('user', JSON.stringify(user));
         dispatch(signInSuccess(user));
@@ -59,7 +58,6 @@ export const signIn = (email, password) => dispatch => {
 }
 
 export const signOut = () => {
-  console.log('signing out');
   // remove the user from local storage on signout
   localStorage.removeItem('user');
   history.push('/signin');
@@ -83,7 +81,6 @@ export const register = (firstName, lastName, email, password) => dispatch => {
     })
   }).then(response => response.json())
     .then(user => {
-      console.log(user)
       if (user.user_id) {
         localStorage.setItem('user', JSON.stringify(user));
         dispatch(registerSuccess(user));

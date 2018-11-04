@@ -35,7 +35,6 @@ class JoinPage extends Component {
 
   render() {
     const { teams, addTeamMember, currentUser, userTeams } = this.props;
-    const teamsNotIn = this.getTeamsNotIn(userTeams, teams);
 
     return (
       <div className='join-page'>
@@ -54,12 +53,6 @@ class JoinPage extends Component {
                     onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>join</button>
                   <p className='join-team-name'>{team.name}</p>
                 </div>
-                // <button
-                //   className='join-button'
-                //   key={team.team_id}
-                //   onClick={() => addTeamMember(currentUser.user_id, team.team_id)}>
-                //   {team.name}
-                // </button>)
               )
               :
               <div>
